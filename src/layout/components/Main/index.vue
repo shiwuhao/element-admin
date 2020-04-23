@@ -13,6 +13,7 @@
     width: 100%;
     position: relative;
     overflow: hidden;
+    background: #545c64;
   }
 
   .fixed-header+.app-main {

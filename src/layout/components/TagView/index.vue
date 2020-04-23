@@ -1,11 +1,14 @@
 <template>
-  <div>
-    tag
+  <div class="tag-view">
+    <el-scrollbar ref="scrollContainer" :vertical="false" class="scroll-container" @wheel.native.prevent="handleScroll">
+      tagView
+    </el-scrollbar>
   </div>
 </template>
 <style>
-  .sidebar {
-    height: 100%;
+  .tag-view {
+    height: 30px;
+    background: #73f63f;
   }
 </style>
 
@@ -23,12 +26,11 @@
       }
     },
     methods: {
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
+      handleScroll(e) {
+        const eventDelta = e.wheelDelta || -e.deltaY * 40
+        const $scrollWrapper = this.scrollWrapper
+        $scrollWrapper.scrollLeft = $scrollWrapper.scrollLeft + eventDelta / 4
       },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
-      }
     }
   };
 </script>
