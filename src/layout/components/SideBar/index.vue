@@ -10,6 +10,7 @@
     :unique-opened="uniqueOpened"
     :collapse-transition="collapseTransition"
     :collapse="isCollapse"
+    mode="vertical"
   >
     <el-submenu index="1">
       <template slot="title">
@@ -45,7 +46,12 @@
 </template>
 <style>
   .sidebar {
+    width: 100%;
     height: 100%;
+  }
+
+  .sidebar:not(.el-menu--collapse) {
+    /*width: 100%;*/
   }
 </style>
 
@@ -62,7 +68,10 @@
       }
     },
     computed: {
-      ...mapGetters(['sidebar']),
+      ...mapGetters([
+        'sidebar',
+        'tagViews'
+      ]),
       variables() {
         return {
           menuBg: '#545c64',
@@ -82,15 +91,13 @@
       },
       // 是否水平折叠收起菜单
       isCollapse() {
-        console.log(this.sidebar);
-        return this.sidebar;
-        // return true;
-        // return this.$store.app.sidebar.collapse;
-        // return this.sidebar.collapse;
+        console.log(this.sidebar.collapse);
+        return !!this.sidebar.collapse;
       }
     },
     methods: {
       handleOpen(key, keyPath) {
+        console.log(this.device);
         console.log(key, keyPath);
       },
       handleClose(key, keyPath) {

@@ -1,12 +1,12 @@
 import Main from './Main/index'
 import Setting from './Setting/index'
-import Navbar from './Navbar/index'
-import Sidebar from './Sidebar/index'
+import NavBar from './NavBar/index'
+import SideBar from './SideBar/index'
 import TagView from './TagView/index'
 
 export {
-  Navbar,
-  Sidebar,
+  NavBar,
+  SideBar,
   TagView,
   Main,
   Setting
