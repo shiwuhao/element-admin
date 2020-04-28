@@ -8,6 +8,7 @@ const app = {
     },
     device: 'desktop',
     size: localStorage.getItem('size') || 'medium',
+    showTagsView: localStorage.getItem('showTagsView') ? !!+localStorage.getItem('showTagsView') : true,
   },
   mutations: {
     TOGGLE_SIDEBAR: state => {

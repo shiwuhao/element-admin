@@ -4,9 +4,9 @@
       <side-bar/>
     </el-aside>
     <el-container>
-      <el-header class="header" height="80px" style="text-align: right; font-size: 12px;background: #3A71A8">
+      <el-header class="header" :height="showTagsView ? '80px' : '50px'" style="text-align: right; font-size: 12px;">
         <nav-bar/>
-        <tag-view/>
+        <tag-view v-if="showTagsView"/>
       </el-header>
       <el-main>
         <Main/>
@@ -24,8 +24,14 @@
     },
     computed: {
       ...mapGetters([
-        'sidebar'
+        'sidebar',
+        'showTagsView'
       ])
+    },
+    date() {
+      return {
+        tagView: false,
+      }
     }
   };
 </script>
