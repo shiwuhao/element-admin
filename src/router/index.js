@@ -14,6 +14,7 @@ const routes = [
       {
         path: '/dashboard',
         name: 'dashboard',
+        meta: {title: '控制台', icon: 'dashboard', affix: true, cache: true, activeMenu: '', roles: [], permissions: []},
         component: () => import('../views/Home'),
       },
       {

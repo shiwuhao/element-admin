@@ -66,6 +66,7 @@
 
 <script>
   import scrollPanel from "./scrollPanel";
+  import path from 'path';
 
   export default {
     components: {
@@ -139,8 +140,31 @@
       }
     },
     methods: {
+      // 判断标签是否需要固定
       isAffix(tag) {
         return tag.meta && tag.meta.affix
+      },
+      // 过滤需要固定的标签
+      filterAffixTags(routes, basePath = '/') {
+        let tags = []
+        routes.forEach(route => {
+          if (route.meta && route.meta.affix) {
+            const tagPath = path.resolve(basePath, route.path)
+            tags.push({
+              fullPath: tagPath,
+              path: tagPath,
+              name: route.name,
+              meta: {...route.meta}
+            })
+          }
+          if (route.children) {
+            const tempTags = this.filterAffixTags(route.children, route.path)
+            if (tempTags.length >= 1) {
+              tags = [...tags, ...tempTags]
+            }
+          }
+        })
+        return tags
       },
       // 开启右键菜单
       openContextmenu(tag, e) {
