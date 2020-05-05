@@ -40,6 +40,7 @@
     padding: 0 0 !important;
   }
 
+
   .el-main {
     padding: 10px;
   }
