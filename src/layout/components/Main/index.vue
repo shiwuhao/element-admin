@@ -16,19 +16,17 @@
     background: #545c64;
   }
 
-  .fixed-header+.app-main {
+  .fixed-header + .app-main {
     padding-top: 50px;
   }
 </style>
 <script>
-  import {mapState} from 'vuex'
+  import {mapGetters} from 'vuex'
 
   export default {
     name: 'Main',
     computed: {
-      ...mapState({
-        cachedViews: state => state.tagViews.cachedViews
-      }),
+      ...mapGetters(['cachedViews'])
     },
   };
 </script>
