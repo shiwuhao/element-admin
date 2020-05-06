@@ -3,7 +3,7 @@
     <scroll-panel class="scroll-container">
       <el-tag
         class="tag-item"
-        v-for="item in items"
+        v-for="item in visitedViews"
         :key="item.label"
         :type="item.type"
         :closable="true"
@@ -67,6 +67,7 @@
 <script>
   import scrollPanel from "./scrollPanel";
   import path from 'path';
+  import {mapGetters} from 'vuex';
 
   export default {
     components: {
@@ -130,6 +131,9 @@
         affixTags: []
       }
     },
+    computed: {
+      ...mapGetters(['visitedViews', 'routes']),
+    },
     watch: {
       visible(value) {
         if (value) {
@@ -139,7 +143,21 @@
         }
       }
     },
+    mounted() {
+      this.initTagViews();
+    },
     methods: {
+      // 初始化标签视图
+      initTagViews() {
+        console.log(this.routes);
+        const affixTags = this.affixTags = this.filterAffixTags(this.routes);
+        for (const tag of affixTags) {
+          // Must have tag name
+          if (tag.name) {
+            this.$store.dispatch('tagView/addVisitedView', tag)
+          }
+        }
+      },
       // 判断标签是否需要固定
       isAffix(tag) {
         return tag.meta && tag.meta.affix

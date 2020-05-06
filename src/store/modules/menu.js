@@ -1,6 +1,6 @@
-const menus = {
+const menu = {
   state: {},
   mutations: {},
   actions: {}
 };
-export default menus;
+export default menu;

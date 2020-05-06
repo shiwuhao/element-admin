@@ -1,6 +1,6 @@
-const settings = {
+const config = {
   state: {},
   mutations: {},
   actions: {}
 };
-export default settings;
+export default config;

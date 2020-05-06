@@ -44,6 +44,7 @@
   .el-main {
     padding: 10px;
   }
+
   .el-aside {
     transition: width .3s;
   }
