@@ -2,12 +2,13 @@ import {constantRoutes, asyncRoutes} from '@/router';
 
 /**
  * 通过meta.role判断是否与当前用户权限匹配
- * @param permissionNodes
+ * @param roles
  * @param route
+ * @returns {boolean|*}
  */
-function hasPermission(permissionNodes, route) {
-  if (route.meta && route.meta.permission) {
-    return permissionNodes.some(node => route.meta.permission === node);
+function hasPermission(roles, route) {
+  if (route.meta && route.meta.roles) {
+    return roles.some(role => route.meta.roles.includes(role))
   } else {
     return true;
   }
@@ -15,22 +16,19 @@ function hasPermission(permissionNodes, route) {
 
 /**
  * 递归过滤异步路由表，返回符合用户角色权限的路由表
- * @param routes asyncRouterMap
- * @param permissionNodes 权限节点
+ * @param routes
+ * @param roles
+ * @returns {[]}
  */
-function filterAsyncRouter(routes, permissionNodes) {
+function filterAsyncRoutes(routes, roles) {
   const res = [];
   routes.forEach(route => {
     let tmp = {...route};
-    if (hasPermission(permissionNodes, tmp)) {
+    if (hasPermission(roles, tmp)) {
       if (tmp.children) {
-        tmp.children = filterAsyncRouter(tmp.children, permissionNodes);
-        if (tmp.children.length > 0) {
-          res.push(tmp);
-        }
-      } else {
-        res.push(tmp);
+        tmp.children = filterAsyncRoutes(tmp.children, roles);
       }
+      res.push(tmp);
     }
   });
 
@@ -57,7 +55,7 @@ const permission = {
         if (roles.some(item => item === 'Administrator')) {
           accessedRoutes = asyncRoutes || []
         } else {
-          accessedRoutes = filterAsyncRouter(asyncRoutes, roles);
+          accessedRoutes = filterAsyncRoutes(asyncRoutes, roles);
         }
 
         commit('SET_ROUTES', accessedRoutes);
