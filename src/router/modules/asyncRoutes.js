@@ -4,11 +4,12 @@ export default [
   {
     path: '/about',
     component: Layout,
+    redirect: '/about/me',
     children: [
       {
-        path: '',
-        name: 'about',
-        meta: {title: '关于我们', icon: 'dashboard', affix: true, cache: true, activeMenu: '', roles: [], permissions: []},
+        path: '/about/me',
+        name: 'me',
+        meta: {title: '关于我们', icon: 'dashboard', affix: false},
         component: () => import('@/views/About'),
       },
     ]
