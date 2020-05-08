@@ -19,4 +19,11 @@ users.logout = () => {
   return axios.post('/api/logout');
 };
 
+/**
+ * 登录用户信息
+ * @returns {Promise<AxiosResponse<T>>}
+ */
+users.userInfo = () => {
+  return axios.get('/api/user');
+};
 export default users;

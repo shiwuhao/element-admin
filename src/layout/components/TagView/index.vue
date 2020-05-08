@@ -4,14 +4,14 @@
       <el-tag
         class="tag-item"
         v-for="item in visitedViews"
-        :key="item.label"
+        :key="item.path"
         :type="item.type"
-        :closable="true"
+        :closable="(item.meta && item.meta.affix) ? false : true"
         :effect="item.effect"
         :color="item.color"
         @contextmenu.prevent.native="openContextmenu(item,$event)"
       >
-        {{ item.label }}
+        {{ item.title }}
       </el-tag>
     </scroll-panel>
     <ul v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
@@ -75,55 +75,6 @@
     },
     data() {
       return {
-        items: [
-          {type: 'info', label: '标签1', effect: 'plain'},
-          {type: 'success', label: '标签2', effect: 'dark', color: '#42b983'},
-          {type: 'info', label: '标签3', effect: 'plain'},
-          {type: 'info', label: '标签4', effect: 'plain'},
-          {type: 'info', label: '标签5', effect: 'plain'},
-          {type: 'info', label: '标签6', effect: 'plain'},
-          {type: 'info', label: '标签7', effect: 'plain'},
-          {type: 'info', label: '标签8', effect: 'plain'},
-          {type: 'info', label: '标签9', effect: 'plain'},
-          {type: 'info', label: '标签10', effect: 'plain'},
-          {type: 'info', label: '标签11', effect: 'plain'},
-          {type: 'info', label: '标签12', effect: 'plain'},
-          {type: 'info', label: '标签13', effect: 'plain'},
-          {type: 'info', label: '标签14', effect: 'plain'},
-          {type: 'info', label: '标签15', effect: 'plain'},
-          {type: 'info', label: '标签16', effect: 'plain'},
-          {type: 'info', label: '标签17', effect: 'plain'},
-          {type: 'info', label: '标签18', effect: 'plain'},
-          {type: 'info', label: '标签19', effect: 'plain'},
-          {type: 'info', label: '标签20', effect: 'plain'},
-          {type: 'info', label: '标签21', effect: 'plain'},
-          {type: 'info', label: '标签22', effect: 'plain'},
-          {type: 'info', label: '标签23', effect: 'plain'},
-          {type: 'info', label: '标签24', effect: 'plain'},
-          {type: 'info', label: '标签25', effect: 'plain'},
-          {type: 'info', label: '标签26', effect: 'plain'},
-          {type: 'info', label: '标签27', effect: 'plain'},
-          {type: 'info', label: '标签28', effect: 'plain'},
-          {type: 'info', label: '标签29', effect: 'plain'},
-          {type: 'info', label: '标签30', effect: 'plain'},
-          {type: 'info', label: '标签31', effect: 'plain'},
-          {type: 'info', label: '标签32', effect: 'plain'},
-          {type: 'info', label: '标签33', effect: 'plain'},
-          {type: 'info', label: '标签34', effect: 'plain'},
-          {type: 'info', label: '标签35', effect: 'plain'},
-          {type: 'info', label: '标签36', effect: 'plain'},
-          {type: 'info', label: '标签37', effect: 'plain'},
-          {type: 'info', label: '标签38', effect: 'plain'},
-          {type: 'info', label: '标签39', effect: 'plain'},
-          {type: 'info', label: '标签40', effect: 'plain'},
-          {type: 'info', label: '标签41', effect: 'plain'},
-          {type: 'info', label: '标签42', effect: 'plain'},
-          {type: 'info', label: '标签43', effect: 'plain'},
-          {type: 'info', label: '标签44', effect: 'plain'},
-          {type: 'info', label: '标签45', effect: 'plain'},
-          {type: 'info', label: '标签46', effect: 'plain'},
-          {type: 'info', label: '标签47', effect: 'plain'},
-        ],
         visible: false,
         top: 0,
         left: 0,
@@ -135,6 +86,11 @@
       ...mapGetters(['visitedViews', 'routes']),
     },
     watch: {
+      $route() {
+        console.log('1312321321321');
+        this.addTags()
+        // this.moveToCurrentTag()
+      },
       visible(value) {
         if (value) {
           document.body.addEventListener('click', this.closeContextmenu)
@@ -145,18 +101,24 @@
     },
     mounted() {
       this.initTagViews();
+      this.addTags()
     },
     methods: {
       // 初始化标签视图
       initTagViews() {
-        console.log(this.routes);
         const affixTags = this.affixTags = this.filterAffixTags(this.routes);
         for (const tag of affixTags) {
-          // Must have tag name
           if (tag.name) {
             this.$store.dispatch('tagView/addVisitedView', tag)
           }
         }
+      },
+      addTags() {
+        const { name } = this.$route
+        if (name) {
+          this.$store.dispatch('tagView/addView', this.$route)
+        }
+        return false
       },
       // 判断标签是否需要固定
       isAffix(tag) {

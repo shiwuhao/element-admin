@@ -15,14 +15,15 @@ const router = new VueRouter({
 const whiteList = ['/login', '/404'];
 
 // 路由拦截器
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   if (whiteList.indexOf(to.path) !== -1) { // 白名单，直接进入
     next();
   } else if (getToken()) { // 已登录 拉取用户信息,过滤权限路由,动态注册路由
-    if (Object.keys(store.getters.user).length === 0) {
-      store.dispatch('getUserInfo').then(() => {
-        next({...to, replace: true});
-      });
+    if (store.getters.user === null) { // 不存在获取用户信息，并注册路由
+      const {roles} = await store.dispatch('user/getUserInfo');
+      const accessRoutes = await store.dispatch('permission/generateRoutes', roles);
+      router.addRoutes(accessRoutes);
+      next({...to, replace: true});
     } else {
       next();
     }

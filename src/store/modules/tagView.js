@@ -7,8 +7,11 @@ const tagView = {
   mutations: {
     // 添加已访问视图
     ADD_VISITED_VIEW: (state, view) => {
+      console.log('store', view);
       if (state.visitedViews.some(item => item.path === view.path)) return;
+      console.log('store2', view);
       state.visitedViews.push({title: view.meta.title || 'no-name', ...view});
+      console.log('store3', state.visitedViews);
     },
     // 删除已访问视图
     DEL_VISITED_VIEW: (state, view) => {

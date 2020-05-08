@@ -21,7 +21,7 @@
           <el-dropdown-item>退出登录</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-      <i class="el-icon-more-outline right-item"></i>
+      <i class="iconfont icon-more-vertical right-item"></i>
     </div>
   </div>
 </template>

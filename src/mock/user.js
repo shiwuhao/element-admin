@@ -1,37 +1,32 @@
 import Mock from 'mockjs';
 
-Mock.setup({
-  domain: process.env.VUE_APP_API_URL,
-});
-
 const code = 200;
 
-const BaseData = {
+const baseData = {
   code: code,
   data: {},
   msg: '',
 };
-// 任务列表
-const loginData = {
-  code: code,
+// 登录
+const loginData = Object.assign(baseData, {
   data: {
     access_token: '12312312321',
-  },
-  msg: '',
-};
+  }
+});
+
 // 任务列表
-const userInfoData = {
-  code: code,
+const userInfoData = Object.assign(baseData, {
   data: {
-    result: {
-      "userName": '石武浩'
+    user: {
+      email: 'shiwuhao@juzifenqi.com',
+      real_name: '石武浩',
+      avatar: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
     },
-    error: '',
+    roles: [],
   },
-  msg: '',
-};
+});
 
 
-Mock.mock(`/api/user`, 'get', userInfoData);// 用户信息
-Mock.mock(`/api/logout`, 'post', BaseData);// 退出登录
-Mock.mock(`/api/login`, 'post', loginData);// 登录
+Mock.mock(/\/api\/user/, 'get', userInfoData);// 用户信息
+Mock.mock(`/api/logout`, 'post', baseData);// 退出登录
+Mock.mock(/\/api\/login/, 'post', loginData);// 登录
