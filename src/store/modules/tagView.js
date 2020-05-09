@@ -77,7 +77,7 @@ const tagView = {
       })
     },
     // 更新访问视图
-    updateVisitedViews({commit}, view) {
+    updateVisitedView({commit}, view) {
       commit('UPDATE_VISITED_VIEWS', view);
     },
     // 添加缓存视图

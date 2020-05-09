@@ -1,10 +1,12 @@
 <template>
   <div class="tag-view">
-    <scroll-panel class="scroll-container">
+    <scroll-panel class="scroll-container" ref="scrollPane">
       <el-tag
         class="tag-item"
+        ref="tag"
         v-for="item in visitedViews"
         :key="item.path"
+        :route="item"
         :type="isActive(item) ? 'success' : 'info'"
         :closable="!(item.meta && item.meta.affix)"
         @close="closeTagView(item)"
@@ -88,7 +90,7 @@
     watch: {
       $route() {
         this.addTagView();
-        // this.moveToCurrentTag()
+        this.moveToCurrentTagView();
       },
       visible(value) {
         if (value) {
@@ -118,16 +120,14 @@
       closeTagView(tagView) {
         this.$store.dispatch('tagView/delView', tagView).then(({visitedViews}) => {
           if (this.isActive(tagView)) {
-            this.toLastView(visitedViews, tagView);
+            this.toLastTagView(visitedViews, tagView);
           }
         })
       },
       // 标签视图点击事件
       clickTagView(tagView) {
         if (tagView.path === this.$route.path) return;
-        this.$router.replace({
-          path: '/redirect' + tagView.fullPath
-        })
+        this.$router.replace({path: '/redirect' + tagView.fullPath});
       },
       // 判断tag是否激活状态
       isActive(route) {
@@ -172,9 +172,7 @@
         this.$store.dispatch('tagView/delCachedView', selectTagView).then(() => {
           const {fullPath} = selectTagView;
           this.$nextTick(() => {
-            this.$router.replace({
-              path: '/redirect' + fullPath
-            })
+            this.$router.replace({path: '/redirect' + fullPath});
           })
         })
       },
@@ -182,16 +180,15 @@
       closeSelectedTag(selectTagView) {
         this.$store.dispatch('tagView/delView', selectTagView).then(({visitedViews}) => {
           if (this.isActive(selectTagView)) {
-            this.toLastView(visitedViews, selectTagView)
+            this.toLastTagView(visitedViews, selectTagView)
           }
         })
       },
       // 关闭其他标签
       closeOthersTags(selectTagView) {
-        if (selectTagView.fullPath !== selectTagView.fullPath) this.$router.push(selectTagView);
-        this.$store.dispatch('tagView/delOtherViews', selectTagView).then((res) => {
-          console.log('res', res);
-          // this.moveToCurrentTag()
+        if (selectTagView.fullPath !== this.$route.fullPath) this.$router.push(selectTagView);
+        this.$store.dispatch('tagView/delOtherViews', selectTagView).then(() => {
+          this.moveToCurrentTagView();
         })
       },
       // 关闭所有标签
@@ -200,33 +197,31 @@
           if (this.affixTags.some(tag => tag.path === selectTagView.path)) {
             return
           }
-          this.toLastView(visitedViews, selectTagView)
+          this.toLastTagView(visitedViews, selectTagView)
         })
       },
-      toLastView(visitedViews, view) {
-        const latestView = visitedViews.slice(-1)[0]
+      // 跳转到最后一个标签视图
+      toLastTagView(visitedViews, view) {
+        const latestView = visitedViews.slice(-1)[0];
         if (latestView) {
           this.$router.push(latestView.fullPath)
         } else {
-          // now the default is to redirect to the home page if there is no tags-view,
-          // you can adjust it according to your needs.
           if (view.name === 'Dashboard') {
-            // to reload home page
             this.$router.replace({path: '/redirect' + view.fullPath})
           } else {
             this.$router.push('/')
           }
         }
       },
-      moveToCurrentTag() {
-        const tags = this.$refs.tag
+      // 移动到当前路由所在标签也面
+      moveToCurrentTagView() {
+        const tags = this.$refs.tag;
         this.$nextTick(() => {
           for (const tag of tags) {
-            if (tag.to.path === this.$route.path) {
+            if (tag.$attrs.route.path === this.$route.path) {
               this.$refs.scrollPane.moveToTarget(tag)
-              // when query is different then update
-              if (tag.to.fullPath !== this.$route.fullPath) {
-                this.$store.dispatch('tagsView/updateVisitedView', this.$route)
+              if (tag.$attrs.route.fullPath !== this.$route.fullPath) {
+                this.$store.dispatch('tagView/updateVisitedView', this.$route)
               }
               break
             }
