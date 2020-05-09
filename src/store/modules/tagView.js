@@ -7,11 +7,8 @@ const tagView = {
   mutations: {
     // 添加已访问视图
     ADD_VISITED_VIEW: (state, view) => {
-      console.log('store', view);
       if (state.visitedViews.some(item => item.path === view.path)) return;
-      console.log('store2', view);
       state.visitedViews.push({title: view.meta.title || 'no-name', ...view});
-      console.log('store3', state.visitedViews);
     },
     // 删除已访问视图
     DEL_VISITED_VIEW: (state, view) => {
@@ -20,11 +17,11 @@ const tagView = {
     },
     // 删除其他已访问视图
     DEL_OTHER_VISITED_VIEWS: (state, view) => {
-      state.visitedViews.filter(item => item.meta.affix || item.path === view.path);
+      state.visitedViews = state.visitedViews.filter(item => item.meta.affix || item.path === view.path);
     },
     // 删除所有已访问视图
     DEL_ALL_VISITED_VIEWS: (state) => {
-      state.visitedViews.filter(item => item.meta.affix);
+      state.visitedViews = state.visitedViews.filter(item => item.meta.affix);
     },
     // 更新已访问视图
     UPDATE_VISITED_VIEWS: (state, view) => {
@@ -33,18 +30,20 @@ const tagView = {
     },
     // 添加缓存视图
     ADD_CACHED_VIEW: (state, view) => {
-      if (!state.cachedViews.includes(view) && view.meta.cache) {
-        state.cachedViews.push(view);
+      if (view.name && !state.cachedViews.includes(view.name) && view.meta.cache !== false) {
+        state.cachedViews.push(view.name);
       }
     },
     // 删除缓存视图
     DEL_CACHED_VIEW: (state, view) => {
-      const index = state.cachedViews.findIndex(item => item.path === view.path);
-      index > -1 && state.splice(index, 1);
+      if (!view.name) return;
+      const index = state.cachedViews.findIndex(item => item === view.name);
+      index > -1 && state.cachedViews.splice(index, 1);
     },
     // 删除其他缓存视图
     DEL_OTHER_CACHED_VIEWS: (state, view) => {
-      state.cachedViews.filter(item => item.path === view.path);
+      if (!view.name) return;
+      state.cachedViews = state.cachedViews.filter(item => item === view.name);
     },
     // 删除其他缓存视图
     DEL_ALL_CACHED_VIEWS: (state) => {

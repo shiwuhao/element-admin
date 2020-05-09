@@ -12,6 +12,12 @@ export default [
         meta: {title: '关于我们', icon: 'dashboard', affix: false},
         component: () => import('@/views/About'),
       },
+      {
+        path: '/about/test',
+        name: 'test',
+        meta: {title: '测试页面', icon: 'dashboard', affix: false},
+        component: () => import('@/views/Test'),
+      },
     ]
   },
 ];

@@ -5,10 +5,10 @@
         class="tag-item"
         v-for="item in visitedViews"
         :key="item.path"
-        :type="item.type"
-        :closable="(item.meta && item.meta.affix) ? false : true"
-        :effect="item.effect"
-        :color="item.color"
+        :type="isActive(item) ? 'success' : 'info'"
+        :closable="!(item.meta && item.meta.affix)"
+        @close="closeTagView(item)"
+        @click="clickTagView(item)"
         @contextmenu.prevent.native="openContextmenu(item,$event)"
       >
         {{ item.title }}
@@ -17,7 +17,7 @@
     <ul v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
       <li @click="refreshSelectedTag(selectedTag)">刷新</li>
       <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">关闭</li>
-      <li @click="closeOthersTags">关闭其他</li>
+      <li @click="closeOthersTags(selectedTag)">关闭其他</li>
       <li @click="closeAllTags(selectedTag)">关闭所有</li>
     </ul>
   </div>
@@ -87,8 +87,7 @@
     },
     watch: {
       $route() {
-        console.log('1312321321321');
-        this.addTags()
+        this.addTagView();
         // this.moveToCurrentTag()
       },
       visible(value) {
@@ -101,41 +100,50 @@
     },
     mounted() {
       this.initTagViews();
-      this.addTags()
+      this.addTagView()
     },
     methods: {
       // 初始化标签视图
       initTagViews() {
         const affixTags = this.affixTags = this.filterAffixTags(this.routes);
         for (const tag of affixTags) {
-          if (tag.name) {
-            this.$store.dispatch('tagView/addVisitedView', tag)
-          }
+          tag.name && this.$store.dispatch('tagView/addVisitedView', tag);
         }
       },
-      addTags() {
-        const { name } = this.$route
-        if (name) {
-          this.$store.dispatch('tagView/addView', this.$route)
-        }
-        return false
+      // 添加标签视图
+      addTagView() {
+        this.$route.name && this.$store.dispatch('tagView/addView', this.$route);
+      },
+      // 关闭标签视图
+      closeTagView(tagView) {
+        this.$store.dispatch('tagView/delView', tagView).then(({visitedViews}) => {
+          if (this.isActive(tagView)) {
+            this.toLastView(visitedViews, tagView);
+          }
+        })
+      },
+      // 标签视图点击事件
+      clickTagView(tagView) {
+        if (tagView.path === this.$route.path) return;
+        this.$router.replace({
+          path: '/redirect' + tagView.fullPath
+        })
+      },
+      // 判断tag是否激活状态
+      isActive(route) {
+        return route.path === this.$route.path;
       },
       // 判断标签是否需要固定
       isAffix(tag) {
-        return tag.meta && tag.meta.affix
+        return tag.meta && tag.meta.affix;
       },
       // 过滤需要固定的标签
       filterAffixTags(routes, basePath = '/') {
-        let tags = []
+        let tags = [];
         routes.forEach(route => {
           if (route.meta && route.meta.affix) {
             const tagPath = path.resolve(basePath, route.path)
-            tags.push({
-              fullPath: tagPath,
-              path: tagPath,
-              name: route.name,
-              meta: {...route.meta}
-            })
+            tags.push({fullPath: tagPath, path: tagPath, name: route.name, meta: {...route.meta}})
           }
           if (route.children) {
             const tempTags = this.filterAffixTags(route.children, route.path)
@@ -143,7 +151,7 @@
               tags = [...tags, ...tempTags]
             }
           }
-        })
+        });
         return tags
       },
       // 开启右键菜单
@@ -160,9 +168,9 @@
         this.visible = false;
       },
       // 刷新选中标签页面
-      refreshSelectedTag(view) {
-        this.$store.dispatch('tagsView/delCachedView', view).then(() => {
-          const {fullPath} = view
+      refreshSelectedTag(selectTagView) {
+        this.$store.dispatch('tagView/delCachedView', selectTagView).then(() => {
+          const {fullPath} = selectTagView;
           this.$nextTick(() => {
             this.$router.replace({
               path: '/redirect' + fullPath
@@ -171,27 +179,28 @@
         })
       },
       // 关闭选中标签页面
-      closeSelectedTag(view) {
-        this.$store.dispatch('tagsView/delView', view).then(({visitedViews}) => {
-          if (this.isActive(view)) {
-            this.toLastView(visitedViews, view)
+      closeSelectedTag(selectTagView) {
+        this.$store.dispatch('tagView/delView', selectTagView).then(({visitedViews}) => {
+          if (this.isActive(selectTagView)) {
+            this.toLastView(visitedViews, selectTagView)
           }
         })
       },
       // 关闭其他标签
-      closeOthersTags() {
-        this.$router.push(this.selectedTag)
-        this.$store.dispatch('tagsView/delOthersViews', this.selectedTag).then(() => {
-          this.moveToCurrentTag()
+      closeOthersTags(selectTagView) {
+        if (selectTagView.fullPath !== selectTagView.fullPath) this.$router.push(selectTagView);
+        this.$store.dispatch('tagView/delOtherViews', selectTagView).then((res) => {
+          console.log('res', res);
+          // this.moveToCurrentTag()
         })
       },
       // 关闭所有标签
-      closeAllTags(view) {
-        this.$store.dispatch('tagsView/delAllViews').then(({visitedViews}) => {
-          if (this.affixTags.some(tag => tag.path === view.path)) {
+      closeAllTags(selectTagView) {
+        this.$store.dispatch('tagView/delAllViews').then(({visitedViews}) => {
+          if (this.affixTags.some(tag => tag.path === selectTagView.path)) {
             return
           }
-          this.toLastView(visitedViews, view)
+          this.toLastView(visitedViews, selectTagView)
         })
       },
       toLastView(visitedViews, view) {
