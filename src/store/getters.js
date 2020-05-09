@@ -4,6 +4,7 @@ const getters = {
   cachedViews: state => state.tagView.cachedViews,
   visitedViews: state => state.tagView.visitedViews,
   routes: state => state.permission.routes,
+  menus: state => state.permission.routes,
   user: state => state.user.user,
   roles: state => state.user.roles,
 };

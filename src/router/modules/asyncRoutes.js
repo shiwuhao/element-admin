@@ -5,6 +5,7 @@ export default [
     path: '/about',
     component: Layout,
     redirect: '/about/me',
+    meta: {title: '关于'},
     children: [
       {
         path: '/about/me',

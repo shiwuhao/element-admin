@@ -36,11 +36,12 @@ export default [
     path: '/',
     component: Layout,
     redirect: '/dashboard',
+    meta: {title: '控制台', icon: 'el-icon-user-solid'},
     children: [
       {
         path: '/dashboard',
         name: 'dashboard',
-        meta: {title: '控制台', icon: 'dashboard', affix: true, cache: true, activeMenu: '', roles: [], permissions: []},
+        meta: {title: '控制台', icon: 'el-icon-user-solid', affix: true},
         component: () => import('@/views/dashboard/index'),
       },
     ]
@@ -48,8 +49,8 @@ export default [
   {
     path: '/profile',
     component: Layout,
+    meta: {title: '个人中心'},
     redirect: '/profile/index',
-    // hidden: true,
     children: [
       {
         path: 'index',
