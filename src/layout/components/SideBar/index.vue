@@ -13,12 +13,7 @@
     :router="true"
     mode="vertical"
   >
-    <template v-for="(menu,index) in menus">
-      <template v-if="!menu.hidden">
-        <menu-sub v-if="menu.children && menu.children.length > 0" :key="index" :menus="menu.children"></menu-sub>
-        <menu-item v-else :key="index" :item="menu"></menu-item>
-      </template>
-    </template>
+    <menu-item  v-for="(menu,index) in menus" :key="index" :menu="menu"></menu-item>
   </el-menu>
 </template>
 <style>
@@ -36,11 +31,10 @@
   import {mapGetters} from 'vuex'
   import variables from '@/styles/variables.scss';
   import menuItem from "@/layout/components/SideBar/menuItem";
-  import menuSub from "@/layout/components/SideBar/menuSub";
 
   export default {
     components: {
-      menuItem, menuSub
+      menuItem
     },
     data() {
       return {
@@ -70,7 +64,6 @@
       },
       // 是否水平折叠收起菜单
       isCollapse() {
-        console.log(this.sidebar.collapse);
         return !!this.sidebar.collapse;
       }
     },

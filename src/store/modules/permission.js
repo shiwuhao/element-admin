@@ -22,8 +22,9 @@ function hasPermission(roles, route) {
  */
 function filterAsyncRoutes(routes, roles) {
   const res = [];
+  const defaultRouteMeta = {meta: {menu: true, cache: true, affix: false}};
   routes.forEach(route => {
-    let tmp = {...route};
+    let tmp = Object.assign(defaultRouteMeta, route);
     if (hasPermission(roles, tmp)) {
       if (tmp.children) {
         tmp.children = filterAsyncRoutes(tmp.children, roles);
@@ -38,13 +39,16 @@ function filterAsyncRoutes(routes, roles) {
 const permission = {
   namespaced: true,
   state: {
+    menus: [],
     routes: [],
     addRoutes: [],
   },
   mutations: {
     SET_ROUTES(state, routes) {
       state.addRoutes = routes;
-      state.routes = constantRoutes.concat(routes)
+      state.routes = constantRoutes.concat(routes);
+      state.menus = state.routes.filter(item => item.meta.menu !== false);
+      console.log(state.menus);
     },
   },
   actions: {
