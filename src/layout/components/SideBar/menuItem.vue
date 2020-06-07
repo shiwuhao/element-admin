@@ -1,24 +1,22 @@
 <template>
-  <el-submenu :index="menu.path" v-if="menu.children && menu.children.length > 1">
+  <el-submenu :index="menu.path" v-if="menu.children && menu.children.length > 1" popper-append-to-body>
     <template slot="title">
       <i :class="menu.meta.icon"/>
-      <span slot="title">{{ menu.meta.title }}</span>
+      <span>{{ menu.meta.title }}</span>
     </template>
-    <template v-for="(item,index) in menu.children">
-      <menu-item :key="index" :menu="item"/>
+    <template v-for="item in menu.children">
+      <menu-item :key="item.path" :menu="item"/>
     </template>
   </el-submenu>
-  <item v-else :menu="menu"/>
+  <item v-else :menu="menu.children && menu.children.length === 1 ? menu.children[0] : menu"/>
 </template>
 
 <script>
   import item from "@/layout/components/SideBar/item";
 
   export default {
-    components: {
-      item
-    },
     name: 'menuItem',
+    components: {item},
     props: {
       menu: {
         type: Object,
