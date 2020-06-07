@@ -1,9 +1,7 @@
 <template>
-  <el-menu-item :index="menu.path" :route="menu">
-    <template slot="title">
-      <i :class="menu.meta.icon"></i>
-      <span>{{ menu.meta.title }}</span>
-    </template>
+  <el-menu-item :index="menuItem.path" :route="menuItem">
+    <i :class="menuItem.meta.icon"/>
+    <span slot="title">{{ menuItem.meta.title }}</span>
   </el-menu-item>
 </template>
 
@@ -20,8 +18,10 @@
         default: '',
       }
     },
-    data() {
-      return {};
+    computed: {
+      menuItem() {
+        return this.menu.children && this.menu.children.length === 1 ? this.menu.children[0] : this.menu;
+      }
     },
     methods: {},
   };

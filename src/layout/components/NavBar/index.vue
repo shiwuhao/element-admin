@@ -21,7 +21,8 @@
           <el-dropdown-item>退出登录</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-      <i class="iconfont icon-more-vertical right-item"></i>
+      <i class="iconfont icon-more-vertical setting" @click="toggleSetting"></i>
+      <setting ref="setting"></setting>
     </div>
   </div>
 </template>
@@ -57,22 +58,31 @@
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      .right-item{
+
+      .setting {
         padding: 0 10px;
+        cursor: pointer;
       }
     }
   }
 </style>
 
 <script>
+  import {Setting} from '@/layout/components';
+
   export default {
+    components: {Setting},
     data() {
       return {
+        drawer: true,
         circleUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
         size: "small",
       }
     },
     methods: {
+      toggleSetting() {
+        this.$refs['setting'].toggleDrawer();
+      },
       toggleSideBar() {
         this.$store.dispatch('app/toggleSideBar')
       },

@@ -1,31 +1,75 @@
 <template>
-  <section class="app-main">
-    <transition name="fade-transform" mode="out-in">
-      <keep-alive :include="cachedViews">
-        <router-view :key="key" />
-      </keep-alive>
-    </transition>
-  </section>
+  <el-drawer
+    title="系统布局设置"
+    :visible.sync="visible"
+    :direction="direction"
+    :size="size"
+    :show-close="showClose"
+    :append-to-body="true"
+  >
+    <div class="drawer-container">
+      <div class="drawer-item">
+        <span>主题色</span>
+        <el-color-picker v-model="color1"></el-color-picker>
+      </div>
+
+      <div class="drawer-item flex-row-center">
+        <span>Tag视图</span>
+        <el-switch v-model="tagsView" class="drawer-switch"/>
+      </div>
+
+      <div class="drawer-item">
+        <span>固定Header</span>
+        <el-switch v-model="fixedHeader" class="drawer-switch"/>
+      </div>
+
+      <div class="drawer-item">
+        <span>侧边栏Logo</span>
+        <el-switch v-model="sidebarLogo" class="drawer-switch"/>
+      </div>
+    </div>
+
+  </el-drawer>
 </template>
 <script>
   export default {
     data() {
-      const item = {
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      };
       return {
-        tableData: Array(20).fill(item)
+        visible: false,
+        direction: 'rtl',
+        size: '260px',
+        showClose: true,
+        color1: '',
+        tagsView: false,
+        fixedHeader: false,
+        sidebarLogo: false,
       }
     },
     methods: {
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
+      toggleDrawer() {
+        this.visible = !this.visible;
       },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
+      themeChange() {
+
       }
     }
   };
 </script>
+<style lang="scss" scoped>
+  .drawer-container {
+    padding: 24px;
+    font-size: 14px;
+    line-height: 1.5;
+    word-wrap: break-word;
+
+    .drawer-item {
+      color: rgba(0, 0, 0, .65);
+      font-size: 14px;
+      padding: 12px 0;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+</style>

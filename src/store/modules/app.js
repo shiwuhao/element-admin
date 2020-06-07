@@ -15,6 +15,10 @@ const app = {
       state.sidebar.collapse = !state.sidebar.collapse;
       localStorage.setItem('sidebarCollapse', state.sidebar.collapse ? '1' : '0');
     },
+    CLOSE_SIDEBAR: state => {
+      state.sidebar.collapse = false;
+      localStorage.setItem('sidebarCollapse', '0');
+    },
     TOGGLE_DEVICE: (state, device) => {
       state.device = device;
     },
@@ -27,6 +31,10 @@ const app = {
     // 收缩菜单
     toggleSideBar({commit}) {
       commit('TOGGLE_SIDEBAR');
+    },
+    // 关闭菜单
+    closeSideBar({commit}) {
+      commit('CLOSE_SIDEBAR');
     },
     // 切换设备
     toggleDevice({commit}, device) {

@@ -1,5 +1,6 @@
 <template>
   <el-container style="height: 100vh;">
+<!--    <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />-->
     <el-aside :width="sidebar.collapse ? sidebar.collapseWidth : sidebar.width">
       <side-bar/>
     </el-aside>
@@ -15,15 +16,19 @@
   </el-container>
 </template>
 <script>
-  import {SideBar, NavBar, TagView, Main} from './components'
+  import {SideBar, NavBar, TagView, Main,} from './components'
+  import ResizeMixin from './mixin/ResizeHandler'
   import {mapGetters} from 'vuex';
 
   export default {
+    name: 'Layout',
     components: {
       SideBar, NavBar, TagView, Main
     },
+    mixins: [ResizeMixin],
     computed: {
       ...mapGetters([
+        'device',
         'sidebar',
         'showTagsView'
       ])
@@ -31,6 +36,7 @@
     date() {
       return {
         tagView: false,
+        drawer: false,
       }
     }
   };
