@@ -72,4 +72,7 @@
       align-items: center;
     }
   }
+  /deep/ :focus{
+    outline: 0;
+  }
 </style>

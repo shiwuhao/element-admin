@@ -2,7 +2,7 @@
   <div class="navBar">
     <div class="left">
       <div class="collapse" @click="toggleSideBar">
-        <i class="el-icon-s-fold"></i>
+        <i :class="[sidebar.collapse ? 'el-icon-s-unfold' : 'el-icon-s-fold']"/>
       </div>
       <div class="breadcrumb">
         <el-breadcrumb separator="/">
@@ -21,8 +21,8 @@
           <el-dropdown-item>退出登录</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-      <i class="iconfont icon-more-vertical setting" @click="toggleSetting"></i>
-      <setting ref="setting"></setting>
+      <i class="iconfont icon-more-vertical setting" @click="toggleSetting"/>
+      <setting ref="setting"/>
     </div>
   </div>
 </template>
@@ -45,7 +45,8 @@
       .collapse {
         padding: 0 15px;
 
-        i.el-icon-s-fold {
+        i {
+          cursor: pointer;
           font-size: 20px;
         }
       }
@@ -69,6 +70,7 @@
 
 <script>
   import {Setting} from '@/layout/components';
+  import {mapGetters} from 'vuex';
 
   export default {
     components: {Setting},
@@ -78,6 +80,9 @@
         circleUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
         size: "small",
       }
+    },
+    computed: {
+      ...mapGetters(['sidebar']),
     },
     methods: {
       toggleSetting() {

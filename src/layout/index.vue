@@ -1,7 +1,8 @@
 <template>
-  <el-container style="height: 100vh;">
-<!--    <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />-->
-    <el-aside :width="sidebar.collapse ? sidebar.collapseWidth : sidebar.width">
+  <el-container style="height: 100vh;" id="home">
+    <!--    <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />-->
+    <!--    <el-aside :width="sidebar.collapse ? sidebar.collapseWidth : sidebar.width">-->
+    <el-aside width="auto">
       <side-bar/>
     </el-aside>
     <el-container>
@@ -41,17 +42,12 @@
     }
   };
 </script>
-<style scoped>
+<style lang="scss" scoped>
   .el-header {
     padding: 0 0 !important;
   }
 
-
   .el-main {
     padding: 10px;
-  }
-
-  .el-aside {
-    transition: width .3s;
   }
 </style>

@@ -24,15 +24,26 @@
 <!--    </el-submenu>-->
   </el-menu>
 </template>
-<style>
+<style lang="scss">
   .sidebar {
-    width: 100%;
     height: 100%;
+    >.el-menu-item{
+      padding-left: 15px !important;
+    }
+    .el-tooltip,.el-submenu__title{
+      padding-left:15px !important;
+    }
+    .el-submenu .el-menu-item {
+      min-width: 165px;
+    }
+  }
+  .sidebar.el-menu--collapse {
+    width: 55px;
+  }
+  .sidebar:not(.el-menu--collapse) {
+    width: 165px;
   }
 
-  .sidebar:not(.el-menu--collapse) {
-    width: 100%;
-  }
 </style>
 
 <script>
