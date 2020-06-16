@@ -11,35 +11,38 @@
     :router="true"
     mode="vertical"
   >
-    <menu-item v-for="menu in menus" :key="menu.path" :menu="menu"/>
-<!--    <el-submenu index="1" v-for="menu in menus" :key="menu.path" :menu="menu">-->
-<!--      <template slot="title">-->
-<!--        <i class="el-icon-location"></i>-->
-<!--        <span slot="title">导航一</span>-->
-<!--      </template>-->
-<!--      <el-menu-item index="1-1">选项1</el-menu-item>-->
-<!--      <el-menu-item index="1-2">选项2</el-menu-item>-->
-<!--      <el-menu-item index="1-3">选项3</el-menu-item>-->
-<!--      <el-menu-item index="1-4-1">选项1</el-menu-item>-->
-<!--    </el-submenu>-->
+<!--    <sub-menu v-for="menu in menus" :key="menu.path" :menu="menu"/>-->
+    <template v-for="menu in menus" >
+      <el-submenu v-if="menu.children && menu.children.length > 1" :index="menu.path" :key="menu.path">
+        <span slot="title">{{ menu.meta.title }}</span>
+        <el-menu-item v-for="child in menu.children" :key="child.path" :index="child.path">{{ child.meta.title }}</el-menu-item>
+      </el-submenu>
+      <el-menu-item v-else :index="menu.path" :key="menu.path">{{ menu.meta.title }}</el-menu-item>
+    </template>
+
   </el-menu>
 </template>
 <style lang="scss">
   .sidebar {
     height: 100%;
-    >.el-menu-item{
+
+    > .el-menu-item {
       padding-left: 15px !important;
     }
-    .el-tooltip,.el-submenu__title{
-      padding-left:15px !important;
+
+    .el-tooltip, .el-submenu__title {
+      padding-left: 15px !important;
     }
+
     .el-submenu .el-menu-item {
       min-width: 165px;
     }
   }
+
   .sidebar.el-menu--collapse {
     width: 55px;
   }
+
   .sidebar:not(.el-menu--collapse) {
     width: 165px;
   }
@@ -49,11 +52,11 @@
 <script>
   import {mapGetters} from 'vuex'
   import variables from '@/styles/variables.scss';
-  import menuItem from "@/layout/components/SideBar/menuItem";
+  // import subMenu from "@/layout/components/SideBar/subMenu";
 
   export default {
     components: {
-      menuItem
+      // subMenu
     },
     data() {
       return {

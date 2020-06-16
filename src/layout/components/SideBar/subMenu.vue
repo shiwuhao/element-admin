@@ -5,7 +5,7 @@
       <span>{{ menu.meta.title }}</span>
     </template>
     <template v-for="item in menu.children">
-      <menu-item :key="item.path" :menu="item"/>
+      <sub-menu :key="item.path" :menu="item"/>
     </template>
   </el-submenu>
   <item v-else :menu="menu.children && menu.children.length === 1 ? menu.children[0] : menu"/>
@@ -15,7 +15,7 @@
   import item from "@/layout/components/SideBar/item";
 
   export default {
-    name: 'menuItem',
+    name: 'subMenu',
     components: {item},
     props: {
       menu: {
@@ -27,9 +27,5 @@
         default: '',
       }
     },
-    data() {
-      return {};
-    },
-    methods: {},
   };
 </script>
