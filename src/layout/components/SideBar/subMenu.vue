@@ -14,15 +14,25 @@
   </div>
 </template>
 <style lang="scss">
-  .subMenu>.el-menu-item {
+  .subMenu > .el-menu-item {
     padding-left: 15px !important;
   }
+
   .el-menu--collapse > div > .el-submenu > .el-submenu__title span {
     height: 0;
     width: 0;
     overflow: hidden;
     visibility: hidden;
     display: inline-block;
+  }
+
+  .el-menu.el-menu--collapse i[class^="el-icon-"] {
+    font-size: 24px;
+    transition: font-size .3s;
+  }
+  .el-menu:not(.el-menu--collapse) i[class^="el-icon-"] {
+    font-size: 18px;
+    transition: font-size .3s;
   }
 
   .el-menu--collapse > div > .el-submenu > .el-submenu__title .el-submenu__icon-arrow {
