@@ -11,15 +11,7 @@
     :router="true"
     mode="vertical"
   >
-<!--    <sub-menu v-for="menu in menus" :key="menu.path" :menu="menu"/>-->
-    <template v-for="menu in menus" >
-      <el-submenu v-if="menu.children && menu.children.length > 1" :index="menu.path" :key="menu.path">
-        <span slot="title">{{ menu.meta.title }}</span>
-        <el-menu-item v-for="child in menu.children" :key="child.path" :index="child.path">{{ child.meta.title }}</el-menu-item>
-      </el-submenu>
-      <el-menu-item v-else :index="menu.path" :key="menu.path">{{ menu.meta.title }}</el-menu-item>
-    </template>
-
+    <sub-menu v-for="menu in menus" :index="menu.path" :key="menu.path" :menu="menu"/>
   </el-menu>
 </template>
 <style lang="scss">
@@ -52,11 +44,12 @@
 <script>
   import {mapGetters} from 'vuex'
   import variables from '@/styles/variables.scss';
-  // import subMenu from "@/layout/components/SideBar/subMenu";
+  import subMenu from "@/layout/components/SideBar/subMenu";
+
 
   export default {
     components: {
-      // subMenu
+      subMenu
     },
     data() {
       return {
