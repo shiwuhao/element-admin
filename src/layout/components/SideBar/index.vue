@@ -1,20 +1,26 @@
 <template>
-  <el-menu
-    class="sidebar"
-    :default-active="activeMenu"
-    :background-color="variables.menuBg"
-    :text-color="variables.menuText"
-    :active-text-color="variables.menuActiveText"
-    :unique-opened="uniqueOpened"
-    :collapse-transition="collapseTransition"
-    :collapse="isCollapse"
-    :router="true"
-    mode="vertical"
-  >
-    <sub-menu v-for="menu in menus" :index="menu.path" :key="menu.path" :menu="menu"/>
-  </el-menu>
+  <div class="sidebar-container">
+    <logo v-if="setting.sidebarLogo" :collapse="isCollapse" />
+    <el-menu
+      class="sidebar"
+      :default-active="activeMenu"
+      :background-color="variables.menuBg"
+      :text-color="variables.menuText"
+      :active-text-color="variables.menuActiveText"
+      :unique-opened="uniqueOpened"
+      :collapse-transition="collapseTransition"
+      :collapse="isCollapse"
+      :router="true"
+      mode="vertical"
+    >
+      <sub-menu v-for="menu in menus" :index="menu.path" :key="menu.path" :menu="menu"/>
+    </el-menu>
+  </div>
 </template>
 <style lang="scss">
+  .sidebar-container{
+    height: 100%;
+  }
   .sidebar {
     height: 100%;
 
@@ -45,11 +51,12 @@
   import {mapGetters} from 'vuex'
   import variables from '@/styles/variables.scss';
   import subMenu from "@/layout/components/SideBar/subMenu";
+  import Logo from './Logo'
 
 
   export default {
     components: {
-      subMenu
+      subMenu,Logo
     },
     data() {
       return {
@@ -58,7 +65,7 @@
       }
     },
     computed: {
-      ...mapGetters(['sidebar', 'menus']),
+      ...mapGetters(['setting','sidebar', 'menus']),
       variables() {
         return {
           menuBg: '#545c64',

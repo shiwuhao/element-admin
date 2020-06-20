@@ -15,7 +15,7 @@
 
       <div class="drawer-item flex-row-center">
         <span>Tag视图</span>
-        <el-switch v-model="tagsView" class="drawer-switch"/>
+        <el-switch v-model="tagView" class="drawer-switch"/>
       </div>
 
       <div class="drawer-item">
@@ -40,9 +40,32 @@
         size: '260px',
         showClose: true,
         color1: '',
-        tagsView: false,
-        fixedHeader: false,
-        sidebarLogo: false,
+      }
+    },
+    computed: {
+      sidebarLogo: {
+        get() {
+          return this.$store.state.setting.sidebarLogo;
+        },
+        set(val) {
+          this.$store.dispatch('setting/changeSetting', {key: 'sidebarLogo', value: val});
+        }
+      },
+      fixedHeader: {
+        get() {
+          return this.$store.state.setting.fixedHeader;
+        },
+        set(val) {
+          this.$store.dispatch('setting/changeSetting', {key: 'fixedHeader', value: val});
+        }
+      },
+      tagView: {
+        get() {
+          return this.$store.state.setting.tagView;
+        },
+        set(val) {
+          this.$store.dispatch('setting/changeSetting', {key: 'tagView', value: val});
+        }
       }
     },
     methods: {
@@ -72,7 +95,8 @@
       align-items: center;
     }
   }
-  /deep/ :focus{
+
+  /deep/ :focus {
     outline: 0;
   }
 </style>

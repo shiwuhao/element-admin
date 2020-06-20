@@ -1,4 +1,6 @@
 const getters = {
+  setting: state => state.setting,
+  config: state => state.config,
   sidebar: state => state.app.sidebar,
   device: state => state.app.device,
   showTagsView: state => state.app.showTagsView,
