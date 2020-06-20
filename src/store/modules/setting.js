@@ -4,21 +4,41 @@ const setting = {
   namespaced: true,
   state: {
     theme: variables.theme,
-    tagView: true,
-    fixedHeader: false,
-    sidebarLogo: true
+    tagView: localStorage.getItem('tagView') ? !!+localStorage.getItem('tagView') : true,
+    fixedHeader: localStorage.getItem('fixedHeader') ? !!+localStorage.getItem('fixedHeader') : true,
+    sidebarLogo: localStorage.getItem('sidebarLogo') ? !!+localStorage.getItem('sidebarLogo') : true,
   },
   mutations: {
     CHANGE_SETTING: (state, {key, value}) => {
       if (Object.prototype.hasOwnProperty.call(state, key)) {
-        state[key] = value
+        state[key] = value;
+        localStorage.setItem(key, state[key]);
       }
-    }
+    },
+    TOGGLE_SETTING: (state, key) => {
+      if (Object.prototype.hasOwnProperty.call(state, key)) {
+        state[key] = !state[key];
+        localStorage.setItem(key, state[key] ? '1' : '0');
+      }
+    },
   },
   actions: {
+    /**
+     * change setting
+     * @param commit
+     * @param data
+     */
     changeSetting({commit}, data) {
       commit('CHANGE_SETTING', data)
-    }
+    },
+    /**
+     * toggle setting
+     * @param commit
+     * @param key
+     */
+    toggleSetting({commit}, key) {
+      commit('TOGGLE_SETTING', key);
+    },
   }
 };
 export default setting;

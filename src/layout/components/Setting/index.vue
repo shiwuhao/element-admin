@@ -47,24 +47,24 @@
         get() {
           return this.$store.state.setting.sidebarLogo;
         },
-        set(val) {
-          this.$store.dispatch('setting/changeSetting', {key: 'sidebarLogo', value: val});
+        set() {
+          this.$store.dispatch('setting/toggleSetting', 'sidebarLogo');
         }
       },
       fixedHeader: {
         get() {
           return this.$store.state.setting.fixedHeader;
         },
-        set(val) {
-          this.$store.dispatch('setting/changeSetting', {key: 'fixedHeader', value: val});
+        set() {
+          this.$store.dispatch('setting/toggleSetting', 'fixedHeader');
         }
       },
       tagView: {
         get() {
           return this.$store.state.setting.tagView;
         },
-        set(val) {
-          this.$store.dispatch('setting/changeSetting', {key: 'tagView', value: val});
+        set() {
+          this.$store.dispatch('setting/toggleSetting', 'tagView');
         }
       }
     },

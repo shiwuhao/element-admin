@@ -3,7 +3,6 @@ const getters = {
   config: state => state.config,
   sidebar: state => state.app.sidebar,
   device: state => state.app.device,
-  showTagsView: state => state.app.showTagsView,
   cachedViews: state => state.tagView.cachedViews,
   visitedViews: state => state.tagView.visitedViews,
   routes: state => state.permission.routes,
