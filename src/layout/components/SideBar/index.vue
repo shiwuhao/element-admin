@@ -1,26 +1,37 @@
 <template>
   <div class="sidebar-container">
-    <logo v-if="setting.sidebarLogo" :collapse="isCollapse" />
-    <el-menu
-      class="sidebar"
-      :default-active="activeMenu"
-      :background-color="variables.menuBg"
-      :text-color="variables.menuText"
-      :active-text-color="variables.menuActiveText"
-      :unique-opened="uniqueOpened"
-      :collapse-transition="collapseTransition"
-      :collapse="isCollapse"
-      :router="true"
-      mode="vertical"
-    >
-      <sub-menu v-for="menu in menus" :index="menu.path" :key="menu.path" :menu="menu"/>
-    </el-menu>
+    <logo v-if="setting.sidebarLogo" :collapse="isCollapse"/>
+    <el-scrollbar>
+      <el-menu
+        class="sidebar"
+        :default-active="activeMenu"
+        :background-color="variables.menuBg"
+        :text-color="variables.menuText"
+        :active-text-color="variables.menuActiveText"
+        :unique-opened="uniqueOpened"
+        :collapse-transition="collapseTransition"
+        :collapse="isCollapse"
+        :router="true"
+        mode="vertical"
+      >
+        <sub-menu v-for="menu in menus" :index="menu.path" :key="menu.path" :menu="menu"/>
+      </el-menu>
+    </el-scrollbar>
   </div>
 </template>
 <style lang="scss">
-  .sidebar-container{
+  .sidebar-container {
     height: 100%;
+
+    .el-scrollbar {
+      height: 100%;
+
+      .el-scrollbar__view {
+        height: 100%;
+      }
+    }
   }
+
   .sidebar {
     height: 100%;
 
@@ -56,7 +67,7 @@
 
   export default {
     components: {
-      subMenu,Logo
+      subMenu, Logo
     },
     data() {
       return {
@@ -65,7 +76,7 @@
       }
     },
     computed: {
-      ...mapGetters(['setting','sidebar', 'menus']),
+      ...mapGetters(['setting', 'sidebar', 'menus']),
       variables() {
         return {
           menuBg: '#545c64',

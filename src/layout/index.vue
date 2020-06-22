@@ -5,7 +5,7 @@
     <el-aside width="auto">
       <side-bar/>
     </el-aside>
-    <el-container :class="{'hasTagView':setting.tagView}">
+    <el-container class="main-container" :class="{'hasTagView':setting.tagView}">
       <el-header :class="{'fixed-header':setting.fixedHeader}" :height="setting.tagView ? '80px' : '50px'"
                  style="text-align: right; font-size: 12px;">
         <nav-bar/>
@@ -46,6 +46,11 @@
 <style lang="scss" scoped>
   @import "~@/styles/variables.scss";
 
+  .main-container{
+    min-height: 100%;
+    position: relative;
+    flex-direction: column;
+  }
   .el-header {
     padding: 0 0 !important;
   }
@@ -53,6 +58,7 @@
   .el-main {
     min-height: calc(100vh - 50px);
     padding: 10px;
+    overflow: hidden;
   }
 
   .fixed-header + .el-main {
