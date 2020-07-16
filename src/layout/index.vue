@@ -1,5 +1,5 @@
 <template>
-  <el-container style="height: 100vh;" id="home">
+  <el-container :class="containerClass" style="height: 100vh;">
     <!--    <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />-->
     <!--    <el-aside :width="sidebar.collapse ? sidebar.collapseWidth : sidebar.width">-->
     <el-aside width="auto">
@@ -33,7 +33,15 @@
         'device',
         'sidebar',
         'setting'
-      ])
+      ]),
+      containerClass() {
+        return {
+          'hide-sidebar': this.sidebar.collapse,
+          'open-sidebar': !this.sidebar.collapse,
+          'without-animation': this.sidebar.withoutAnimation,
+          'mobile': this.device === 'mobile'
+        }
+      },
     },
     date() {
       return {
@@ -46,19 +54,23 @@
 <style lang="scss" scoped>
   @import "~@/styles/variables.scss";
 
-  .main-container{
+  .main-container {
     min-height: 100%;
     position: relative;
     flex-direction: column;
   }
+
   .el-header {
     padding: 0 0 !important;
   }
 
   .el-main {
-    min-height: calc(100vh - 50px);
-    padding: 10px;
-    overflow: hidden;
+    /*min-height: calc(100vh - 50px);*/
+    /*padding: 10px;*/
+    /*overflow: hidden;*/
+  }
+  .el-aside{
+    transition:all 0s ease 0s;
   }
 
   .fixed-header + .el-main {
@@ -72,6 +84,9 @@
     z-index: 9;
     width: calc(100% - #{$sideBarWidth});
     transition: width 0.28s;
+  }
+  .hide-sidebar .fixed-header {
+    width: calc(100% - 55px);
   }
 
   .hasTagView {

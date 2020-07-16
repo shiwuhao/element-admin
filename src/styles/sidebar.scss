@@ -1,0 +1,51 @@
+#app {
+  .sidebar-container {
+    max-width: $sideBarWidth;
+    height: 100%;
+    transition: all 0s ease 0s !important;
+
+    .el-scrollbar {
+      width: 100%;
+      height: 100%;
+
+      .el-scrollbar__view {
+        height: 100%;
+      }
+    }
+
+    .sidebar {
+      height: 100%;
+
+      > .el-menu-item {
+        padding-left: 15px !important;
+      }
+
+      .el-tooltip, .el-submenu__title {
+        padding-left: 15px !important;
+      }
+
+      .el-submenu .el-menu-item {
+        min-width: $sideBarWidth;
+      }
+    }
+
+    .sidebar.el-menu--collapse {
+      width: $sideBarCollapseWidth;
+    }
+
+    .sidebar:not(.el-menu--collapse) {
+      width: $sideBarWidth;
+    }
+  }
+
+  .sidebar-container.has-logo {
+    height: calc(100% - 50px);
+  }
+
+  .withoutAnimation {
+    .main-container,
+    .sidebar-container {
+      transition: none;
+    }
+  }
+}

@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar-container">
+  <div class="sidebar-container" :class="{'has-logo':setting.sidebarLogo}">
     <logo v-if="setting.sidebarLogo" :collapse="isCollapse"/>
     <el-scrollbar>
       <el-menu
@@ -19,45 +19,6 @@
     </el-scrollbar>
   </div>
 </template>
-<style lang="scss">
-  .sidebar-container {
-    height: 100%;
-
-    .el-scrollbar {
-      height: 100%;
-
-      .el-scrollbar__view {
-        height: 100%;
-      }
-    }
-  }
-
-  .sidebar {
-    height: 100%;
-
-    > .el-menu-item {
-      padding-left: 15px !important;
-    }
-
-    .el-tooltip, .el-submenu__title {
-      padding-left: 15px !important;
-    }
-
-    .el-submenu .el-menu-item {
-      min-width: 165px;
-    }
-  }
-
-  .sidebar.el-menu--collapse {
-    width: 55px;
-  }
-
-  .sidebar:not(.el-menu--collapse) {
-    width: 165px;
-  }
-
-</style>
-
 <script>
   import {mapGetters} from 'vuex'
   import variables from '@/styles/variables.scss';

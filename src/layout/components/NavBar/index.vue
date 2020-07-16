@@ -69,9 +69,9 @@
 </style>
 
 <script>
+
   import {Setting} from '@/layout/components';
   import {mapGetters} from 'vuex';
-
   export default {
     components: {Setting},
     data() {
