@@ -46,7 +46,7 @@ const permission = {
     SET_ROUTES(state, routes) {
       state.addRoutes = routes;
       state.routes = constantRoutes.concat(routes);
-      state.menus = state.routes.filter(item => item.meta.menu !== false);
+      state.menus = state.routes.filter(item => item.meta && item.meta.menu !== false);
     },
   },
   actions: {

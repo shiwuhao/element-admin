@@ -50,12 +50,12 @@ export default [
     path: '/',
     component: Layout,
     redirect: '/dashboard',
-    meta: {title: '控制台', icon: 'el-icon-user-solid', menu: true, cache: true},
+    meta: {icon: 'el-icon-user-solid', menu: true, cache: true},
     children: [
       {
         path: '/dashboard',
         name: 'dashboard',
-        meta: {title: '控制台', icon: 'el-icon-user-solid', menu: true, cache: true, affix: true},
+        meta: {title: '首页', icon: 'el-icon-user-solid', menu: true, cache: true, affix: true},
         component: () => import('@/views/dashboard/index'),
       },
     ]
