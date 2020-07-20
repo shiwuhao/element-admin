@@ -9,15 +9,11 @@
 </template>
 <style lang="scss" scoped>
   .app-main {
-    min-height: calc(100vh - 50px);
+    height: 100%;
     width: 100%;
     position: relative;
     overflow: hidden;
     background: #545c64;
-  }
-
-  .fixed-header + .app-main {
-    padding-top: 50px;
   }
 </style>
 <script>
