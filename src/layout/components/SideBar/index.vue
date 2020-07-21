@@ -1,9 +1,9 @@
 <template>
-  <div class="sidebar-container" :class="{'has-logo':setting.sidebarLogo}">
+  <div class="sidebar-wrapper" :class="{'has-logo':setting.sidebarLogo}">
     <logo v-if="setting.sidebarLogo" :collapse="isCollapse"/>
     <el-scrollbar>
       <el-menu
-        class="sidebar"
+        class="menu"
         :default-active="activeMenu"
         :background-color="variables.menuBg"
         :text-color="variables.menuText"

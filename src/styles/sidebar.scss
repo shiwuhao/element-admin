@@ -1,5 +1,5 @@
 #app {
-  .sidebar-container {
+  .sidebar-wrapper {
     max-width: $sideBarWidth;
     height: 100%;
     transition: all 0s ease 0s !important;
@@ -13,7 +13,7 @@
       }
     }
 
-    .sidebar {
+    .menu {
       height: 100%;
 
       > .el-menu-item {
@@ -29,22 +29,22 @@
       }
     }
 
-    .sidebar.el-menu--collapse {
+    .menu.el-menu--collapse {
       width: $sideBarCollapseWidth;
     }
 
-    .sidebar:not(.el-menu--collapse) {
+    .menu:not(.el-menu--collapse) {
       width: $sideBarWidth;
     }
   }
 
-  .sidebar-container.has-logo {
+  .sidebar-wrapper.has-logo {
     height: calc(100% - 50px);
   }
 
   .withoutAnimation {
     .main-container,
-    .sidebar-container {
+    .sidebar-wrapper {
       transition: none;
     }
   }

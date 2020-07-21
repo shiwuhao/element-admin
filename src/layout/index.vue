@@ -1,6 +1,6 @@
 <template>
   <el-container :class="containerClass" class="app-container">
-    <el-aside width="auto" class="sidebar-container">
+    <el-aside width="auto">
       <side-bar/>
     </el-aside>
     <el-scrollbar>
