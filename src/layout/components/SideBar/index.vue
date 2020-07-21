@@ -23,12 +23,12 @@
   import {mapGetters} from 'vuex'
   import variables from '@/styles/variables.scss';
   import subMenu from "@/layout/components/SideBar/subMenu";
-  import Logo from './Logo'
+  import logo from './logo'
 
 
   export default {
     components: {
-      subMenu, Logo
+      subMenu, logo
     },
     data() {
       return {

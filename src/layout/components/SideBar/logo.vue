@@ -49,7 +49,7 @@
     background: #2b2f3a;
     text-align: center;
     overflow: hidden;
-
+    /*transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;*/
     & .sidebar-logo-link {
       height: 100%;
       width: 100%;
@@ -74,7 +74,6 @@
     }
 
     &.collapse {
-      transition: 0.3s width ease-in-out, 0.3s padding-left ease-in-out, 0.3s padding-right ease-in-out !important;
 
       .sidebar-logo {
         margin-right: 0;

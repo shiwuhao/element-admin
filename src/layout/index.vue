@@ -37,13 +37,13 @@
         return {
           'hide-sidebar': this.sidebar.collapse,
           'open-sidebar': !this.sidebar.collapse,
-          'without-animation': this.sidebar.withoutAnimation,
+          // 'without-animation': this.sidebar.withoutAnimation,
           'mobile': this.device === 'mobile'
         }
       },
       mainContainerClass() {
         return {
-          'hasTagView': this.setting.tagView,
+          'has-tag-view': this.setting.tagView,
           'fixed-header': this.setting.fixedHeader,
         }
       }
@@ -76,7 +76,7 @@
     }
   }
 
-  .main-container.hasTagView {
+  .main-container.has-tag-view {
     .header-container {
       height: $navBarTagViewHeight !important;
     }
@@ -101,7 +101,7 @@
     padding-top: $navBarHeight;
   }
 
-  .main-container.fixed-header.hasTagView .el-main {
+  .main-container.fixed-header.has-tag-view .el-main {
     padding-top: $navBarTagViewHeight;
   }
 
