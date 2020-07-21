@@ -1,42 +1,41 @@
 import store from '@/store'
 
-const {body} = document;
+const {body, hidden} = document;
 const WIDTH = 992;
 
 export default {
   watch: {
     $route() {
       if (this.device === 'mobile' && this.sidebar.opened) {
-        store.dispatch('app/closeSideBar', {withoutAnimation: false})
+        store.dispatch('app/closeSideBar');
       }
     }
   },
   beforeMount() {
-    window.addEventListener('resize', this.$_resizeHandler)
+    window.addEventListener('resize', this.$_resizeHandler);
   },
   beforeDestroy() {
-    window.removeEventListener('resize', this.$_resizeHandler)
+    window.removeEventListener('resize', this.$_resizeHandler);
   },
   mounted() {
     const isMobile = this.$_isMobile();
     if (isMobile) {
       store.dispatch('app/toggleDevice', 'mobile');
-      store.dispatch('app/closeSideBar', {withoutAnimation: true});
+      store.dispatch('app/closeSideBar');
     }
   },
   methods: {
+    // 判断移动端
     $_isMobile() {
       const rect = body.getBoundingClientRect();
-      return rect.width - 1 < WIDTH
+      return rect.width - 1 < WIDTH;
     },
+    // 调整大小
     $_resizeHandler() {
-      if (!document.hidden) {
+      if (!hidden) {
         const isMobile = this.$_isMobile();
         store.dispatch('app/toggleDevice', isMobile ? 'mobile' : 'desktop');
-
-        if (isMobile) {
-          store.dispatch('app/closeSideBar', {withoutAnimation: true})
-        }
+        isMobile && store.dispatch('app/closeSideBar');
       }
     }
   }

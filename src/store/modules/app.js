@@ -15,8 +15,8 @@ const app = {
       localStorage.setItem('sidebarCollapse', state.sidebar.collapse ? '1' : '0');
     },
     CLOSE_SIDEBAR: state => {
-      state.sidebar.collapse = false;
-      localStorage.setItem('sidebarCollapse', '0');
+      state.sidebar.collapse = true;
+      localStorage.setItem('sidebarCollapse', '1');
     },
     TOGGLE_DEVICE: (state, device) => {
       state.device = device;

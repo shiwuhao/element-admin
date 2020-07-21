@@ -37,7 +37,7 @@
       }
     },
     computed: {
-      ...mapGetters(['setting', 'sidebar', 'menus']),
+      ...mapGetters(['setting', 'sidebar', 'menus','device']),
       variables() {
         return {
           menuBg: '#545c64',
@@ -57,5 +57,6 @@
         return !!this.sidebar.collapse;
       }
     },
+
   };
 </script>

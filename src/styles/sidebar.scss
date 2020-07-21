@@ -3,6 +3,7 @@
     max-width: $sideBarWidth;
     height: 100%;
 
+
     .el-scrollbar {
       width: 100%;
       height: 100%;
@@ -38,6 +39,14 @@
 
   .sidebar-wrapper.has-logo {
     height: calc(100% - #{$navBarHeight});
+  }
+
+  .mobile.hide-sidebar {
+    .sidebar-container {
+      pointer-events: none;
+      transition-duration: 0.3s;
+      transform: translate3d(-$sideBarWidth, 0, 0);
+    }
   }
 
   .withoutAnimation {
