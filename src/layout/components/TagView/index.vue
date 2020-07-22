@@ -7,6 +7,7 @@
         v-for="item in visitedViews"
         :key="item.path"
         :route="item"
+        :hit="isActive(item)"
         :type="isActive(item) ? 'success' : 'info'"
         :closable="!(item.meta && item.meta.affix)"
         @close="closeTagView(item)"
@@ -39,6 +40,7 @@
         margin: 0 2px;
         cursor: pointer;
         font-weight: bolder;
+        user-select: none;
       }
     }
 
@@ -158,12 +160,14 @@
       },
       // 开启右键菜单
       openContextmenu(tag, e) {
-        const menuMinWidth = 100, marginLeft = 0;
-        const maxLeft = window.screen.availWidth - menuMinWidth + marginLeft;
-        this.left = e.clientX > maxLeft ? maxLeft : e.clientX;
+        const contextmenuWidth = 80, marginLeft = 10;// 菜单宽度 左侧边距
+        const offsetLeft = this.$el.getBoundingClientRect().left; // 组件左侧偏移量
+        const left = e.clientX - offsetLeft + marginLeft;// 最大偏移量
+        const maxLeft = this.$el.offsetWidth - contextmenuWidth;
+        this.left = left > maxLeft ? maxLeft : left;
         this.top = e.clientY;
         this.visible = true;
-        this.selectedTag = tag
+        this.selectedTag = tag;
       },
       // 关闭右键菜单
       closeContextmenu() {
