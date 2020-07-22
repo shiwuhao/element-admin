@@ -1,21 +1,12 @@
 <template>
   <section class="app-main">
-    <transition name="el-fade-in">
+    <transition name="el-zoom-in-center">
       <keep-alive :include="cachedViews">
         <router-view :key="key"/>
       </keep-alive>
     </transition>
   </section>
 </template>
-<style lang="scss" scoped>
-  .app-main {
-    height: 100%;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-    background: #545c64;
-  }
-</style>
 <script>
   import {mapGetters} from 'vuex'
 
