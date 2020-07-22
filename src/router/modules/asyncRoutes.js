@@ -2,21 +2,21 @@ import Layout from '@/layout/index.vue';
 
 export default [
   {
-    path: '/about',
+    path: '/table',
     component: Layout,
     redirect: '/about/me',
-    meta: {title: '关于', icon: 'el-icon-delete'},
+    meta: {title: '表格', icon: 'el-icon-delete'},
     children: [
       {
-        path: '/about/me',
+        path: '/table/index',
         name: 'me',
-        meta: {title: '关于我们',  affix: false},
-        component: () => import('@/views/About'),
+        meta: {title: '表格', affix: false},
+        component: () => import('@/views/table/index'),
       },
       {
         path: '/about/test',
         name: 'test',
-        meta: {title: '测试页面',  affix: false},
+        meta: {title: '测试页面', affix: false},
         component: () => import('@/views/Test'),
       },
     ]
@@ -30,13 +30,13 @@ export default [
       {
         path: '/about/me2',
         name: 'me2',
-        meta: {title: '关于我们',  affix: false},
+        meta: {title: '关于我们', affix: false},
         component: () => import('@/views/About'),
       },
       {
         path: '/about/test2',
         name: 'test2',
-        meta: {title: '测试页面',  affix: false},
+        meta: {title: '测试页面', affix: false},
         component: () => import('@/views/Test'),
       },
     ]
@@ -50,13 +50,13 @@ export default [
       {
         path: '/about/me3',
         name: 'm3',
-        meta: {title: '关于我们',  affix: false},
+        meta: {title: '关于我们', affix: false},
         component: () => import('@/views/About'),
       },
       {
         path: '/about/test3',
         name: 'tes3',
-        meta: {title: '测试页面',  affix: false},
+        meta: {title: '测试页面', affix: false},
         component: () => import('@/views/Test'),
       },
     ]
@@ -70,13 +70,13 @@ export default [
       {
         path: '/about/me4',
         name: 'me4',
-        meta: {title: '关于我们',  affix: false},
+        meta: {title: '关于我们', affix: false},
         component: () => import('@/views/About'),
       },
       {
         path: '/about/test4',
         name: 'test4',
-        meta: {title: '测试页面',  affix: false},
+        meta: {title: '测试页面', affix: false},
         component: () => import('@/views/Test'),
       },
     ]
@@ -90,13 +90,13 @@ export default [
       {
         path: '/about/me5',
         name: 'me5',
-        meta: {title: '关于我们',  affix: false},
+        meta: {title: '关于我们', affix: false},
         component: () => import('@/views/About'),
       },
       {
         path: '/about/test5',
         name: 'test5',
-        meta: {title: '测试页面',  affix: false},
+        meta: {title: '测试页面', affix: false},
         component: () => import('@/views/Test'),
       },
     ]
@@ -110,13 +110,13 @@ export default [
       {
         path: '/about/me6',
         name: 'me6',
-        meta: {title: '关于我们',  affix: false},
+        meta: {title: '关于我们', affix: false},
         component: () => import('@/views/About'),
       },
       {
         path: '/about/test6',
         name: 'test6',
-        meta: {title: '测试页面',  affix: false},
+        meta: {title: '测试页面', affix: false},
         component: () => import('@/views/Test'),
       },
     ]
@@ -130,13 +130,13 @@ export default [
       {
         path: '/about/me7',
         name: 'me7',
-        meta: {title: '关于我们',  affix: false},
+        meta: {title: '关于我们', affix: false},
         component: () => import('@/views/About'),
       },
       {
         path: '/about/test7',
         name: 'test7',
-        meta: {title: '测试页面',  affix: false},
+        meta: {title: '测试页面', affix: false},
         component: () => import('@/views/Test'),
       },
     ]
@@ -150,13 +150,13 @@ export default [
       {
         path: '/about/me8',
         name: 'me8',
-        meta: {title: '关于我们',  affix: false},
+        meta: {title: '关于我们', affix: false},
         component: () => import('@/views/About'),
       },
       {
         path: '/about/test8',
         name: 'test8',
-        meta: {title: '测试页面',  affix: false},
+        meta: {title: '测试页面', affix: false},
         component: () => import('@/views/Test'),
       },
     ]
@@ -170,13 +170,13 @@ export default [
       {
         path: '/about/me9',
         name: 'me9',
-        meta: {title: '关于我们',  affix: false},
+        meta: {title: '关于我们', affix: false},
         component: () => import('@/views/About'),
       },
       {
         path: '/about/test9',
         name: 'test9',
-        meta: {title: '测试页面',  affix: false},
+        meta: {title: '测试页面', affix: false},
         component: () => import('@/views/Test'),
       },
     ]
@@ -190,13 +190,13 @@ export default [
       {
         path: '/about/me11',
         name: 'me11',
-        meta: {title: '关于我们',  affix: false},
+        meta: {title: '关于我们', affix: false},
         component: () => import('@/views/About'),
       },
       {
         path: '/about/test11',
         name: 'test11',
-        meta: {title: '测试页面',  affix: false},
+        meta: {title: '测试页面', affix: false},
         component: () => import('@/views/Test'),
       },
     ]
@@ -210,13 +210,13 @@ export default [
       {
         path: '/about/me12',
         name: 'me12',
-        meta: {title: '关于我们',  affix: false},
+        meta: {title: '关于我们', affix: false},
         component: () => import('@/views/About'),
       },
       {
         path: '/about/test12',
         name: 'test12',
-        meta: {title: '测试页面',  affix: false},
+        meta: {title: '测试页面', affix: false},
         component: () => import('@/views/Test'),
       },
     ]
@@ -230,13 +230,13 @@ export default [
       {
         path: '/about/me13',
         name: 'me13',
-        meta: {title: '关于我们',  affix: false},
+        meta: {title: '关于我们', affix: false},
         component: () => import('@/views/About'),
       },
       {
         path: '/about/test13',
         name: 'test13',
-        meta: {title: '测试页面',  affix: false},
+        meta: {title: '测试页面', affix: false},
         component: () => import('@/views/Test'),
       },
     ]
