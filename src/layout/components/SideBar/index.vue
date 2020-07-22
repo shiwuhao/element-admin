@@ -32,7 +32,7 @@
     },
     data() {
       return {
-        uniqueOpened: false, // 是否只保持一个子菜单的展开
+        uniqueOpened: true, // 是否只保持一个子菜单的展开
         collapseTransition: true,// 是否开启折叠动画
       }
     },

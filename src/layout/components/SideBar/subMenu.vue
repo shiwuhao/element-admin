@@ -27,7 +27,7 @@
   }
 
   .el-menu.el-menu--collapse i[class^="el-icon-"] {
-    font-size: 24px;
+    /*font-size: 24px;*/
     transition: font-size .3s;
   }
   .el-menu:not(.el-menu--collapse) i[class^="el-icon-"] {

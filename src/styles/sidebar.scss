@@ -2,7 +2,9 @@
   .sidebar-wrapper {
     max-width: $sideBarWidth;
     height: 100%;
-
+    //.horizontal-collapse-transition {
+    //  transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
+    //}
 
     .el-scrollbar {
       width: 100%;
@@ -12,8 +14,10 @@
         height: 100%;
       }
     }
+
     .menu {
       height: 100%;
+      border: 0;
 
       > .el-menu-item {
         padding-left: 15px !important;
