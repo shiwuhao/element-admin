@@ -1,7 +1,7 @@
 <template>
   <el-container :class="containerClass" class="app-container">
     <div v-if="device==='mobile' && !isCollapse" class="drawer-bg" @click="handleClickOutside"/>
-    <el-aside width="auto" class="sidebar-container" :class="{'collapse':isCollapse}">
+    <el-aside width="auto" class="sidebar-container">
       <side-bar/>
     </el-aside>
     <el-scrollbar>
@@ -102,11 +102,11 @@
     .header-container {
       height: $navBarHeight;
       padding: 0;
-      position: fixed;
+      position: absolute;
       top: 0;
       right: 0;
       z-index: 9;
-      width: calc(100% - #{$sideBarWidth});
+      width: 100%;
       transition: width 0.28s;
     }
 
@@ -118,6 +118,7 @@
       padding-top: $navBarTagViewHeight;
     }
   }
+
   // 手机端
   .mobile {
     .fixed-header {
@@ -132,11 +133,6 @@
       z-index: 999;
     }
   }
-
-  .hide-sidebar .fixed-header .header-container {
-    width: calc(100% - #{$sideBarCollapseWidth});
-  }
-
 
   .el-scrollbar {
     width: 100%;
