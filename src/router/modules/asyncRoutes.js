@@ -8,16 +8,16 @@ export default [
     meta: {title: '表格', icon: 'el-icon-delete'},
     children: [
       {
-        path: '/table/index',
+        path: '/table/base-table',
         name: 'me',
-        meta: {title: '表格', affix: false},
-        component: () => import('@/views/table/index'),
+        meta: {title: '基础表格', affix: false},
+        component: () => import('@/views/table/base-table'),
       },
       {
-        path: '/about/test',
+        path: '/about/dynamic-table',
         name: 'test',
-        meta: {title: '测试页面', affix: false},
-        component: () => import('@/views/Test'),
+        meta: {title: '动态表格', affix: false},
+        component: () => import('@/views/table/dynamic-table'),
       },
     ]
   },

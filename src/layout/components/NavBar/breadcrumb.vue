@@ -44,3 +44,10 @@
     }
   }
 </script>
+<style lang="scss" scoped>
+  .app-breadcrumb{
+    .el-breadcrumb__item{
+      user-select: none;
+    }
+  }
+</style>

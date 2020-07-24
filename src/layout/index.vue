@@ -152,4 +152,7 @@
     position: absolute;
     z-index: 999;
   }
+  .main-wrapper{
+    margin-top: 5px;
+  }
 </style>
