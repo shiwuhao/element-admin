@@ -1,19 +1,21 @@
 <template>
-  <div>
-    {{ columns }}
-<!--  <p v-for="(value,key,index) in columns"-->
-<!--  :prop="key"-->
-<!--  :key="index">-->
-<!--    {{value}}{{key}}{{index}}-->
-<!--  </p>-->
-  </div>
-<!--  <el-table border :data="data" tooltip-effect="light" style="width: 100%;">-->
-<!--    <el-table-column-->
-<!--      v-for="(value,key,index) in columns"-->
-<!--      :prop="key"-->
-<!--      :key="index"-->
-<!--    />-->
-<!--  </el-table>-->
+  <el-table border :data="data" tooltip-effect="light" style="width: 100%;">
+    <el-table-column
+      v-for="(value,key,index) in columns"
+      :prop="key"
+      :key="index"
+      :index="value.index"
+      :column-key="value.columnKey"
+      :label="value.label"
+      :width="value.width"
+      :min-width="value.minWidth"
+      :fixed="value.fixed"
+      :render-header="value.renderHeader"
+      :sortable="value.sortable"
+      :sort-method="value.sortMethod"
+      :sort-by="value.sortBy"
+    />
+  </el-table>
 </template>
 
 <script>
@@ -21,17 +23,16 @@
     name: 'DynamicTable',
     props: {
       data: Array,
-      columns: Object,
-      default: () => {
-        return {
-          name: {
-            prop: 'name'
-          },
-          date: {
-            prop: 'date'
-          }
-        };
-      }
-    }
+      columns: {
+        type: Object,
+        default: () => {
+          return {
+            name: {},
+            date: {},
+            address: {}
+          };
+        }
+      },
+    },
   }
 </script>
