@@ -27,9 +27,18 @@
     </div>
     <dynamic-table :data="tableData" :columns="tableColumns">
       <template slot="name" slot-scope="scope">
-        <i class="el-icon-time" />
+        <i class="el-icon-time"/>
         <span style="margin-left: 10px">{{ scope.row.name }} --  {{ scope.$index }}</span>
       </template>
+      <el-table-column label="操作">
+        <template slot-scope="scope">
+          <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+          <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+          <el-button size="mini" type="success" @click="handleDelete(scope.$index, scope.row)" icon="el-icon-delete">
+            编辑
+          </el-button>
+        </template>
+      </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
@@ -183,17 +192,21 @@
             address: '上海市普陀区金沙江路 1516 弄'
           }
         ],
-        tableColumns: {
-          name: {
+        tableColumns: [
+          {
+            filed: 'name',
             label: '姓名',
-            width: '150',
             slot: 'name'
           },
-          date: {
-            label: '时间',
+          {
+            filed: 'date',
+            label: '日期'
           },
-          // address: {}
-        },
+          {
+            label: '地址',
+            filed: 'address'
+          },
+        ],
         formInline: {
           user: '',
           region: ''
