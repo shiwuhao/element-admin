@@ -1,49 +1,22 @@
 <template>
   <div>
-    <div>
-      <el-form :inline="true" :model="formInline">
-        <el-form-item>
-          <el-input v-model="formInline.user" placeholder="审批人"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-select v-model="formInline.region" placeholder="活动区域">
-            <el-option label="区域一" value="shanghai"></el-option>
-            <el-option label="区域二" value="beijing"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item>
-          <el-date-picker type="date" placeholder="选择日期" style="width: 100%;"></el-date-picker>
-        </el-form-item>
-        <el-form-item>
-          <el-input-number controls-position="right" placeholder="计数器"></el-input-number>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" icon="el-icon-search" circle></el-button>
-          <el-button type="primary" icon="el-icon-download" circle></el-button>
-          <el-button type="primary" icon="el-icon-setting" circle></el-button>
-        </el-form-item>
-
-      </el-form>
-    </div>
+    <search-form></search-form>
     <dynamic-table :data="tableData" :columns="tableColumns">
       <template slot="name" slot-scope="scope">
         <i class="el-icon-time"/>
         <span style="margin-left: 10px">{{ scope.row.name }} --  {{ scope.$index }}</span>
       </template>
-      <el-table-column label="操作">
+      <el-table-column label="操作" min-width="100">
         <template slot-scope="scope">
-          <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-          <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-          <el-button size="mini" type="success" @click="handleDelete(scope.$index, scope.row)" icon="el-icon-delete">
-            编辑
-          </el-button>
+          <el-switch v-model="scope.row.open">
+          </el-switch>
         </template>
       </el-table-column>
-      <el-table-column label="操作">
+      <el-table-column label="操作" width="220">
         <template slot-scope="scope">
-          <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+          <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
           <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-          <el-button size="mini" type="success" @click="handleDelete(scope.$index, scope.row)" icon="el-icon-delete">
+          <el-button size="mini" type="success" @click="handleDelete(scope.$index, scope.row)">
             编辑
           </el-button>
         </template>
@@ -62,11 +35,12 @@
 <script>
 
   import DynamicTable from "@/components/Table/DynamicTable";
+  import SearchForm from "@/components/Table/SearchForm";
 
   export default {
     name: 'Test',
     components: {
-      DynamicTable,
+      DynamicTable, SearchForm
     },
     data() {
       return {
@@ -74,137 +48,181 @@
           {
             date: '2016-05-02',
             name: '王小虎',
+            open: false,
             address: '上海市普陀区金沙江路 1518 弄'
           },
           {
             date: '2016-05-04',
             name: '王小虎',
+            open: true,
             address: '上海市普陀区金沙江路 1517 弄'
           },
           {
             date: '2016-05-01',
             name: '王小虎',
+            open: false,
             address: '上海市普陀区金沙江路 1519 弄'
           },
           {
             date: '2016-05-03',
             name: '王小虎',
+            open: false,
             address: '上海市普陀区金沙江路 1516 弄'
           },
           {
             date: '2016-05-02',
             name: '王小虎',
+            open: false,
             address: '上海市普陀区金沙江路 1518 弄'
           },
           {
             date: '2016-05-04',
             name: '王小虎',
+            open: false,
             address: '上海市普陀区金沙江路 1517 弄'
           },
           {
             date: '2016-05-01',
             name: '王小虎',
+            open: false,
             address: '上海市普陀区金沙江路 1519 弄'
           },
           {
             date: '2016-05-03',
             name: '王小虎',
+            open: false,
             address: '上海市普陀区金沙江路 1516 弄'
           },
           {
             date: '2016-05-02',
             name: '王小虎',
+            open: false,
             address: '上海市普陀区金沙江路 1518 弄'
           },
           {
             date: '2016-05-04',
             name: '王小虎',
+            open: false,
             address: '上海市普陀区金沙江路 1517 弄'
           },
           {
             date: '2016-05-01',
             name: '王小虎',
+            open: false,
             address: '上海市普陀区金沙江路 1519 弄'
           },
           {
             date: '2016-05-03',
             name: '王小虎',
+            open: false,
             address: '上海市普陀区金沙江路 1516 弄'
           },
           {
             date: '2016-05-02',
             name: '王小虎',
+            open: false,
             address: '上海市普陀区金沙江路 1518 弄'
           },
           {
             date: '2016-05-04',
             name: '王小虎',
+            open: false,
             address: '上海市普陀区金沙江路 1517 弄'
           },
           {
             date: '2016-05-01',
             name: '王小虎',
+            open: false,
             address: '上海市普陀区金沙江路 1519 弄'
           },
           {
             date: '2016-05-03',
             name: '王小虎',
+            open: false,
             address: '上海市普陀区金沙江路 1516 弄'
           },
           {
             date: '2016-05-02',
             name: '王小虎',
+            open: false,
             address: '上海市普陀区金沙江路 1518 弄'
           },
           {
             date: '2016-05-04',
             name: '王小虎',
+            open: false,
             address: '上海市普陀区金沙江路 1517 弄'
           },
           {
             date: '2016-05-01',
             name: '王小虎',
+            open: false,
             address: '上海市普陀区金沙江路 1519 弄'
           },
           {
             date: '2016-05-03',
             name: '王小虎',
+            open: false,
             address: '上海市普陀区金沙江路 1516 弄'
           },
           {
             date: '2016-05-02',
             name: '王小虎',
+            open: false,
             address: '上海市普陀区金沙江路 1518 弄'
           },
           {
             date: '2016-05-04',
             name: '王小虎',
+            open: false,
             address: '上海市普陀区金沙江路 1517 弄'
           },
           {
             date: '2016-05-01',
             name: '王小虎',
+            open: false,
             address: '上海市普陀区金沙江路 1519 弄'
           },
           {
             date: '2016-05-03',
             name: '王小虎',
+            open: false,
             address: '上海市普陀区金沙江路 1516 弄'
           }
         ],
         tableColumns: [
           {
-            filed: 'name',
+            key: 'name',
             label: '姓名',
-            slot: 'name'
+            slot: 'name',
+            minWidth: 130
           },
           {
-            filed: 'date',
-            label: '日期'
+            key: 'date',
+            label: '日期',
+            minWidth: 130
           },
           {
             label: '地址',
-            filed: 'address'
+            key: 'address',
+            minWidth: 230
+          },
+        ],
+        searchFormOptions: [
+          {
+            key: 'input',
+            label: '基础表单',
+            type: 'input',
+            options: [],
+          },
+          {
+            type: 'datetime',
+            key: 'datetime',
+            label: "时间",
+          },
+          {
+            type: 'input',
+            key: 'key',
           },
         ],
         formInline: {
