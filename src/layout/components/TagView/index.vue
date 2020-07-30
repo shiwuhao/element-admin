@@ -12,17 +12,18 @@
         :closable="!(item.meta && item.meta.affix)"
         @close="closeTagView(item)"
         @click="clickTagView(item)"
-        @contextmenu.prevent.native="openContextmenu(item,$event)"
+        @contextmenu.prevent.native="openContextmenu(item)"
+        v-contextmenu:contextmenu
       >
         {{ item.title }}
       </el-tag>
     </scroll-panel>
-    <ul v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
-      <li @click="refreshSelectedTag(selectedTag)">刷新</li>
-      <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">关闭</li>
-      <li @click="closeOthersTags(selectedTag)">关闭其他</li>
-      <li @click="closeAllTags(selectedTag)">关闭所有</li>
-    </ul>
+    <v-contextmenu ref="contextmenu">
+      <v-contextmenu-item @click="refreshSelectedTag(selectedTag)">刷新</v-contextmenu-item>
+      <v-contextmenu-item v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">关闭</v-contextmenu-item>
+      <v-contextmenu-item @click="closeOthersTags(selectedTag)">关闭其他</v-contextmenu-item>
+      <v-contextmenu-item @click="closeAllTags(selectedTag)">关闭所有</v-contextmenu-item>
+    </v-contextmenu>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -77,13 +78,10 @@
 
   export default {
     components: {
-      scrollPanel
+      scrollPanel,
     },
     data() {
       return {
-        visible: false,
-        top: 0,
-        left: 0,
         selectedTag: {},
         affixTags: []
       }
@@ -96,13 +94,6 @@
         this.addTagView();
         this.moveToCurrentTagView();
       },
-      visible(value) {
-        if (value) {
-          document.body.addEventListener('click', this.closeContextmenu)
-        } else {
-          document.body.removeEventListener('click', this.closeContextmenu)
-        }
-      }
     },
     mounted() {
       this.initTagViews();
@@ -159,19 +150,8 @@
         return tags
       },
       // 开启右键菜单
-      openContextmenu(tag, e) {
-        const contextmenuWidth = 80, marginLeft = 10;// 菜单宽度 左侧边距
-        const offsetLeft = this.$el.getBoundingClientRect().left; // 组件左侧偏移量
-        const left = e.clientX - offsetLeft + marginLeft;// 最大偏移量
-        const maxLeft = this.$el.offsetWidth - contextmenuWidth;
-        this.left = left > maxLeft ? maxLeft : left;
-        this.top = e.clientY;
-        this.visible = true;
+      openContextmenu(tag) {
         this.selectedTag = tag;
-      },
-      // 关闭右键菜单
-      closeContextmenu() {
-        this.visible = false;
       },
       // 刷新选中标签页面
       refreshSelectedTag(selectTagView) {
