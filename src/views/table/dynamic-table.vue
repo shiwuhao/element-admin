@@ -1,6 +1,6 @@
 <template>
   <div>
-    <search-form></search-form>
+    <search-form :options="searchFormOptions"></search-form>
     <dynamic-table :data="tableData" :columns="tableColumns">
       <template slot="name" slot-scope="scope">
         <i class="el-icon-time"/>
@@ -208,21 +208,37 @@
             minWidth: 230
           },
         ],
+        searchForm: {},
         searchFormOptions: [
           {
+            type: 'input',
             key: 'input',
             label: '基础表单',
-            type: 'input',
-            options: [],
           },
           {
-            type: 'datetime',
-            key: 'datetime',
+            type: 'select',
+            key: 'selectKey',
+            label: '下拉框',
+            multiple: true,
+            options: [
+              {value: '选项1', label: '黄金糕'},
+              {value: '选项2', label: '双皮奶'},
+              {value: '选项3', label: '蚵仔煎'},
+              {value: '选项4', label: '龙须面'},
+              {value: '选项5', label: '北京烤鸭'},
+            ]
+          },
+          {
+            type: 'date-picker',
+            key: 'created_at',
             label: "时间",
+            displayType: 'datetime',
           },
           {
             type: 'input',
             key: 'key',
+            label: 'input框',
+            placeholder: '请输入搜索条件',
           },
         ],
         formInline: {
