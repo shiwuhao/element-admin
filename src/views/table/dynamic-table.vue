@@ -1,6 +1,6 @@
 <template>
   <div>
-    <search-form :options="searchFormOptions"></search-form>
+    <search-form :options="searchFormOptions" @search="search" @reset="reset"></search-form>
     <dynamic-table :data="tableData" :columns="tableColumns">
       <template slot="name" slot-scope="scope">
         <i class="el-icon-time"/>
@@ -232,7 +232,13 @@
             type: 'date-picker',
             key: 'created_at',
             label: "时间",
-            displayType: 'datetime',
+            displayType: 'date',
+          },
+          {
+            type: 'time-picker',
+            key: 'time',
+            label: "时间",
+            // valueFormat: 'h:m:s',
           },
           {
             type: 'input',
@@ -253,6 +259,12 @@
       },
       handleDelete(index, row) {
         console.log(index, row);
+      },
+      search(form) {
+        console.log('search', form);
+      },
+      reset() {
+        console.log('reset');
       }
     }
   }
