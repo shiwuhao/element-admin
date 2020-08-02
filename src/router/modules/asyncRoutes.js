@@ -9,15 +9,21 @@ export default [
     children: [
       {
         path: '/table/base-table',
-        name: 'me',
+        name: 'base-table',
         meta: {title: '基础表格', affix: false},
         component: () => import('@/views/table/base-table'),
       },
       {
-        path: '/about/dynamic-table',
-        name: 'test',
+        path: '/table/dynamic-table',
+        name: 'dynamic-table',
         meta: {title: '动态表格', affix: false},
         component: () => import('@/views/table/dynamic-table'),
+      },
+      {
+        path: '/table/search-form',
+        name: 'search-form',
+        meta: {title: '表格搜索', affix: false},
+        component: () => import('@/views/table/search-form'),
       },
     ]
   },

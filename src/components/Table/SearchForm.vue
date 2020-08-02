@@ -1,6 +1,6 @@
 <template>
   <div style="padding-top:10px;">
-    <el-form ref="searchForm" :inline="true" :model="form" :size="size" :label="label" :label-width="labelWidth">
+    <el-form ref="searchForm" :inline="true" :model="form" :size="size" :label="label" :label-width="labelWidth" @submit="submit">
       <template v-for="(item,index) in options">
         <el-form-item :key="index" :label="label ? item.label : ''" :prop="item.key">
 
@@ -108,6 +108,9 @@
       handleReset(formName) {
         this.$refs[formName].resetFields();
         this.$emit('reset');
+      },
+      submit(){
+        console.log('submit');
       }
     }
   }
