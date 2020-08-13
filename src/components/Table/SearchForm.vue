@@ -1,14 +1,15 @@
 <template>
   <div style="padding-top:10px;">
-    <el-form ref="searchForm" :inline="true" :model="form" :size="size" :label="label" :label-width="labelWidth" @submit="submit">
+    <el-form ref="searchForm" :inline="true" :model="form" :size="size" :label="label" :label-width="labelWidth"
+             @submit="submit">
       <template v-for="(item,index) in options">
-        <el-form-item :key="index" :label="label ? item.label : ''" :prop="item.key">
+        <el-form-item :key="index" :label="label ? item.label : ''" :prop="item.key" v-if="!item.slot">
 
           <template v-if="item.type === 'input'">
             <el-input
               v-model="form[item.key]"
               :placeholder="item.placeholder || item.label"
-              :clearable="!!item.clearable"
+              :clearable="item.clearable ? !!item.clearable : clearable"
               :style="{width:width}"/>
           </template>
 
@@ -17,7 +18,7 @@
               v-model="form[item.key]"
               :placeholder="item.placeholder || item.label"
               :multiple="item.multiple"
-              :clearable="!!item.clearable"
+              :clearable="item.clearable ? !!item.clearable : clearable"
               :style="{width:width}"
               collapse-tags>
               <el-option v-for="(option,optionIndex) in item.options"
@@ -32,7 +33,7 @@
               v-model="form[item.key]"
               :type="item.type"
               :placeholder="item.placeholder || item.label"
-              :clearable="!!item.clearable"
+              :clearable="item.clearable ? !!item.clearable : clearable"
               :style="{width:width}">
             </el-date-picker>
           </template>
@@ -42,7 +43,7 @@
               v-model="form[item.key]"
               :type="item.displayType"
               :placeholder="item.placeholder || item.label"
-              :clearable="!!item.clearable"
+              :clearable="item.clearable ? !!item.clearable : clearable"
               :value-format="item.valueFormat ? item.valueFormat : 'yyyy-MM-dd'"
               :style="{width:width}">
             </el-date-picker>
@@ -53,20 +54,25 @@
               v-model="form[item.key]"
               :type="item.type"
               :placeholder="item.placeholder || item.label"
-              :clearable="!!item.clearable"
+              :clearable="item.clearable ? !!item.clearable : clearable"
               :value-format="item.valueFormat ? item.valueFormat : 'HH:mm:ss'"
               :style="{width:width}">
             </el-time-picker>
           </template>
 
         </el-form-item>
+        <slot v-else :name="item.slot"/>
       </template>
 
       <el-form-item>
-        <el-button type="primary" icon="el-icon-search" circle @click="handleSearch"></el-button>
-        <el-button type="primary" icon="el-icon-download" circle></el-button>
-        <el-button type="primary" icon="el-icon-setting" circle></el-button>
-        <el-button type="primary" @click="handleReset('searchForm')">重置</el-button>
+        <el-button type="primary" :icon="iconButton ? 'el-icon-search' : ''" @click="handleSearch">
+          {{ iconButton ? '' : '搜索'}}
+        </el-button>
+        <el-button type="primary" :icon="iconButton ? 'el-icon-refresh-right' : ''" @click="handleReset('searchForm')">
+          {{ iconButton ? '' : '重置'}}
+        </el-button>
+        <!--        <el-button type="primary" icon="el-icon-download"></el-button>-->
+        <!--        <el-button type="primary" icon="el-icon-setting"></el-button>-->
       </el-form-item>
     </el-form>
   </div>
@@ -75,7 +81,12 @@
 <script>
   export default {
     name: 'SearchForm',
+    model: {
+      prop: 'value',
+      event: 'change',
+    },
     props: {
+      value: Object,
       size: {
         type: String,
         default: 'mini',
@@ -92,6 +103,14 @@
         type: String,
         default: '180px',
       },
+      iconButton: {
+        type: Boolean,
+        default: false,
+      },
+      clearable: {
+        type: Boolean,
+        default: false,
+      },
       options: Array,
     },
     data() {
@@ -100,16 +119,20 @@
         form: {},
       }
     },
+    watch: {
+      'form': function (newVal) {
+        this.$emit('change', newVal);
+      }
+    },
     methods: {
       handleSearch() {
-        console.log(this.form);
         this.$emit('search', this.form);
       },
       handleReset(formName) {
         this.$refs[formName].resetFields();
         this.$emit('reset');
       },
-      submit(){
+      submit() {
         console.log('submit');
       }
     }
