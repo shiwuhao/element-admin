@@ -120,8 +120,11 @@
       }
     },
     watch: {
-      'form': function (newVal) {
-        this.$emit('change', newVal);
+      form: {
+        handler(newVal) {
+          this.$emit('change', newVal);
+        },
+        deep: true,
       }
     },
     methods: {
