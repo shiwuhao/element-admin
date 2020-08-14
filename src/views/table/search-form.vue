@@ -19,12 +19,16 @@
             <el-radio-button label="mini"></el-radio-button>
           </el-radio-group>
         </el-form-item>
+        <el-form-item label="宽度">
+          <el-input-number v-model="config.width" :min="150" :max="300" label="描述文字"></el-input-number>
+        </el-form-item>
       </el-form>
       <search-form :options="options1"
                    :label="config.showLabel"
                    :iconButton="config.iconButton"
                    :size="config.size"
                    :clearable="config.clearable"
+                   :width="config.width+'px'"
                    @search="form1 = $event"
                    @reset="form1 = {}"></search-form>
       {{ form1 }}
@@ -75,6 +79,7 @@
           iconButton: false,
           clearable: true,
           size: 'mini',
+          width: 100
         },
         options1: [
           {
