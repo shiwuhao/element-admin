@@ -29,7 +29,7 @@
                    :size="config.size"
                    :clearable="config.clearable"
                    :width="config.width+'px'"
-                   @search="form1 = $event"
+                   @search="search1"
                    @reset="form1 = {}"></search-form>
       {{ form1 }}
     </el-card>
@@ -228,6 +228,10 @@
       },
       handleDelete(index, row) {
         console.log(index, row);
+      },
+      search1(event) {
+        this.form1 = event;
+        console.log('search1', event);
       },
       search3(form) {
         this.form3 = {...form, ...{customSlot: this.customSlot}};

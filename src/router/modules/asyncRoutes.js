@@ -22,7 +22,7 @@ export default [
       {
         path: '/table/search-form',
         name: 'search-form',
-        meta: {title: '表格搜索', affix: false},
+        meta: {title: '搜索表单', affix: false},
         component: () => import('@/views/table/search-form'),
       },
     ]
