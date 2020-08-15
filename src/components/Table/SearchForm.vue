@@ -1,7 +1,7 @@
 <template>
   <div style="padding-top:10px;">
     <el-form ref="searchForm" :inline="true" :model="form" :size="size" :label="label" :label-width="labelWidth"
-             @submit="submit">
+             @submit.native.prevent="handleSubmit" @keyup.enter.native="handleSubmit">
       <template v-for="(item,index) in options">
         <el-form-item :key="index" :label="label ? item.label : ''" :prop="item.key" v-if="!item.slot">
 
@@ -120,23 +120,20 @@
       }
     },
     watch: {
-      form: {
-        handler(newVal) {
-          this.$emit('change', newVal);
-        },
-        deep: true,
+      form: function (newVal) {
+        this.$emit('change', newVal);
       }
     },
     methods: {
       handleSearch() {
-        this.$emit('search', this.form);
+        this.$emit('search', {...this.form});
       },
       handleReset(formName) {
         this.$refs[formName].resetFields();
         this.$emit('reset');
       },
-      submit() {
-        console.log('submit');
+      handleSubmit() {
+        this.handleSearch();
       }
     }
   }

@@ -29,27 +29,23 @@
                    :size="config.size"
                    :clearable="config.clearable"
                    :width="config.width+'px'"
-                   @search="search1"
+                   @search="form1 = $event"
                    @reset="form1 = {}"></search-form>
       {{ form1 }}
     </el-card>
     <el-card class="box-card">
       <div slot="header" class="card-header">自定义插槽</div>
-      <search-form :options="options3" @search="search3" @reset="reset3">
+      <search-form :options="options2" @search="search" @reset="reset">
         <el-form-item slot="custom-slot">
           <el-input v-model="customSlot" placeholder="我是自定义插槽渲染的"/>
         </el-form-item>
       </search-form>
-      {{ form3 }}
+      {{ form2 }}
     </el-card>
     <el-card class="box-card">
       <div slot="header" class="card-header">双向绑定</div>
-      <search-form v-model="form4" :options="options4" @reset="reset4">
-        <el-form-item slot="custom-slot">
-          <el-input v-model="form4['customSlot']" placeholder="我是自定义插槽渲染的"/>
-        </el-form-item>
-      </search-form>
-      {{ form4 }}
+      <search-form v-model="form3" :options="options3"></search-form>
+      {{ form3 }}
     </el-card>
   </div>
 </template>
@@ -131,7 +127,7 @@
             placeholder: '请输入搜索条件',
           },
         ],
-        options3: [
+        options2: [
           {
             slot: 'custom-slot'
           },
@@ -167,7 +163,7 @@
             placeholder: '请输入搜索条件',
           },
         ],
-        options4: [
+        options3: [
           {
             slot: 'custom-slot'
           },
@@ -218,31 +214,16 @@
         form1: {},
         form2: {},
         form3: {},
-        form4: {},
         customSlot: '',
       }
     },
     methods: {
-      handleEdit(index, row) {
-        console.log(index, row);
+      search(form) {
+        this.form2 = {...form, ...{customSlot: this.customSlot}};
       },
-      handleDelete(index, row) {
-        console.log(index, row);
-      },
-      search1(event) {
-        this.form1 = event;
-        console.log('search1', event);
-      },
-      search3(form) {
-        this.form3 = {...form, ...{customSlot: this.customSlot}};
-      },
-      reset3() {
-        this.form3 = {};
+      reset() {
+        this.form2 = {};
         this.customSlot = '';
-      },
-      reset4() {
-        this.form4 = {};
-        console.log(this.form4);
       },
     }
   }
