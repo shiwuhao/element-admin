@@ -67,6 +67,18 @@
             </el-time-picker>
           </template>
 
+          <template v-else-if="item.type === 'cascader'">
+            <el-cascader
+              v-model="form[item.key]"
+              :options="item.options"
+              :placeholder="item.placeholder || item.label"
+              :clearable="item.clearable ? !!item.clearable : clearable"
+              :filterable="item.filterable ? !!item.filterable : false"
+              :show-all-levels="item.showAllLevels"
+              :style="{width:width}">
+            </el-cascader>
+          </template>
+
         </el-form-item>
         <slot v-else :name="item.slot"/>
       </template>
