@@ -39,6 +39,10 @@
         <el-form-item slot="custom-slot">
           <el-input v-model="customSlot" placeholder="我是自定义插槽渲染的"/>
         </el-form-item>
+        <template slot="button">
+          <el-button type="primary" icon="el-icon-download">下载</el-button>
+          <el-button type="primary" icon="el-icon-setting">设置</el-button>
+        </template>
       </search-form>
       {{ form2 }}
     </el-card>
@@ -75,7 +79,7 @@
           iconButton: false,
           clearable: true,
           size: 'mini',
-          width: 100
+          width: 200
         },
         options1: [
           {
@@ -111,14 +115,42 @@
           {
             type: 'date-picker',
             key: 'date',
-            label: "时间",
+            label: "年月日",
             displayType: 'date',
           },
           {
             type: 'time-picker',
             key: 'time',
+            label: "时分秒",
+            valueFormat: 'h:m:s',
+          },
+          {
+            type: 'date-picker',
+            key: 'daterange',
+            label: "日期范围",
+            displayType: 'daterange',
+            rangeSeparator: '至',
+            startPlaceholder: '开始日期',
+            endPlaceholder: '结束日期',
+          },
+          {
+            type: 'date-picker',
+            key: 'monthrange',
+            label: "月份范围",
+            displayType: 'monthrange',
+            rangeSeparator: '至',
+            startPlaceholder: '开始月份',
+            endPlaceholder: '结束月份',
+          },
+          {
+            type: 'time-picker',
+            key: 'timerange',
             label: "时间",
-            // valueFormat: 'h:m:s',
+            displayType: 'timerange',
+            valueFormat: 'HH:mm:ss',
+            rangeSeparator: '至',
+            startPlaceholder: '开始时间',
+            endPlaceholder: '结束时间',
           },
           {
             type: 'input',

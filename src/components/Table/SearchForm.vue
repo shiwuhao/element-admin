@@ -45,6 +45,9 @@
               :placeholder="item.placeholder || item.label"
               :clearable="item.clearable ? !!item.clearable : clearable"
               :value-format="item.valueFormat ? item.valueFormat : 'yyyy-MM-dd'"
+              :range-separator="item.rangeSeparator"
+              :start-placeholder="item.startPlaceholder"
+              :end-placeholder="item.endPlaceholder"
               :style="{width:width}">
             </el-date-picker>
           </template>
@@ -52,10 +55,14 @@
           <template v-else-if="item.type === 'time-picker'">
             <el-time-picker
               v-model="form[item.key]"
+              :is-range="item.displayType === 'timerange'"
               :type="item.type"
               :placeholder="item.placeholder || item.label"
               :clearable="item.clearable ? !!item.clearable : clearable"
               :value-format="item.valueFormat ? item.valueFormat : 'HH:mm:ss'"
+              :range-separator="item.rangeSeparator"
+              :start-placeholder="item.startPlaceholder"
+              :end-placeholder="item.endPlaceholder"
               :style="{width:width}">
             </el-time-picker>
           </template>
@@ -71,8 +78,7 @@
         <el-button type="primary" :icon="iconButton ? 'el-icon-refresh-right' : ''" @click="handleReset('searchForm')">
           {{ iconButton ? '' : '重置'}}
         </el-button>
-        <!--        <el-button type="primary" icon="el-icon-download"></el-button>-->
-        <!--        <el-button type="primary" icon="el-icon-setting"></el-button>-->
+        <slot name="button"></slot>
       </el-form-item>
     </el-form>
   </div>
@@ -97,7 +103,7 @@
       },
       labelWidth: {
         type: String,
-        default: '100',
+        default: '100px',
       },
       width: {
         type: String,
