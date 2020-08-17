@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{ keys }}
     <el-table border :data="data" tooltip-effect="light" style="width: 100%;">
       <template v-for="(column,index) in columns">
         <el-table-column
@@ -8,12 +7,14 @@
           :prop="column.key"
           :key="index"
           :index="column.index"
+          :type="column.type ? column.type : 'default'"
           :column-key="column.columnKey"
           :label="column.label"
           :width="column.width"
           :min-width="column.minWidth"
           :fixed="column.fixed"
           :render-header="column.renderHeader"
+          :show-overflow-tooltip="column.showOverflowTooltip"
           :sortable="column.sortable"
           :sort-method="column.sortMethod"
           :sort-by="column.sortBy">
