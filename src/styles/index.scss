@@ -1,6 +1,9 @@
 @import "./variables.scss";
 @import "./flex.scss";
 @import "./sidebar.scss";
+.el-drawer__container div,.el-drawer__header span:focus {
+  outline: 0;
+}
 
 body {
   height: 100%;

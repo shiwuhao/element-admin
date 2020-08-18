@@ -1,7 +1,11 @@
 <template>
   <div>
-    <search-form :options="searchFormOptions" @search="search" @reset="reset"></search-form>
-    <dynamic-table :data="tableData" :columns="tableColumns">
+    <search-form :options="searchFormOptions" @search="search" @reset="reset">
+      <template slot="button">
+        <el-button type="primary" @click="handleSetting">设置</el-button>
+      </template>
+    </search-form>
+    <dynamic-table ref="dynamicTable" :data="tableData" :columns="tableColumns">
       <template slot="name" slot-scope="scope">
         <i class="el-icon-time"/>
         <span style="margin-left: 10px">{{ scope.row.name }} --  {{ scope.$index }}</span>
@@ -36,6 +40,7 @@
 
   import DynamicTable from "@/components/Table/DynamicTable";
   import SearchForm from "@/components/Table/SearchForm";
+
   const cascaderData = [
     {
       value: 'zhinan',
@@ -227,36 +232,6 @@
             address: '上海市普陀区金沙江路 1519 弄'
           },
           {
-            date: '2016-05-03',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1516 弄'
-          },
-          {
-            date: '2016-05-02',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1518 弄'
-          },
-          {
-            date: '2016-05-04',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1517 弄'
-          },
-          {
-            date: '2016-05-01',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1519 弄'
-          },
-          {
-            date: '2016-05-03',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1516 弄'
-          },
-          {
             date: '2016-05-02',
             name: '王小虎',
             open: false,
@@ -331,7 +306,9 @@
         ],
         tableColumns: [
           {
+            key: 'selection',
             type: 'selection',
+            label: '多选',
             width: 40
           },
           {
@@ -390,46 +367,46 @@
             label: "年月日",
             displayType: 'date',
           },
-          // {
-          //   type: 'time-picker',
-          //   key: 'time',
-          //   label: "时分秒",
-          //   valueFormat: 'h:m:s',
-          // },
-          // {
-          //   type: 'date-picker',
-          //   key: 'daterange',
-          //   label: "日期范围",
-          //   displayType: 'daterange',
-          //   rangeSeparator: '至',
-          //   startPlaceholder: '开始日期',
-          //   endPlaceholder: '结束日期',
-          // },
-          // {
-          //   type: 'date-picker',
-          //   key: 'monthrange',
-          //   label: "月份范围",
-          //   displayType: 'monthrange',
-          //   rangeSeparator: '至',
-          //   startPlaceholder: '开始月份',
-          //   endPlaceholder: '结束月份',
-          // },
-          // {
-          //   type: 'time-picker',
-          //   key: 'timerange',
-          //   label: "时间范围",
-          //   displayType: 'timerange',
-          //   valueFormat: 'HH:mm:ss',
-          //   rangeSeparator: '至',
-          //   startPlaceholder: '开始时间',
-          //   endPlaceholder: '结束时间',
-          // },
-          // {
-          //   type: 'cascader',
-          //   key: 'cascader',
-          //   label: "级联选择",
-          //   options: cascaderData
-          // },
+          {
+            type: 'time-picker',
+            key: 'time',
+            label: "时分秒",
+            valueFormat: 'h:m:s',
+          },
+          {
+            type: 'date-picker',
+            key: 'daterange',
+            label: "日期范围",
+            displayType: 'daterange',
+            rangeSeparator: '至',
+            startPlaceholder: '开始日期',
+            endPlaceholder: '结束日期',
+          },
+          {
+            type: 'date-picker',
+            key: 'monthrange',
+            label: "月份范围",
+            displayType: 'monthrange',
+            rangeSeparator: '至',
+            startPlaceholder: '开始月份',
+            endPlaceholder: '结束月份',
+          },
+          {
+            type: 'time-picker',
+            key: 'timerange',
+            label: "时间范围",
+            displayType: 'timerange',
+            valueFormat: 'HH:mm:ss',
+            rangeSeparator: '至',
+            startPlaceholder: '开始时间',
+            endPlaceholder: '结束时间',
+          },
+          {
+            type: 'cascader',
+            key: 'cascader',
+            label: "级联选择",
+            options: cascaderData
+          },
           {
             type: 'cascader',
             key: 'cascader-show-last',
@@ -463,6 +440,9 @@
       },
       reset() {
         console.log('reset');
+      },
+      handleSetting() {
+        this.$refs['dynamicTable'].toggleDrawer();
       }
     }
   }

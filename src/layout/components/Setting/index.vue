@@ -96,7 +96,7 @@
     }
   }
 
-  /deep/ :focus {
-    outline: 0;
-  }
+  /*/deep/ :focus {*/
+  /*  outline: 0;*/
+  /*}*/
 </style>
