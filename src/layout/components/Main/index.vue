@@ -20,3 +20,8 @@
     },
   };
 </script>
+<style lang="scss" scoped>
+  .app-main {
+    padding: 10px 0;
+  }
+</style>

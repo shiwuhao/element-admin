@@ -156,3 +156,8 @@
     }
   }
 </script>
+<style lang="scss" scoped>
+  .el-form--inline .el-form-item{
+    margin-bottom: 5px !important;
+  }
+</style>

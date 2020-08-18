@@ -13,7 +13,12 @@
       </el-checkbox-group>
     </el-drawer>
 
-    <el-table border :data="data" tooltip-effect="light" style="width: 100%;">
+    <el-table :data="data"
+              :border="border"
+              :size="size"
+              :stripe="stripe"
+              tooltip-effect="light"
+              style="width: 100%;">
       <template v-for="(column,index) in columns">
         <template v-if="checkedColumns.indexOf(column.key) >= 0">
           <el-table-column
@@ -64,6 +69,22 @@
     props: {
       data: Array,
       columns: Array,
+      stripe: {
+        type: Boolean,
+        default: false,
+      },
+      border: {
+        type: Boolean,
+        default: false,
+      },
+      height: {
+        type: [String, Number],
+        default: '',
+      },
+      size: {
+        type: String,
+        default: 'small',
+      },
     },
     data() {
       return {
@@ -77,7 +98,7 @@
     mounted() {
       const allColumns = this.columns.map(item => item.key);
       this.allColumns = allColumns;
-      this.checkedColumns = allColumns
+      this.checkedColumns = allColumns;
     },
     methods: {
       // 全选事件

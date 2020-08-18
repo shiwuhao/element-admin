@@ -25,6 +25,12 @@ export default [
         meta: {title: '搜索表单', affix: false},
         component: () => import('@/views/table/search-form'),
       },
+      {
+        path: '/table/complex-table',
+        name: 'complex-table',
+        meta: {title: '综合表格', affix: false},
+        component: () => import('@/views/table/complex-table'),
+      },
     ]
   },
   {
