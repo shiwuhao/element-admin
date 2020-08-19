@@ -28,7 +28,6 @@
                    :iconButton="config.iconButton"
                    :size="config.size"
                    :clearable="config.clearable"
-                   :width="config.width+'px'"
                    @search="form1 = $event"
                    @reset="form1 = {}"></search-form>
       {{ form1 }}

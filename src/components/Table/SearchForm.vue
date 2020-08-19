@@ -1,99 +1,97 @@
 <template>
-  <div style="padding-top:10px;">
-    <el-form ref="searchForm" :inline="true" :model="form" :size="size" :label="label" :label-width="labelWidth"
-             @submit.native.prevent="handleSubmit" @keyup.enter.native="handleSubmit">
+  <el-form ref="searchForm"
+           :model="form"
+           :size="size"
+           :label="label"
+           :label-width="label ? labelWidth : 0"
+           @submit.native.prevent="handleSubmit"
+           @keyup.enter.native="handleSubmit">
+    <el-row>
       <template v-for="(item,index) in options">
-        <el-form-item :key="index" :label="label ? item.label : ''" :prop="item.key" v-if="!item.slot">
-
-          <template v-if="item.type === 'input'">
-            <el-input
-              v-model="form[item.key]"
-              :placeholder="item.placeholder || item.label"
-              :clearable="item.clearable ? !!item.clearable : clearable"
-              :style="{width:width}"/>
-          </template>
-
-          <template v-else-if="item.type === 'select'">
-            <el-select
-              v-model="form[item.key]"
-              :placeholder="item.placeholder || item.label"
-              :multiple="item.multiple"
-              :clearable="item.clearable ? !!item.clearable : clearable"
-              :style="{width:width}"
-              collapse-tags>
-              <el-option v-for="(option,optionIndex) in item.options"
-                         :key="optionIndex"
-                         :label="option.label"
-                         :value="option.value"/>
+        <el-col :xl="label ? 4 : 3"
+                :lg="label ? 6 : 5"
+                :md="label ? 8 : 6"
+                :sm="label ? 12 : 8"
+                :xs="label ? 24 : 24"
+                :key="index"
+                v-if="index < advancedLength || advanced ">
+          <el-form-item :label="label ? item.label : ''" :prop="item.key" v-if="!item.slot">
+            <el-input v-if="item.type === 'input'"
+                      v-model="form[item.key]"
+                      :placeholder="item.placeholder || item.label"
+                      :clearable="item.clearable ? !!item.clearable : clearable"
+                      :style="{width:width}">
+            </el-input>
+            <el-select v-else-if="item.type === 'select'"
+                       v-model="form[item.key]"
+                       :placeholder="item.placeholder || item.label"
+                       :multiple="item.multiple"
+                       :clearable="item.clearable ? !!item.clearable : clearable"
+                       :style="{width:width}"
+                       collapse-tags>
+              <el-option
+                v-for="(option,optionIndex) in item.options"
+                :key="optionIndex"
+                :label="option.label"
+                :value="option.value"/>
             </el-select>
-          </template>
-
-          <template v-else-if="datePickerTypes.indexOf(item.type) > 0">
-            <el-date-picker
-              v-model="form[item.key]"
-              :type="item.type"
-              :placeholder="item.placeholder || item.label"
-              :clearable="item.clearable ? !!item.clearable : clearable"
-              :style="{width:width}">
+            <el-date-picker v-else-if="item.type === 'date-picker'"
+                            v-model="form[item.key]"
+                            :type="item.displayType"
+                            :placeholder="item.placeholder || item.label"
+                            :clearable="item.clearable ? !!item.clearable : clearable"
+                            :value-format="item.valueFormat ? item.valueFormat : 'yyyy-MM-dd'"
+                            :range-separator="item.rangeSeparator"
+                            :start-placeholder="item.startPlaceholder"
+                            :end-placeholder="item.endPlaceholder"
+                            :style="{width:width}">
             </el-date-picker>
-          </template>
-
-          <template v-else-if="item.type === 'date-picker'">
-            <el-date-picker
-              v-model="form[item.key]"
-              :type="item.displayType"
-              :placeholder="item.placeholder || item.label"
-              :clearable="item.clearable ? !!item.clearable : clearable"
-              :value-format="item.valueFormat ? item.valueFormat : 'yyyy-MM-dd'"
-              :range-separator="item.rangeSeparator"
-              :start-placeholder="item.startPlaceholder"
-              :end-placeholder="item.endPlaceholder"
-              :style="{width:width}">
-            </el-date-picker>
-          </template>
-
-          <template v-else-if="item.type === 'time-picker'">
-            <el-time-picker
-              v-model="form[item.key]"
-              :is-range="item.displayType === 'timerange'"
-              :type="item.type"
-              :placeholder="item.placeholder || item.label"
-              :clearable="item.clearable ? !!item.clearable : clearable"
-              :value-format="item.valueFormat ? item.valueFormat : 'HH:mm:ss'"
-              :range-separator="item.rangeSeparator"
-              :start-placeholder="item.startPlaceholder"
-              :end-placeholder="item.endPlaceholder"
-              :style="{width:width}">
+            <el-time-picker v-else-if="item.type === 'time-picker'"
+                            v-model="form[item.key]"
+                            :is-range="item.displayType === 'timerange'"
+                            :type="item.type"
+                            :placeholder="item.placeholder || item.label"
+                            :clearable="item.clearable ? !!item.clearable : clearable"
+                            :value-format="item.valueFormat ? item.valueFormat : 'HH:mm:ss'"
+                            :range-separator="item.rangeSeparator"
+                            :start-placeholder="item.startPlaceholder"
+                            :end-placeholder="item.endPlaceholder"
+                            :style="{width:width}">
             </el-time-picker>
-          </template>
-
-          <template v-else-if="item.type === 'cascader'">
-            <el-cascader
-              v-model="form[item.key]"
-              :options="item.options"
-              :placeholder="item.placeholder || item.label"
-              :clearable="item.clearable ? !!item.clearable : clearable"
-              :filterable="item.filterable ? !!item.filterable : false"
-              :show-all-levels="item.showAllLevels"
-              :style="{width:width}">
+            <el-cascader v-else-if="item.type === 'cascader'"
+                         v-model="form[item.key]"
+                         :options="item.options"
+                         :placeholder="item.placeholder || item.label"
+                         :clearable="item.clearable ? !!item.clearable : clearable"
+                         :filterable="item.filterable ? !!item.filterable : false"
+                         :show-all-levels="item.showAllLevels"
+                         :style="{width:width}">
             </el-cascader>
-          </template>
-
-        </el-form-item>
-        <slot v-else :name="item.slot"/>
+          </el-form-item>
+          <slot v-else :name="item.slot"/>
+        </el-col>
       </template>
-
-      <el-form-item>
-        <el-button type="primary" :icon="iconButton ? 'el-icon-search' : ''" @click="handleSearch">
-          {{ iconButton ? '' : '搜索'}}
-        </el-button>
-        <el-button type="primary" :icon="iconButton ? 'el-icon-refresh-right' : ''" @click="handleReset('searchForm')">
-          {{ iconButton ? '' : '重置'}}
-        </el-button>
-        <slot name="button"></slot>
-      </el-form-item>
-    </el-form>
-  </div>
+      <el-col :xl="label ? 4 : 3"
+              :lg="label ? 6 : 6"
+              :md="label ? 8 : 8"
+              :sm="label ? 12 : 12"
+              :xs="label ? 24 : 24">
+        <el-form-item>
+          <el-button type="primary" :icon="iconButton ? 'el-icon-search' : ''" @click="handleSearch">
+            {{ iconButton ? '' : '搜索'}}
+          </el-button>
+          <el-button type="default" :icon="iconButton ? 'el-icon-refresh-right' : ''"
+                     @click="handleReset('searchForm')">
+            {{ iconButton ? '' : '重置'}}
+          </el-button>
+          <slot name="button"></slot>
+          <el-link type="primary" @click="toggleAdvanced" style="margin-left:10px;font-size: 12px;">
+            {{ advanced ? '收起' : '展开' }}
+          </el-link>
+        </el-form-item>
+      </el-col>
+    </el-row>
+  </el-form>
 </template>
 
 <script>
@@ -119,7 +117,7 @@
       },
       width: {
         type: String,
-        default: '180px',
+        default: '100%',
       },
       iconButton: {
         type: Boolean,
@@ -128,6 +126,14 @@
       clearable: {
         type: Boolean,
         default: false,
+      },
+      advanced: {
+        type: Boolean,
+        default: false,
+      },
+      advancedLength: {
+        type: Number,
+        default: 3,
       },
       options: Array,
     },
@@ -152,12 +158,17 @@
       },
       handleSubmit() {
         this.handleSearch();
+      },
+      // 高级搜索
+      toggleAdvanced() {
+        this.advanced = !this.advanced;
       }
     }
   }
 </script>
 <style lang="scss" scoped>
-  .el-form--inline .el-form-item{
-    margin-bottom: 5px !important;
+  .el-form-item {
+    min-height: 34px !important;
+    margin-bottom: 5px;
   }
 </style>

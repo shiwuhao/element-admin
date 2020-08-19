@@ -1,39 +1,46 @@
 <template>
   <div>
-    <search-form :options="searchFormOptions" @search="search" @reset="reset">
-      <template slot="button">
-        <el-button type="primary" @click="handleSetting">设置</el-button>
-      </template>
-    </search-form>
-    <div style="margin-top: 10px;"></div>
-    <dynamic-table ref="dynamicTable" :data="tableData" :columns="tableColumns">
-      <template slot="name" slot-scope="scope">
-        <i class="el-icon-time"/>
-        <span style="margin-left: 10px">{{ scope.row.name }} --  {{ scope.$index }}</span>
-      </template>
-      <el-table-column label="操作" min-width="100">
-        <template slot-scope="scope">
-          <el-switch v-model="scope.row.open">
-          </el-switch>
+    <el-card>
+      <search-form :options="searchFormOptions" label @search="search" @reset="reset">
+<!--        <template slot="button">-->
+        <!--          <el-button type="primary" @click="handleSetting">设置</el-button>-->
+        <!--        </template>-->
+      </search-form>
+    </el-card>
+    <el-card style="margin-top: 10px;">
+      <div slot="header" class="clearfix" style="height: 10px;padding: 5px 0;">
+        <span>动态表格</span>
+        <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+      </div>
+      <dynamic-table ref="dynamicTable" :data="tableData" :columns="tableColumns">
+        <template slot="name" slot-scope="scope">
+          <i class="el-icon-time"/>
+          <span style="margin-left: 10px">{{ scope.row.name }} --  {{ scope.$index }}</span>
         </template>
-      </el-table-column>
-      <el-table-column label="操作" width="220">
-        <template slot-scope="scope">
-          <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-          <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-          <el-button size="mini" type="success" @click="handleDelete(scope.$index, scope.row)">
-            编辑
-          </el-button>
-        </template>
-      </el-table-column>
-    </dynamic-table>
-    <el-pagination
-      class="flex-row-right"
-      :page-size="20"
-      :pager-count="11"
-      layout="prev, pager, next"
-      :total="1000">
-    </el-pagination>
+        <el-table-column label="操作" min-width="100">
+          <template slot-scope="scope">
+            <el-switch v-model="scope.row.open">
+            </el-switch>
+          </template>
+        </el-table-column>
+        <el-table-column label="操作" width="220">
+          <template slot-scope="scope">
+            <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+            <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+            <el-button size="mini" type="success" @click="handleDelete(scope.$index, scope.row)">
+              编辑
+            </el-button>
+          </template>
+        </el-table-column>
+      </dynamic-table>
+      <el-pagination
+        class="flex-row-right"
+        :page-size="20"
+        :pager-count="11"
+        layout="prev, pager, next"
+        :total="1000">
+      </el-pagination>
+    </el-card>
   </div>
 </template>
 
@@ -336,6 +343,31 @@
             type: 'input',
             key: 'input',
             label: '基础表单',
+            placeholder: '请输入搜索条件',
+          },
+          {
+            type: 'select',
+            key: 'single-select',
+            label: '单选下拉框',
+            options: [
+              {value: '选项1', label: '黄金糕'},
+              {value: '选项2', label: '双皮奶'},
+              {value: '选项3', label: '蚵仔煎'},
+              {value: '选项4', label: '龙须面'},
+              {value: '选项5', label: '北京烤鸭'},
+            ]
+          },
+          {
+            type: 'select',
+            key: 'single-select',
+            label: '单选下拉框',
+            options: [
+              {value: '选项1', label: '黄金糕'},
+              {value: '选项2', label: '双皮奶'},
+              {value: '选项3', label: '蚵仔煎'},
+              {value: '选项4', label: '龙须面'},
+              {value: '选项5', label: '北京烤鸭'},
+            ]
           },
           {
             type: 'select',
@@ -363,16 +395,15 @@
             ]
           },
           {
+            type: 'input',
+            key: 'input',
+            label: '基础表单',
+          },
+          {
             type: 'date-picker',
             key: 'date',
             label: "年月日",
             displayType: 'date',
-          },
-          {
-            type: 'time-picker',
-            key: 'time',
-            label: "时分秒",
-            valueFormat: 'h:m:s',
           },
           {
             type: 'date-picker',
@@ -382,6 +413,16 @@
             rangeSeparator: '至',
             startPlaceholder: '开始日期',
             endPlaceholder: '结束日期',
+          },
+          {
+            type: 'time-picker',
+            key: 'timerange',
+            label: "时间范围",
+            displayType: 'timerange',
+            valueFormat: 'HH:mm:ss',
+            rangeSeparator: '至',
+            startPlaceholder: '开始时间',
+            endPlaceholder: '结束时间',
           },
           {
             type: 'date-picker',
@@ -394,13 +435,27 @@
           },
           {
             type: 'time-picker',
-            key: 'timerange',
-            label: "时间范围",
-            displayType: 'timerange',
-            valueFormat: 'HH:mm:ss',
-            rangeSeparator: '至',
-            startPlaceholder: '开始时间',
-            endPlaceholder: '结束时间',
+            key: 'time',
+            label: "时分秒",
+            valueFormat: 'h:m:s',
+          },
+          {
+            type: 'time-picker',
+            key: 'time',
+            label: "时分秒",
+            valueFormat: 'h:m:s',
+          },
+          {
+            type: 'time-picker',
+            key: 'time',
+            label: "时分秒",
+            valueFormat: 'h:m:s',
+          },
+          {
+            type: 'time-picker',
+            key: 'time',
+            label: "时分秒",
+            valueFormat: 'h:m:s',
           },
           {
             type: 'cascader',
@@ -415,6 +470,48 @@
             placeholder: '级联选择展示最后一项',
             showAllLevels: false,
             options: cascaderData
+          },
+          {
+            type: 'input',
+            key: 'key',
+            label: 'input框',
+            placeholder: '请输入搜索条件',
+          },
+          {
+            type: 'input',
+            key: 'key',
+            label: 'input框',
+            placeholder: '请输入搜索条件',
+          },
+          {
+            type: 'input',
+            key: 'key',
+            label: 'input框',
+            placeholder: '请输入搜索条件',
+          },
+          {
+            type: 'input',
+            key: 'key',
+            label: 'input框',
+            placeholder: '请输入搜索条件',
+          },
+          {
+            type: 'input',
+            key: 'key',
+            label: 'input框',
+            placeholder: '请输入搜索条件',
+          },
+          {
+            type: 'input',
+            key: 'key',
+            label: 'input框',
+            placeholder: '请输入搜索条件',
+          },
+          {
+            type: 'input',
+            key: 'key',
+            label: 'input框',
+            placeholder: '请输入搜索条件',
           },
           {
             type: 'input',
