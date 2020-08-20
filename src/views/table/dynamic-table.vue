@@ -7,6 +7,9 @@
       <el-form-item label="斑马纹">
         <el-switch v-model="config.stripe"></el-switch>
       </el-form-item>
+      <el-form-item label="树形结构">
+        <el-switch v-model="config.tree" @change="changeTree"></el-switch>
+      </el-form-item>
       <el-form-item label="尺寸">
         <el-radio-group v-model="config.size" size="mini">
           <el-radio-button label="medium"></el-radio-button>
@@ -61,13 +64,17 @@
 
   const tableData = [];
   for (let i = 0; i < 15; i++) {
+
+    let status = !!Math.floor((Math.random() * 2))
     tableData.push({
+      id: i + 1,
       key: i.toString(),
       age: 32,
       date: '2016-05-02',
       name: `王小虎 ${i}`,
-      status: !!Math.floor((Math.random() * 2)),
+      status: status,
       address: `上海市普陀区金沙江路 1518 ${i}`,
+      children: [],
     });
   }
   export default {
@@ -112,10 +119,36 @@
           border: false,
           size: 'small',
           stripe: false,
+          tree: false,
         },
       }
     },
     methods: {
+      changeTree(val) {
+        let children = [
+          {
+            id: Math.floor((Math.random() * 10000000)),
+            age: 32,
+            date: '2016-05-02',
+            name: `子集姓名`,
+            status: !!Math.floor((Math.random() * 2)),
+            address: `上海市普陀区金沙江路 1518`,
+          },
+          {
+            id: Math.floor((Math.random() * 10000000)),
+            age: 32,
+            date: '2016-05-02',
+            name: `子集姓名`,
+            status: !!Math.floor((Math.random() * 2)),
+            address: `子集：上海市普陀区金沙江路 `,
+          }
+        ];
+        if (val) {
+          this.tableData[0]['children'] = children;
+        } else {
+          this.tableData[0]['children'] = [];
+        }
+      },
       handleEdit(index, row) {
         console.log(index, row);
       },

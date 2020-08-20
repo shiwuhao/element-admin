@@ -19,6 +19,8 @@
               :stripe="stripe"
               v-loading="loading"
               :height="height"
+              :row-key="rowKey"
+              :tree-props="treeProps"
               tooltip-effect="light"
               style="width: 100%;">
       <template v-for="(column,index) in columns">
@@ -73,6 +75,16 @@
       loading: {
         type: Boolean,
         default: false,
+      },
+      rowKey: {
+        type: [Function, String],
+        default: 'id',
+      },
+      treeProps: {
+        type: Object,
+        default: () => {
+          return {children: 'children', hasChildren: 'hasChildren'}
+        },
       }
     },
     data() {
