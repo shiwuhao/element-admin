@@ -1,23 +1,34 @@
 <template>
   <div>
-    <el-card>
-      <query-form :options="searchFormOptions" label size="small" @search="search" @reset="reset">
-        <!--        <template slot="button">-->
-        <!--          <el-button type="primary" @click="handleSetting">设置</el-button>-->
-        <!--        </template>-->
-      </query-form>
+    <el-card :body-style="{padding:'10px'}">
+      <query-form :options="queryFormOptions" size="mini" clearable @search="search" @reset="reset"/>
     </el-card>
-    <el-card style="margin-top: 10px;">
-      <div slot="header" class="clearfix" style="height: 10px;padding: 5px 0;">
-        <span>动态表格</span>
-        <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+    <el-card class="mt10" :body-style="{padding:'10px'}">
+      <div slot="header" class="flex-row-justify">
+        <div>
+          <span class="mr10">动态表格</span>
+          <el-tooltip effect="dark" content="列设置" placement="top-start">
+            <span class="el-icon-setting space-item" @click="handleTableSetting"></span>
+          </el-tooltip>
+          <el-tooltip effect="dark" content="刷新" placement="top-start">
+            <span class="el-icon-refresh space-item" @click="handleTableRefresh"></span>
+          </el-tooltip>
+          <el-tooltip effect="dark" content="密度" placement="top-start">
+            <span class="el-icon-s-data space-item" @click="handleTableDensity"></span>
+          </el-tooltip>
+        </div>
+        <div>
+          <el-button type="primary" size="mini" icon="el-icon-circle-plus-outline">新增</el-button>
+          <el-button type="primary" size="mini" icon="el-icon-download">下载</el-button>
+        </div>
       </div>
-      <dynamic-table ref="dynamicTable" :data="tableData" :columns="tableColumns">
-        <template slot="name" slot-scope="scope">
-          <i class="el-icon-time"/>
-          <span style="margin-left: 10px">{{ scope.row.name }} --  {{ scope.$index }}</span>
-        </template>
-        <el-table-column label="操作" min-width="100">
+      <dynamic-table ref="dynamicTable" :data="tableData" :columns="tableColumns" :loading="loading" :height="700">
+        <el-table-column label="姓名" prop="name" slot="name">
+          <template slot-scope="scope">
+            <i class="el-icon-time"/><span style="margin-left: 10px">{{ scope.row.name }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="状态">
           <template slot-scope="scope">
             <el-switch v-model="scope.row.open">
             </el-switch>
@@ -189,6 +200,17 @@
       ]
     }
   ];
+  const tableData = [];
+  for (let i = 0; i < 30; i++) {
+    tableData.push({
+      key: i.toString(),
+      age: 32,
+      date: '2016-05-02',
+      name: `王小虎 ${i}`,
+      status: !!Math.floor((Math.random() * 2)),
+      address: `上海市普陀区金沙江路 1518 ${i}`,
+    });
+  }
   export default {
     name: 'Test',
     components: {
@@ -196,128 +218,13 @@
     },
     data() {
       return {
-        tableData: [
-          {
-            date: '2016-05-02',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1518 弄'
-          },
-          {
-            date: '2016-05-04',
-            name: '王小虎',
-            open: true,
-            address: '上海市普陀区金沙江路 1517 弄'
-          },
-          {
-            date: '2016-05-01',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1519 弄'
-          },
-          {
-            date: '2016-05-03',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1516 弄'
-          },
-          {
-            date: '2016-05-02',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1518 弄'
-          },
-          {
-            date: '2016-05-04',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1517 弄'
-          },
-          {
-            date: '2016-05-01',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1519 弄'
-          },
-          {
-            date: '2016-05-02',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1518 弄'
-          },
-          {
-            date: '2016-05-04',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1517 弄'
-          },
-          {
-            date: '2016-05-01',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1519 弄'
-          },
-          {
-            date: '2016-05-03',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1516 弄'
-          },
-          {
-            date: '2016-05-02',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1518 弄'
-          },
-          {
-            date: '2016-05-04',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1517 弄'
-          },
-          {
-            date: '2016-05-01',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1519 弄'
-          },
-          {
-            date: '2016-05-03',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1516 弄'
-          },
-          {
-            date: '2016-05-02',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1518 弄'
-          },
-          {
-            date: '2016-05-04',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1517 弄'
-          },
-          {
-            date: '2016-05-01',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1519 弄'
-          },
-          {
-            date: '2016-05-03',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1516 弄'
-          }
-        ],
+        tableData: [],
         tableColumns: [
           {
             key: 'selection',
             type: 'selection',
             label: '多选',
-            width: 40
+            width: 50
           },
           {
             key: 'name',
@@ -333,41 +240,21 @@
           {
             label: '地址',
             key: 'address',
-            showOverflowTooltip: true,
             minWidth: 230
           },
+          {
+            label: '状态',
+            key: 'status',
+            slot: true
+          },
         ],
-        searchForm: {},
-        searchFormOptions: [
+        queryForm: {},
+        queryFormOptions: [
           {
             type: 'input',
             key: 'input',
             label: '基础表单',
             placeholder: '请输入搜索条件',
-          },
-          {
-            type: 'select',
-            key: 'single-select',
-            label: '单选下拉框',
-            options: [
-              {value: '选项1', label: '黄金糕'},
-              {value: '选项2', label: '双皮奶'},
-              {value: '选项3', label: '蚵仔煎'},
-              {value: '选项4', label: '龙须面'},
-              {value: '选项5', label: '北京烤鸭'},
-            ]
-          },
-          {
-            type: 'select',
-            key: 'single-select',
-            label: '单选下拉框',
-            options: [
-              {value: '选项1', label: '黄金糕'},
-              {value: '选项2', label: '双皮奶'},
-              {value: '选项3', label: '蚵仔煎'},
-              {value: '选项4', label: '龙须面'},
-              {value: '选项5', label: '北京烤鸭'},
-            ]
           },
           {
             type: 'select',
@@ -393,11 +280,6 @@
               {value: '选项4', label: '龙须面'},
               {value: '选项5', label: '北京烤鸭'},
             ]
-          },
-          {
-            type: 'input',
-            key: 'input',
-            label: '基础表单',
           },
           {
             type: 'date-picker',
@@ -440,24 +322,6 @@
             valueFormat: 'h:m:s',
           },
           {
-            type: 'time-picker',
-            key: 'time',
-            label: "时分秒",
-            valueFormat: 'h:m:s',
-          },
-          {
-            type: 'time-picker',
-            key: 'time',
-            label: "时分秒",
-            valueFormat: 'h:m:s',
-          },
-          {
-            type: 'time-picker',
-            key: 'time',
-            label: "时分秒",
-            valueFormat: 'h:m:s',
-          },
-          {
             type: 'cascader',
             key: 'cascader',
             label: "级联选择",
@@ -477,26 +341,33 @@
             label: 'input框',
             placeholder: '请输入搜索条件',
           },
-          {
-            type: 'input',
-            key: 'key',
-            label: 'input框',
-            placeholder: '请输入搜索条件',
-          },
-          {
-            type: 'input',
-            key: 'key',
-            label: 'input框',
-            placeholder: '请输入搜索条件',
-          },
         ],
-        formInline: {
-          user: '',
-          region: ''
-        }
+        loading: false,
       }
     },
+    mounted() {
+      this.fetchData();
+    },
     methods: {
+      fetchData() {
+        this.loading = true;
+        setTimeout(() => {
+          this.tableData = tableData;
+          this.loading = false;
+        }, 2000);
+      },
+      // 表格刷新
+      handleTableRefresh() {
+        this.fetchData();
+      },
+      // 表格设置
+      handleTableSetting() {
+        this.$refs['dynamicTable'].toggleDrawer();
+      },
+      // 表格密度
+      handleTableDensity() {
+        this.$refs['dynamicTable'].toggleDensity();
+      },
       handleEdit(index, row) {
         console.log(index, row);
       },
@@ -509,9 +380,16 @@
       reset() {
         console.log('reset');
       },
-      handleSetting() {
-        this.$refs['dynamicTable'].toggleDrawer();
-      }
+
     }
   }
 </script>
+<style lang="scss" scoped>
+  .space-item {
+    font-size: 16px;
+    cursor: pointer;
+    color: #bcc1ce;
+    padding-left: 5px;
+    outline: 0;
+  }
+</style>

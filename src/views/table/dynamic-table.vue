@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <el-card>
     <el-form :inline="true" :model="config" label-position="right" label-width="100px" class="demo-form-inline">
       <el-form-item label="显示边框">
         <el-switch v-model="config.border"></el-switch>
@@ -24,14 +24,15 @@
                    :border="config.border"
                    :stripe="config.stripe"
                    :size="config.size">
-      <template slot="name" slot-scope="scope">
-        <i class="el-icon-time"/>
-        <span style="margin-left: 10px">{{ scope.row.name }} --  {{ scope.$index }}</span>
-      </template>
-      <el-table-column label="操作" min-width="100">
+      <el-table-column label="操作" width="220" slot="name">
         <template slot-scope="scope">
-          <el-switch v-model="scope.row.open">
-          </el-switch>
+          <i class="el-icon-time"/>
+          <span style="margin-left: 10px">{{ scope.row.name }} --  {{ scope.$index }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="状态" min-width="100">
+        <template slot-scope="scope">
+          <el-switch v-model="scope.row.status"></el-switch>
         </template>
       </el-table-column>
       <el-table-column label="操作" width="220">
@@ -51,13 +52,24 @@
       layout="prev, pager, next"
       :total="1000">
     </el-pagination>
-  </div>
+  </el-card>
 </template>
 
 <script>
 
   import DynamicTable from "@/components/Table/DynamicTable";
 
+  const tableData = [];
+  for (let i = 0; i < 15; i++) {
+    tableData.push({
+      key: i.toString(),
+      age: 32,
+      date: '2016-05-02',
+      name: `王小虎 ${i}`,
+      status: !!Math.floor((Math.random() * 2)),
+      address: `上海市普陀区金沙江路 1518 ${i}`,
+    });
+  }
   export default {
     name: 'Test',
     components: {
@@ -65,122 +77,7 @@
     },
     data() {
       return {
-        tableData: [
-          {
-            date: '2016-05-02',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1518 弄'
-          },
-          {
-            date: '2016-05-04',
-            name: '王小虎',
-            open: true,
-            address: '上海市普陀区金沙江路 1517 弄'
-          },
-          {
-            date: '2016-05-01',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1519 弄'
-          },
-          {
-            date: '2016-05-03',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1516 弄'
-          },
-          {
-            date: '2016-05-02',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1518 弄'
-          },
-          {
-            date: '2016-05-04',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1517 弄'
-          },
-          {
-            date: '2016-05-01',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1519 弄'
-          },
-          {
-            date: '2016-05-02',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1518 弄'
-          },
-          {
-            date: '2016-05-04',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1517 弄'
-          },
-          {
-            date: '2016-05-01',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1519 弄'
-          },
-          {
-            date: '2016-05-03',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1516 弄'
-          },
-          {
-            date: '2016-05-02',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1518 弄'
-          },
-          {
-            date: '2016-05-04',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1517 弄'
-          },
-          {
-            date: '2016-05-01',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1519 弄'
-          },
-          {
-            date: '2016-05-03',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1516 弄'
-          },
-          {
-            date: '2016-05-02',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1518 弄'
-          },
-          {
-            date: '2016-05-04',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1517 弄'
-          },
-          {
-            date: '2016-05-01',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1519 弄'
-          },
-          {
-            date: '2016-05-03',
-            name: '王小虎',
-            open: false,
-            address: '上海市普陀区金沙江路 1516 弄'
-          }
-        ],
+        tableData: tableData,
         tableColumns: [
           {
             key: 'selection',
@@ -198,6 +95,11 @@
             key: 'date',
             label: '日期',
             minWidth: 130
+          },
+          {
+            key: 'status',
+            label: '状态',
+            slot: true
           },
           {
             label: '地址',

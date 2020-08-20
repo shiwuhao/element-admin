@@ -130,10 +130,6 @@
         type: Boolean,
         default: false,
       },
-      advanced: {
-        type: Boolean,
-        default: false,
-      },
       advancedLength: {
         type: Number,
         default: 3,
@@ -143,6 +139,7 @@
     data() {
       return {
         datePickerTypes: ['year', 'month', 'date', 'dates', 'week', 'datetime', 'datetimerange', 'daterange', 'monthrange'],
+        advanced: false,
         form: {},
       }
     },

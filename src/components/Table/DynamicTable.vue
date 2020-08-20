@@ -17,12 +17,15 @@
               :border="border"
               :size="size"
               :stripe="stripe"
+              v-loading="loading"
+              :height="height"
               tooltip-effect="light"
               style="width: 100%;">
       <template v-for="(column,index) in columns">
         <template v-if="checkedColumns.indexOf(column.key) >= 0">
+          <slot v-if="column.slot" :name="column.key"/>
           <el-table-column
-            v-if="!column.slot"
+            v-else
             :prop="column.key"
             :key="index"
             :index="column.index"
@@ -37,24 +40,6 @@
             :sortable="column.sortable"
             :sort-method="column.sortMethod"
             :sort-by="column.sortBy">
-          </el-table-column>
-          <el-table-column
-            v-else
-            :prop="column.key"
-            :key="index"
-            :index="column.index"
-            :column-key="column.columnKey"
-            :label="column.label"
-            :width="column.width"
-            :min-width="column.minWidth"
-            :fixed="column.fixed"
-            :render-header="column.renderHeader"
-            :sortable="column.sortable"
-            :sort-method="column.sortMethod"
-            :sort-by="column.sortBy">
-            <template slot-scope="scope">
-              <slot :name="column.slot" :row="scope.row" :$index="scope.$index"/>
-            </template>
           </el-table-column>
         </template>
       </template>
@@ -79,12 +64,16 @@
       },
       height: {
         type: [String, Number],
-        default: '',
+        default: 'auto',
       },
       size: {
         type: String,
         default: 'small',
       },
+      loading: {
+        type: Boolean,
+        default: false,
+      }
     },
     data() {
       return {
@@ -115,6 +104,12 @@
       // 展开收缩表格设置抽屉
       toggleDrawer() {
         this.drawer = !this.drawer;
+      },
+      // 密度设置
+      toggleDensity() {
+        const size = ['medium', 'small', 'mini'];
+        const nextIndex = size.indexOf(this.size) + 1;
+        this.size = size[nextIndex > size.length ? 0 : nextIndex];
       },
       // 获取展示的字段
       getCheckedColumns() {

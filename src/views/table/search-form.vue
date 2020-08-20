@@ -31,7 +31,7 @@
                   :clearable="config.clearable"
                   @search="form1 = $event"
                   @reset="form1 = {}"></query-form>
-      {{ form1 }}
+      <pre><code>{{ form1 }}</code></pre>
     </el-card>
     <el-card class="box-card">
       <div slot="header" class="card-header">自定义插槽</div>
@@ -40,16 +40,15 @@
           <el-input v-model="customSlot" placeholder="我是自定义插槽渲染的"/>
         </el-form-item>
         <template slot="button">
-          <el-button type="primary" icon="el-icon-download">下载</el-button>
-          <el-button type="primary" icon="el-icon-setting">设置</el-button>
+          <el-button type="primary">下载</el-button>
         </template>
       </query-form>
-      {{ form2 }}
+      <pre><code>{{ form2 }}</code></pre>
     </el-card>
     <el-card class="box-card">
       <div slot="header" class="card-header">双向绑定</div>
       <query-form v-model="form3" :options="options3"></query-form>
-      {{ form3 }}
+      <pre><code>{{ form3 }}</code></pre>
     </el-card>
   </div>
 </template>
