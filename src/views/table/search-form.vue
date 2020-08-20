@@ -36,7 +36,7 @@
     <el-card class="box-card">
       <div slot="header" class="card-header">自定义插槽</div>
       <query-form :options="options2" @search="search" @reset="reset">
-        <el-form-item slot="custom-slot">
+        <el-form-item slot="custom-slot" style="margin-bottom: 2px;margin-top:2px;">
           <el-input v-model="customSlot" placeholder="我是自定义插槽渲染的"/>
         </el-form-item>
         <template slot="button">
