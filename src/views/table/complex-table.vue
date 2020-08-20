@@ -1,11 +1,11 @@
 <template>
   <div>
     <el-card>
-      <search-form :options="searchFormOptions" label @search="search" @reset="reset">
-<!--        <template slot="button">-->
+      <query-form :options="searchFormOptions" label size="small" @search="search" @reset="reset">
+        <!--        <template slot="button">-->
         <!--          <el-button type="primary" @click="handleSetting">设置</el-button>-->
         <!--        </template>-->
-      </search-form>
+      </query-form>
     </el-card>
     <el-card style="margin-top: 10px;">
       <div slot="header" class="clearfix" style="height: 10px;padding: 5px 0;">
@@ -47,7 +47,7 @@
 <script>
 
   import DynamicTable from "@/components/Table/DynamicTable";
-  import SearchForm from "@/components/Table/SearchForm";
+  import QueryForm from "@/components/Table/QueryForm";
 
   const cascaderData = [
     {
@@ -192,7 +192,7 @@
   export default {
     name: 'Test',
     components: {
-      DynamicTable, SearchForm
+      DynamicTable, QueryForm
     },
     data() {
       return {
@@ -470,36 +470,6 @@
             placeholder: '级联选择展示最后一项',
             showAllLevels: false,
             options: cascaderData
-          },
-          {
-            type: 'input',
-            key: 'key',
-            label: 'input框',
-            placeholder: '请输入搜索条件',
-          },
-          {
-            type: 'input',
-            key: 'key',
-            label: 'input框',
-            placeholder: '请输入搜索条件',
-          },
-          {
-            type: 'input',
-            key: 'key',
-            label: 'input框',
-            placeholder: '请输入搜索条件',
-          },
-          {
-            type: 'input',
-            key: 'key',
-            label: 'input框',
-            placeholder: '请输入搜索条件',
-          },
-          {
-            type: 'input',
-            key: 'key',
-            label: 'input框',
-            placeholder: '请输入搜索条件',
           },
           {
             type: 'input',

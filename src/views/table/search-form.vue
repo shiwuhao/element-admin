@@ -19,22 +19,23 @@
             <el-radio-button label="mini"></el-radio-button>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="宽度">
-          <el-input-number v-model="config.width" :min="150" :max="300" label="描述文字"></el-input-number>
+        <el-form-item label="label宽度">
+          <el-input-number v-model="config.labelWidth" :min="100" :max="300" label="描述文字"></el-input-number>
         </el-form-item>
       </el-form>
-      <search-form :options="options1"
-                   :label="config.showLabel"
-                   :iconButton="config.iconButton"
-                   :size="config.size"
-                   :clearable="config.clearable"
-                   @search="form1 = $event"
-                   @reset="form1 = {}"></search-form>
+      <query-form :options="options1"
+                  :label="config.showLabel"
+                  :iconButton="config.iconButton"
+                  :size="config.size"
+                  :label-width="`${config.labelWidth}px`"
+                  :clearable="config.clearable"
+                  @search="form1 = $event"
+                  @reset="form1 = {}"></query-form>
       {{ form1 }}
     </el-card>
     <el-card class="box-card">
       <div slot="header" class="card-header">自定义插槽</div>
-      <search-form :options="options2" @search="search" @reset="reset">
+      <query-form :options="options2" @search="search" @reset="reset">
         <el-form-item slot="custom-slot">
           <el-input v-model="customSlot" placeholder="我是自定义插槽渲染的"/>
         </el-form-item>
@@ -42,12 +43,12 @@
           <el-button type="primary" icon="el-icon-download">下载</el-button>
           <el-button type="primary" icon="el-icon-setting">设置</el-button>
         </template>
-      </search-form>
+      </query-form>
       {{ form2 }}
     </el-card>
     <el-card class="box-card">
       <div slot="header" class="card-header">双向绑定</div>
-      <search-form v-model="form3" :options="options3"></search-form>
+      <query-form v-model="form3" :options="options3"></query-form>
       {{ form3 }}
     </el-card>
   </div>
@@ -63,7 +64,7 @@
 </style>
 <script>
 
-  import SearchForm from "@/components/Table/SearchForm";
+  import QueryForm from "@/components/Table/QueryForm";
 
   const cascaderData = [
     {
@@ -209,17 +210,18 @@
   export default {
     name: 'Test',
     components: {
-      SearchForm
+      QueryForm
     },
     data() {
       return {
         searchForm: {},
         config: {
-          showLabel: false,
+          showLabel: true,
           iconButton: false,
           clearable: true,
           size: 'mini',
-          width: 200
+          labelWidth: 100
+
         },
         options1: [
           {
@@ -230,7 +232,7 @@
           {
             type: 'select',
             key: 'single-select',
-            label: '单选下拉框',
+            label: '单选下拉框单',
             options: [
               {value: '选项1', label: '黄金糕'},
               {value: '选项2', label: '双皮奶'},

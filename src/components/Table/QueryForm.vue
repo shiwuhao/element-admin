@@ -1,21 +1,24 @@
 <template>
-  <el-form ref="searchForm"
+  <el-form ref="`queryForm`"
            :model="form"
            :size="size"
            :label="label"
-           :label-width="label ? labelWidth : 0"
+           :label-width="label ? labelWidth : ''"
            @submit.native.prevent="handleSubmit"
            @keyup.enter.native="handleSubmit">
-    <el-row>
+    <el-row :gutter="20">
       <template v-for="(item,index) in options">
-        <el-col :xl="label ? 4 : 3"
+        <el-col :xl="label ? 6 : 4"
                 :lg="label ? 6 : 5"
                 :md="label ? 8 : 6"
-                :sm="label ? 12 : 8"
+                :sm="label ? 12 : 12"
                 :xs="label ? 24 : 24"
                 :key="index"
                 v-if="index < advancedLength || advanced ">
-          <el-form-item :label="label ? item.label : ''" :prop="item.key" v-if="!item.slot">
+          <el-form-item v-if="!item.slot"
+                        :label="label ? item.label : ''"
+                        :label-width="label ? item.labelWidth : ''"
+                        :prop="item.key">
             <el-input v-if="item.type === 'input'"
                       v-model="form[item.key]"
                       :placeholder="item.placeholder || item.label"
@@ -71,17 +74,17 @@
           <slot v-else :name="item.slot"/>
         </el-col>
       </template>
-      <el-col :xl="label ? 4 : 3"
-              :lg="label ? 6 : 6"
-              :md="label ? 8 : 8"
+      <el-col :xl="label ? 6 : 4"
+              :lg="label ? 6 : 5"
+              :md="label ? 8 : 6"
               :sm="label ? 12 : 12"
               :xs="label ? 24 : 24">
-        <el-form-item>
+        <el-form-item class="query-button" style="margin-left: 0">
           <el-button type="primary" :icon="iconButton ? 'el-icon-search' : ''" @click="handleSearch">
             {{ iconButton ? '' : '搜索'}}
           </el-button>
           <el-button type="default" :icon="iconButton ? 'el-icon-refresh-right' : ''"
-                     @click="handleReset('searchForm')">
+                     @click="handleReset('`queryForm`')">
             {{ iconButton ? '' : '重置'}}
           </el-button>
           <slot name="button"></slot>
@@ -96,7 +99,7 @@
 
 <script>
   export default {
-    name: 'SearchForm',
+    name: 'QueryForm',
     model: {
       prop: 'value',
       event: 'change',
@@ -169,6 +172,7 @@
 <style lang="scss" scoped>
   .el-form-item {
     min-height: 34px !important;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
+    margin-top: 2px;
   }
 </style>
