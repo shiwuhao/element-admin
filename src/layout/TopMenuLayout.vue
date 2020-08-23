@@ -1,9 +1,10 @@
 <template>
-  <el-container>
-    <el-header style="background: red;padding: 0;">
+  <el-container style="min-height: 100vh;">
+    <el-header class="header">
       <el-menu
+        class="fluid"
         default-active="2"
-        background-color="#545c64"
+        background-color="#001529"
         text-color="#fff"
         mode="horizontal"
         active-text-color="#ffd04b">
@@ -22,7 +23,7 @@
           </el-menu-item-group>
           <el-submenu index="1-4">
             <template slot="title">选项4</template>
-            <el-menu-item index="1-4-1">选项1</el-menu-item>
+
           </el-submenu>
         </el-submenu>
         <el-menu-item index="2">
@@ -39,20 +40,20 @@
         </el-menu-item>
       </el-menu>
     </el-header>
-    <el-main style="background: #2c3b41;">
+    <el-main class="main">
       <Main></Main>
     </el-main>
   </el-container>
 </template>
 <script>
-  import { Main,} from './components'
+  import {Main,} from './components'
   import ResizeMixin from './mixin/ResizeHandler'
   import {mapGetters} from 'vuex';
 
   export default {
     name: 'TopMenuLayout',
     components: {
-       Main
+      Main
     },
     mixins: [ResizeMixin],
     computed: {
@@ -95,92 +96,16 @@
   };
 </script>
 <style lang="scss" scoped>
-  @import "~@/styles/variables.scss";
-
-  .app-container {
-    height: 100vh;
+  .header{
+    padding: 0;
+    background: #001529;
   }
-
-  .main-container {
-
-    .header-container {
-      height: $navBarHeight !important;
-      padding: 0;
-    }
-
-    .el-main {
-      padding: 0 10px;
-      min-height: calc(100vh - #{$navBarHeight});
-    }
+  .main{
+    background: #3A71A8;
   }
-
-  .main-container.has-tag-view {
-    .header-container {
-      height: $navBarTagViewHeight !important;
-    }
-
-    .el-main {
-      min-height: calc(100vh - #{$navBarTagViewHeight});
-    }
-  }
-
-  // 固定header
-  .main-container.fixed-header {
-    .header-container {
-      height: $navBarHeight;
-      padding: 0;
-      position: absolute;
-      top: 0;
-      right: 0;
-      z-index: 9;
-      width: 100%;
-      transition: width 0.28s;
-    }
-
-    .el-main {
-      padding-top: $navBarHeight;
-    }
-
-    &.has-tag-view .el-main {
-      padding-top: $navBarTagViewHeight;
-    }
-  }
-
-  // 手机端
-  .mobile {
-    .fixed-header {
-      .header-container {
-        width: 100% !important;
-      }
-    }
-
-    .sidebar-container {
-      position: absolute;
-      height: 100vh;
-      z-index: 999;
-    }
-  }
-
-  .el-scrollbar {
+  .fluid{
+    max-width: 1200px;
     width: 100%;
-    height: 100%;
-
-    .el-scrollbar__view {
-      height: 100%;
-    }
-  }
-
-  .drawer-bg {
-    background: #000;
-    opacity: 0.3;
-    width: 100%;
-    top: 0;
-    height: 100%;
-    position: absolute;
-    z-index: 999;
-  }
-
-  .main-wrapper {
-    margin-top: 5px;
+    margin: 0 auto;
   }
 </style>

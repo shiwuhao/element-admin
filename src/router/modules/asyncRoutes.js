@@ -1,6 +1,12 @@
 import Layout from '@/layout/index.vue';
+import TopMenuLayout from "@/layout/TopMenuLayout";
 
 export default [
+  {
+    path: '/dashboard2',
+    component: TopMenuLayout,
+    meta: {title: 'dashboard', icon: 'el-icon-delete'},
+  },
   {
     path: '/table',
     component: Layout,
