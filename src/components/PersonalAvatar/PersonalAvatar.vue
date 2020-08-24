@@ -21,6 +21,8 @@
 </script>
 <style lang="scss" scoped>
   .avatar {
+    font-size: 10px;
+    -webkit-transform: scale(0.8);
     cursor: pointer;
   }
 </style>
