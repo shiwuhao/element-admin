@@ -49,6 +49,7 @@
   import {Main,} from './components'
   import ResizeMixin from './mixin/ResizeHandler'
   import {mapGetters} from 'vuex';
+  import logo from "@/layout/components/SideBar/logo";
 
   export default {
     name: 'TopMenuLayout',
