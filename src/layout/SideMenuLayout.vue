@@ -1,31 +1,48 @@
 <template>
-  <el-container :class="containerClass" class="app-container">
+  <el-container class="app-container" :class="containerClass">
     <div v-if="device==='mobile' && !isCollapse" class="drawer-bg" @click="handleClickOutside"/>
     <el-aside width="auto" class="sidebar-container">
-      <side-bar/>
+      <nav-menu/>
     </el-aside>
-    <el-scrollbar>
-      <el-container class="main-container" :class="mainContainerClass">
-        <el-header class="header-container">
-          <nav-bar/>
-          <tag-view v-if="setting.tagView"/>
-        </el-header>
+    <el-container class="main-container" :class="mainContainerClass">
+      <el-scrollbar style="width: 100%;">
+        <div class="header-container">
+          <el-header height="50">
+            <div class="navBar">
+              <div class="left">
+                <i class="collapse" :class="[sidebar.collapse ? 'el-icon-s-unfold' : 'el-icon-s-fold']" @click="toggleSideBar"/>
+                <Breadcrumb></Breadcrumb>
+              </div>
+              <div class="right">
+                <PersonalAvatar></PersonalAvatar>
+                <SettingDrawer ref="setting"/>
+              </div>
+            </div>
+          </el-header>
+          <el-header height="30" v-if="setting.tagView">
+            <tag-view/>
+          </el-header>
+        </div>
         <el-main class="main-wrapper">
           <Main/>
         </el-main>
-      </el-container>
-    </el-scrollbar>
+      </el-scrollbar>
+    </el-container>
   </el-container>
 </template>
 <script>
-  import {SideBar, NavBar, TagView, Main,} from './components'
+  import NavMenu from "@/components/NavMenu/NavMenu";
+  import PersonalAvatar from "@/components/PersonalAvatar/PersonalAvatar";
+  import Breadcrumb from "@/components/Breadcrumb/Breadcrumb";
+  import SettingDrawer from "@/components/SettingDrawer/SettingDrawer";
+  import {NavBar, TagView, Main,} from './components'
   import ResizeMixin from './mixin/ResizeHandler'
   import {mapGetters} from 'vuex';
 
   export default {
     name: 'Layout',
     components: {
-      SideBar, NavBar, TagView, Main
+      NavBar, TagView, Main, NavMenu, SettingDrawer, PersonalAvatar, Breadcrumb
     },
     mixins: [ResizeMixin],
     computed: {
@@ -36,10 +53,9 @@
       ]),
       containerClass() {
         return {
+          'mobile': this.device === 'mobile',
           'hide-sidebar': this.sidebar.collapse,
           'open-sidebar': !this.sidebar.collapse,
-          // 'without-animation': this.sidebar.withoutAnimation,
-          'mobile': this.device === 'mobile'
         }
       },
       mainContainerClass() {
@@ -63,7 +79,13 @@
       // 点击遮罩区域关闭sidebar
       handleClickOutside() {
         this.$store.dispatch('app/closeSideBar')
-      }
+      },
+      toggleSetting() {
+        this.$refs['setting'].toggleDrawer();
+      },
+      toggleSideBar() {
+        this.$store.dispatch('app/toggleSideBar')
+      },
     }
   };
 </script>
@@ -72,87 +94,53 @@
 
   .app-container {
     height: 100vh;
-  }
 
-  .main-container {
-
-    .header-container {
-      height: $navBarHeight !important;
+    .el-header {
+      width: 100%;
       padding: 0;
     }
 
     .el-main {
       padding: 0 10px;
-      min-height: calc(100vh - #{$navBarHeight});
-    }
-  }
-
-  .main-container.has-tag-view {
-    .header-container {
-      height: $navBarTagViewHeight !important;
     }
 
-    .el-main {
-      min-height: calc(100vh - #{$navBarTagViewHeight});
-    }
-  }
+    &.mobile {
+      .sidebar-container {
+        position: absolute;
+        height: 100vh;
+        z-index: 101;
+      }
 
-  // 固定header
-  .main-container.fixed-header {
-    .header-container {
-      height: $navBarHeight;
-      padding: 0;
-      position: absolute;
-      top: 0;
-      right: 0;
-      z-index: 9;
-      width: 100%;
-      transition: width 0.28s;
-    }
-
-    .el-main {
-      padding-top: $navBarHeight;
-    }
-
-    &.has-tag-view .el-main {
-      padding-top: $navBarTagViewHeight;
-    }
-  }
-
-  // 手机端
-  .mobile {
-    .fixed-header {
-      .header-container {
-        width: 100% !important;
+      &.hide-sidebar {
+        .sidebar-container {
+          display: none;
+        }
       }
     }
 
-    .sidebar-container {
-      position: absolute;
-      height: 100vh;
-      z-index: 999;
+    .main-container.fixed-header {
+      .header-container {
+        padding: 0;
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 9;
+        width: 100%;
+        transition: width 0.28s;
+      }
+
+      .el-main {
+        padding-top: $navBarHeight;
+      }
+
+      &.has-tag-view .el-main {
+        padding-top: $navBarTagViewHeight;
+      }
+
+      .main-wrapper {
+        margin-top: 5px;
+      }
     }
   }
 
-  .el-scrollbar {
-    width: 100%;
-    height: 100%;
-
-    .el-scrollbar__view {
-      height: 100%;
-    }
-  }
-
-  .drawer-bg {
-    background: #000;
-    opacity: 0.3;
-    width: 100%;
-    top: 0;
-    height: 100%;
-    position: absolute;
-    z-index: 999;
-  }
-  .main-wrapper{
-    margin-top: 5px;
-  }
 </style>

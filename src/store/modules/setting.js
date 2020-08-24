@@ -3,6 +3,7 @@ import variables from '@/styles/element-variables.scss'
 const setting = {
   namespaced: true,
   state: {
+    layout: localStorage.getItem('layout') ? localStorage.getItem('layout') : 'side',
     theme: variables.theme,
     tagView: localStorage.getItem('tagView') ? !!+localStorage.getItem('tagView') : true,
     fixedHeader: localStorage.getItem('fixedHeader') ? !!+localStorage.getItem('fixedHeader') : true,

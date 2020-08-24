@@ -1,34 +1,32 @@
 <template>
-  <div class="sidebar-wrapper " :class="{'has-logo':setting.sidebarLogo}">
+  <div class="sidebar-wrapper" :class="{'has-logo':setting.sidebarLogo}">
+    <logo v-if="setting.sidebarLogo" :collapse="isCollapse"/>
     <el-scrollbar>
-      <div class="flex-row-left">
-        <logo />
-        <el-menu
-          class="menu"
-          :default-active="activeMenu"
-          background-color="#001529"
-          :text-color="variables.menuText"
-          :active-text-color="variables.menuActiveText"
-          :unique-opened="uniqueOpened"
-          :collapse-transition="collapseTransition"
-          :collapse="isCollapse"
-          :router="true"
-          :mode="mode"
-        >
-          <sub-menu v-for="menu in menus" :index="menu.path" :key="menu.path" :menu="menu"/>
-        </el-menu>
-      </div>
+      <el-menu
+        class="menu"
+        :default-active="activeMenu"
+        :background-color="variables.menuBg"
+        :text-color="variables.menuText"
+        :active-text-color="variables.menuActiveText"
+        :unique-opened="uniqueOpened"
+        :collapse-transition="collapseTransition"
+        :collapse="isCollapse"
+        :router="true"
+        :mode="mode">
+        <sub-menu v-for="menu in menus" :index="menu.path" :key="menu.path" :menu="menu"/>
+      </el-menu>
     </el-scrollbar>
   </div>
 </template>
 <script>
   import {mapGetters} from 'vuex'
   import variables from '@/styles/variables.scss';
-  import subMenu from "@/layout/components/SideBarBak/subMenu";
+  import subMenu from "@/layout/components/SideBar/subMenu";
   import logo from './logo'
 
 
   export default {
+    name: 'NavMenu',
     components: {
       subMenu, logo
     },
@@ -68,3 +66,13 @@
 
   };
 </script>
+<style lang="scss" scoped>
+  .nav-menu {
+    width: 100%;
+    height: 100vh;
+
+    .el-menu {
+      height: 100vh;
+    }
+  }
+</style>

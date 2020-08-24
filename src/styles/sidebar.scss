@@ -5,7 +5,7 @@
     //.horizontal-collapse-transition {
     //  transition: 1s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
     //}
-    .sidebar-logo-container{
+    .sidebar-logo-container {
       transition: width 3s;
     }
 
@@ -48,18 +48,11 @@
     height: calc(100% - #{$navBarHeight});
   }
 
-  .mobile.hide-sidebar {
-    .sidebar-container {
-      pointer-events: none;
-      transition-duration: 0.3s;
-      transform: translate3d(-$sideBarWidth, 0, 0);
-    }
-  }
-
-  .withoutAnimation {
-    .main-container,
-    .sidebar-wrapper {
-      transition: none;
-    }
-  }
+  //.mobile.hide-sidebar {
+  //  .sidebar-container {
+  //    pointer-events: none;
+  //    transition-duration: 0.3s;
+  //    transform: translate3d(-$sideBarWidth, 0, 0);
+  //  }
+  //}
 }

@@ -1,22 +1,25 @@
 <template>
   <el-container style="min-height: 100vh;">
-    <el-header class="header">
-      <SideBar mode="horizontal" />
+    <el-header class="header flex-row-justify">
+      <div class="fluid flex-row-justify">
+        <SideBarBak mode="horizontal" />
+        <NavBar />
+      </div>
     </el-header>
-    <el-main class="main fluid">
+    <el-main class="main">
       <Main></Main>
     </el-main>
   </el-container>
 </template>
 <script>
-  import {SideBar, NavBar, TagView, Main} from './components'
+  import {SideBarBak, NavBar, TagView, Main} from './components'
   import ResizeMixin from './mixin/ResizeHandler'
   import {mapGetters} from 'vuex';
 
   export default {
     name: 'TopMenuLayout',
     components: {
-      SideBar, NavBar, TagView, Main
+      SideBarBak, NavBar, TagView, Main
     },
     mixins: [ResizeMixin],
     computed: {

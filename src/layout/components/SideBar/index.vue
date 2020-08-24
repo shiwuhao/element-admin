@@ -12,7 +12,7 @@
         :collapse-transition="collapseTransition"
         :collapse="isCollapse"
         :router="true"
-        :mode="mode"
+        mode="vertical"
       >
         <sub-menu v-for="menu in menus" :index="menu.path" :key="menu.path" :menu="menu"/>
       </el-menu>
@@ -30,12 +30,6 @@
     components: {
       subMenu, logo
     },
-    porps: {
-      mode: {
-        type: String,
-        default: 'vertical'
-      }
-    },
     data() {
       return {
         uniqueOpened: true, // 是否只保持一个子菜单的展开
@@ -43,7 +37,7 @@
       }
     },
     computed: {
-      ...mapGetters(['setting', 'sidebar', 'menus', 'device']),
+      ...mapGetters(['setting', 'sidebar', 'menus','device']),
       variables() {
         return {
           menuBg: '#545c64',
