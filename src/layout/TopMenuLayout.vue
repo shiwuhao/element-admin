@@ -1,60 +1,22 @@
 <template>
   <el-container style="min-height: 100vh;">
     <el-header class="header">
-      <el-menu
-        class="fluid"
-        default-active="2"
-        background-color="#001529"
-        text-color="#fff"
-        mode="horizontal"
-        active-text-color="#ffd04b">
-        <el-submenu index="1">
-          <template slot="title">
-            <i class="el-icon-location"></i>
-            <span>导航一</span>
-          </template>
-          <el-menu-item-group>
-            <template slot="title">分组一</template>
-            <el-menu-item index="1-1">选项1</el-menu-item>
-            <el-menu-item index="1-2">选项2</el-menu-item>
-          </el-menu-item-group>
-          <el-menu-item-group title="分组2">
-            <el-menu-item index="1-3">选项3</el-menu-item>
-          </el-menu-item-group>
-          <el-submenu index="1-4">
-            <template slot="title">选项4</template>
-
-          </el-submenu>
-        </el-submenu>
-        <el-menu-item index="2">
-          <i class="el-icon-menu"></i>
-          <span slot="title">导航二</span>
-        </el-menu-item>
-        <el-menu-item index="3" disabled>
-          <i class="el-icon-document"></i>
-          <span slot="title">导航三</span>
-        </el-menu-item>
-        <el-menu-item index="4">
-          <i class="el-icon-setting"></i>
-          <span slot="title">导航四</span>
-        </el-menu-item>
-      </el-menu>
+      <SideBar mode="horizontal" />
     </el-header>
-    <el-main class="main">
+    <el-main class="main fluid">
       <Main></Main>
     </el-main>
   </el-container>
 </template>
 <script>
-  import {Main,} from './components'
+  import {SideBar, NavBar, TagView, Main} from './components'
   import ResizeMixin from './mixin/ResizeHandler'
   import {mapGetters} from 'vuex';
-  import logo from "@/layout/components/SideBar/logo";
 
   export default {
     name: 'TopMenuLayout',
     components: {
-      Main
+      SideBar, NavBar, TagView, Main
     },
     mixins: [ResizeMixin],
     computed: {
@@ -97,14 +59,16 @@
   };
 </script>
 <style lang="scss" scoped>
-  .header{
+  .header {
     padding: 0;
     background: #001529;
   }
-  .main{
+
+  .main {
     background: #3A71A8;
   }
-  .fluid{
+
+  .fluid {
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
