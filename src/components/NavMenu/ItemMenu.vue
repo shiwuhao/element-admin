@@ -7,7 +7,7 @@
 
 <script>
   export default {
-    name: 'item',
+    name: 'ItemMenu',
     props: {
       menu: {
         type: Object,

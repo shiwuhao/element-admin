@@ -4,8 +4,8 @@
 </template>
 <script>
 
-  import SideMenuLayout from "@/layout/SideMenuLayout";
-  import TopMenuLayout from "@/layout/TopMenuLayout";
+  import SideMenuLayout from "@/components/Layout/SideMenuLayout/SideMenuLayout";
+  import TopMenuLayout from "@/components/Layout/TopMenuLayout/TopMenuLayout";
   import {mapGetters} from 'vuex'
 
   export default {

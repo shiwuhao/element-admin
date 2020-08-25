@@ -1,5 +1,4 @@
-import Layout from '@/layout/index.vue';
-import TopMenuLayout from "@/layout/TopMenuLayout";
+import Layout, {TopMenuLayout} from "@/components/Layout";
 
 export default [
   {

@@ -1,6 +1,12 @@
 <template>
   <div>
-    <i class="iconfont icon-more-vertical icon-setting" @click="toggleDrawer"/>
+    <div class="icon-wrap flex-col-center" :class="{'fixed':!navBar}" @click="toggleDrawer">
+      <i class="iconfont icon-more-vertical icon-setting"/>
+    </div>
+    <!--    <div class="icon-setting-fixed">-->
+    <!--      <i class="iconfont icon-more-vertical" v-if="!visible"/>-->
+    <!--      <i class="iconfont icon-more-vertical" v-else/>-->
+    <!--    </div>-->
     <el-drawer
       title="系统布局设置"
       :visible.sync="visible"
@@ -53,6 +59,10 @@
           <h3 class="setting-title">内容区域</h3>
           <div>
             <div class="drawer-item flex-row-center">
+              <span>顶栏</span>
+              <el-switch v-model="navBar" class="drawer-switch"/>
+            </div>
+            <div class="drawer-item flex-row-center">
               <span>Tag视图</span>
               <el-switch v-model="tagView" class="drawer-switch"/>
             </div>
@@ -73,6 +83,8 @@
   </div>
 </template>
 <script>
+  import {mapGetters} from 'vuex';
+
   export default {
     data() {
       return {
@@ -136,9 +148,18 @@
       }
     },
     computed: {
+      ...mapGetters(['setting']),
+      navBar: {
+        get() {
+          return this.setting.navBar;
+        },
+        set() {
+          this.$store.dispatch('setting/toggleSetting', 'navBar');
+        }
+      },
       sidebarLogo: {
         get() {
-          return this.$store.state.setting.sidebarLogo;
+          return this.setting.sidebarLogo;
         },
         set() {
           this.$store.dispatch('setting/toggleSetting', 'sidebarLogo');
@@ -146,7 +167,7 @@
       },
       fixedHeader: {
         get() {
-          return this.$store.state.setting.fixedHeader;
+          return this.setting.fixedHeader;
         },
         set() {
           this.$store.dispatch('setting/toggleSetting', 'fixedHeader');
@@ -154,7 +175,7 @@
       },
       tagView: {
         get() {
-          return this.$store.state.setting.tagView;
+          return this.setting.tagView;
         },
         set() {
           this.$store.dispatch('setting/toggleSetting', 'tagView');
@@ -179,15 +200,39 @@
   };
 </script>
 <style lang="scss" scoped>
-  .icon-setting {
-    display: block;
-    font-size: 20px;
-    padding: 0 10px;
-    cursor: pointer;
-  }
-  .icon-setting:hover{
-    background: #30B08F;
+  .icon-wrap {
+    width: 35px;
+    height: 35px;
+    margin-right: 5px;
     border-radius: 50%;
+    cursor: pointer;
+
+    &.fixed {
+      position: fixed;
+      top: -9px;
+      right: -9px;
+      transform: rotate(-45deg);
+      border-radius: 0;
+
+      &:hover {
+        background: none;
+      }
+    }
+
+    &:hover {
+      background: #F2F6FC;
+    }
+
+    .icon-setting {
+      display: block;
+      font-size: 20px;
+      padding: 0 10px;
+    }
+
+    .icon-setting:hover {
+      /*background: #30B08F;*/
+      border-radius: 5px;
+    }
   }
 
   .drawer-container {
@@ -253,7 +298,27 @@
     }
   }
 
-  /*/deep/ :focus {*/
-  /*  outline: 0;*/
-  /*}*/
+  .icon-setting-fixed {
+    position: absolute;
+    top: 240px;
+    /*background: #1890ff;*/
+    width: 48px;
+    height: 48px;
+    right: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    pointer-events: auto;
+    z-index: 1001;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 4px 0 0 4px;
+    background: red;
+
+    i {
+      color: rgb(255, 255, 255);
+      font-size: 20px;
+    }
+  }
 </style>

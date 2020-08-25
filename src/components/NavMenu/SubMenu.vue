@@ -7,12 +7,32 @@
       </template>
       <template v-for="child in menu.children">
         <sub-menu v-if="child.children && child.children.length > 1" :menu="item" :key="child.path"/>
-        <item class="subMenuItem" v-else :menu="child" :key="child.path"/>
+        <item-menu v-else :menu="child" :key="child.path"/>
       </template>
     </el-submenu>
     <item v-else :menu="menu.children && menu.children.length === 1 ? menu.children[0] : menu"/>
   </div>
 </template>
+<script>
+  import ItemMenu from "@/components/NavMenu/ItemMenu";
+
+  export default {
+    name: 'SubMenu',
+    components: {
+      ItemMenu
+    },
+    props: {
+      menu: {
+        type: Object,
+        required: true
+      },
+      basePath: {
+        type: String,
+        default: '',
+      }
+    },
+  };
+</script>
 <style lang="scss">
   @import "~@/styles/variables.scss";
 
@@ -52,23 +72,3 @@
     display: none;
   }
 </style>
-<script>
-  import item from "@/layout/components/SideBar/item";
-  import FixiOSBug from './FixiOSBug'
-
-  export default {
-    name: 'subMenu',
-    components: {item},
-    mixins: [FixiOSBug],
-    props: {
-      menu: {
-        type: Object,
-        required: true
-      },
-      basePath: {
-        type: String,
-        default: '',
-      }
-    },
-  };
-</script>

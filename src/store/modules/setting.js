@@ -8,6 +8,7 @@ const setting = {
     tagView: localStorage.getItem('tagView') ? !!+localStorage.getItem('tagView') : true,
     fixedHeader: localStorage.getItem('fixedHeader') ? !!+localStorage.getItem('fixedHeader') : true,
     sidebarLogo: localStorage.getItem('sidebarLogo') ? !!+localStorage.getItem('sidebarLogo') : true,
+    navBar: localStorage.getItem('navBar') ? !!+localStorage.getItem('navBar') : true,
   },
   mutations: {
     CHANGE_SETTING: (state, {key, value}) => {

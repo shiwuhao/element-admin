@@ -21,14 +21,14 @@
 <script>
   import {mapGetters} from 'vuex'
   import variables from '@/styles/variables.scss';
-  import subMenu from "@/layout/components/SideBar/subMenu";
-  import logo from './logo'
+  import SubMenu from "@/components/NavMenu/SubMenu";
+  import Logo from "@/components/Logo/Logo";
 
 
   export default {
     name: 'NavMenu',
     components: {
-      subMenu, logo
+      SubMenu, Logo
     },
     props: {
       mode: {

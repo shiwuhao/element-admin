@@ -1,5 +1,5 @@
 <template>
-  <div class="avatar">
+  <div class="avatar flex-col-center">
     <el-dropdown class="right-item">
       <el-avatar :size="size" :src="circleUrl">武浩</el-avatar>
       <el-dropdown-menu slot="dropdown">
@@ -14,15 +14,20 @@
     data() {
       return {
         circleUrl: '',
-        size: 'small',
+        size: 'large',
       };
     }
   };
 </script>
 <style lang="scss" scoped>
   .avatar {
-    font-size: 10px;
-    -webkit-transform: scale(0.8);
+    width: 35px;
+    height: 35px;
     cursor: pointer;
+
+    .el-avatar {
+      font-size: 12px;
+      -webkit-transform: scale(0.75);
+    }
   }
 </style>

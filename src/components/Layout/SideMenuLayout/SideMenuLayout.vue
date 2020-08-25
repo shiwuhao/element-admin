@@ -7,42 +7,32 @@
     <el-container class="main-container" :class="mainContainerClass">
       <el-scrollbar style="width: 100%;">
         <div class="header-container">
-          <el-header height="50">
-            <div class="navBar">
-              <div class="left">
-                <i class="collapse" :class="[sidebar.collapse ? 'el-icon-s-unfold' : 'el-icon-s-fold']" @click="toggleSideBar"/>
-                <Breadcrumb></Breadcrumb>
-              </div>
-              <div class="right">
-                <PersonalAvatar></PersonalAvatar>
-                <SettingDrawer ref="setting"/>
-              </div>
-            </div>
+          <el-header height="50" v-if="setting.navBar">
+            <NavBar/>
           </el-header>
           <el-header height="30" v-if="setting.tagView">
             <tag-view/>
           </el-header>
         </div>
         <el-main class="main-wrapper">
-          <Main/>
+          <RouteView/>
         </el-main>
       </el-scrollbar>
     </el-container>
   </el-container>
 </template>
 <script>
+  import NavBar from "@/components/Layout/SideMenuLayout/NavBar";
   import NavMenu from "@/components/NavMenu/NavMenu";
-  import PersonalAvatar from "@/components/PersonalAvatar/PersonalAvatar";
-  import Breadcrumb from "@/components/Breadcrumb/Breadcrumb";
-  import SettingDrawer from "@/components/SettingDrawer/SettingDrawer";
-  import {NavBar, TagView, Main,} from './components'
-  import ResizeMixin from './mixin/ResizeHandler'
+  import TagView from "@/components/TagView/TagView";
+  import RouteView from "@/components/Layout/RouteView";
+  import ResizeMixin from '../mixin/ResizeHandler'
   import {mapGetters} from 'vuex';
 
   export default {
-    name: 'Layout',
+    name: 'SideMenuLayout',
     components: {
-      NavBar, TagView, Main, NavMenu, SettingDrawer, PersonalAvatar, Breadcrumb
+      NavBar, TagView, RouteView, NavMenu
     },
     mixins: [ResizeMixin],
     computed: {

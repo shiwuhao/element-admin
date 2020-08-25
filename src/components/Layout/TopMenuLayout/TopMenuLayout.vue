@@ -2,24 +2,26 @@
   <el-container style="min-height: 100vh;">
     <el-header class="header flex-row-justify">
       <div class="fluid flex-row-justify">
-        <SideBarBak mode="horizontal" />
-        <NavBar />
+        <NavMenu mode="horizontal"/>
+        <NavBar/>
       </div>
     </el-header>
     <el-main class="main">
-      <Main></Main>
+      <RouteView/>
     </el-main>
   </el-container>
 </template>
 <script>
-  import {SideBarBak, NavBar, TagView, Main} from './components'
-  import ResizeMixin from './mixin/ResizeHandler'
+  import NavMenu from "@/components/NavMenu/NavMenu";
+  import TagView from "@/components/TagView/TagView";
+  import RouteView from "@/components/Layout/RouteView";
+  import ResizeMixin from '../mixin/ResizeHandler'
   import {mapGetters} from 'vuex';
 
   export default {
     name: 'TopMenuLayout',
     components: {
-      SideBarBak, NavBar, TagView, Main
+      NavMenu, TagView, RouteView
     },
     mixins: [ResizeMixin],
     computed: {
@@ -32,7 +34,6 @@
         return {
           'hide-sidebar': this.sidebar.collapse,
           'open-sidebar': !this.sidebar.collapse,
-          // 'without-animation': this.sidebar.withoutAnimation,
           'mobile': this.device === 'mobile'
         }
       },
