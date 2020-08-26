@@ -1,5 +1,5 @@
 <template>
-  <side-menu-layout v-if="setting.layout === 'side'"/>
+  <side-menu-layout v-if="setting.layout === 'sideMenu'"/>
   <top-menu-layout v-else/>
 </template>
 <script>

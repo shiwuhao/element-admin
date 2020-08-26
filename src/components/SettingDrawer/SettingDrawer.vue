@@ -193,8 +193,7 @@
 
       },
       handleChangeNav(theme) {
-        console.log('12121', theme);
-        this.$store.dispatch('setting/changeSetting', {layout: theme});
+        this.$store.dispatch('setting/changeSetting', 'layout', theme);
       }
     }
   };

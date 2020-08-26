@@ -3,7 +3,7 @@ import variables from '@/styles/element-variables.scss'
 const setting = {
   namespaced: true,
   state: {
-    layout: localStorage.getItem('layout') ? localStorage.getItem('layout') : 'side',
+    layout: localStorage.getItem('layout') ? localStorage.getItem('layout') : 'sideMenu',
     theme: variables.theme,
     tagView: localStorage.getItem('tagView') ? !!+localStorage.getItem('tagView') : true,
     fixedHeader: localStorage.getItem('fixedHeader') ? !!+localStorage.getItem('fixedHeader') : true,
@@ -11,11 +11,13 @@ const setting = {
     navBar: localStorage.getItem('navBar') ? !!+localStorage.getItem('navBar') : true,
   },
   mutations: {
-    CHANGE_SETTING: (state, {key, value}) => {
+    CHANGE_SETTING: (state, key, value) => {
+      console.log(state, key, value);
       if (Object.prototype.hasOwnProperty.call(state, key)) {
         state[key] = value;
         localStorage.setItem(key, state[key]);
       }
+      console.log(state);
     },
     TOGGLE_SETTING: (state, key) => {
       if (Object.prototype.hasOwnProperty.call(state, key)) {
@@ -28,10 +30,11 @@ const setting = {
     /**
      * change setting
      * @param commit
-     * @param data
+     * @param key
+     * @param value
      */
-    changeSetting({commit}, data) {
-      commit('CHANGE_SETTING', data)
+    changeSetting({commit}, key, value) {
+      commit('CHANGE_SETTING', key, value)
     },
     /**
      * toggle setting

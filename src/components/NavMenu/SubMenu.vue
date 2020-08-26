@@ -10,7 +10,7 @@
         <item-menu v-else :menu="child" :key="child.path"/>
       </template>
     </el-submenu>
-    <item v-else :menu="menu.children && menu.children.length === 1 ? menu.children[0] : menu"/>
+    <item-menu v-else :menu="menu.children && menu.children.length === 1 ? menu.children[0] : menu"/>
   </div>
 </template>
 <script>
