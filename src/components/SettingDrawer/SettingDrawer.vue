@@ -1,88 +1,83 @@
 <template>
-  <div>
-    <!--    <div class="icon-setting-fixed">-->
-    <!--      <i class="iconfont icon-more-vertical" v-if="!visible"/>-->
-    <!--      <i class="iconfont icon-more-vertical" v-else/>-->
-    <!--    </div>-->
-    <div class="icon-wrap flex-col-center" :class="{'fixed':!navBar}" @click="toggleDrawer">
+  <el-drawer
+    title="系统布局设置"
+    :visible.sync="visible"
+    :direction="direction"
+    :size="size"
+    :show-close="showClose"
+    :append-to-body="true"
+  >
+    <div class="setting-drawer-index-handle" slot="handle">
       <i class="iconfont icon-more-vertical icon-setting"/>
     </div>
-    <el-drawer
-      title="系统布局设置"
-      :visible.sync="visible"
-      :direction="direction"
-      :size="size"
-      :show-close="showClose"
-      :append-to-body="true"
-    >
-      <div class="drawer-container">
-        <div class="setting-group">
-          <h3 class="setting-title">整体风格设置</h3>
-          <div class="flex-row-left">
-            <template v-for="(item,index) in menuThemes">
-              <el-tooltip :key="index" effect="dark" :content="item.label" placement="top-start">
-                <div class="setting-item" @click="handleMenuTheme('dark')">
-                  <img :src="item.img"/>
-                  <i class="el-icon-check" v-if="item.theme === selectedMenuTheme"/>
-                </div>
-              </el-tooltip>
-            </template>
-          </div>
-        </div>
-        <el-divider/>
-        <div class="setting-group">
-          <h3 class="setting-title">主题色</h3>
-          <div style="height: 20px" class="flex-row-justify">
-            <el-tooltip v-for="(item, index) in colorList" :key="index" :content="item.key" placement="top-start">
-              <el-tag class="color-block" :color="item.color" :disable-transitions="false">
-                <i class="el-icon-check" v-if="item.color === primaryColor"/>
-              </el-tag>
+    <div class="drawer-container">
+      <div class="setting-group">
+        <h3 class="setting-title">整体风格设置</h3>
+        <div class="flex-row-left">
+          <template v-for="(item,index) in menuThemes">
+            <el-tooltip :key="index" effect="dark" :content="item.label" placement="top-start">
+              <div class="setting-item" @click="handleMenuTheme('dark')">
+                <img :src="item.img"/>
+                <i class="el-icon-check" v-if="item.theme === selectedMenuTheme"/>
+              </div>
             </el-tooltip>
-          </div>
+          </template>
         </div>
-        <el-divider/>
-        <div class="setting-group">
-          <h3 class="setting-title">导航模式</h3>
-          <div class="flex-row-left">
-            <template v-for="(item,index) in layoutMenus">
-              <el-tooltip :key="index" effect="dark" :content="item.label" placement="top-start">
-                <div class="setting-item" @click="handleChangeNav(item.theme)">
-                  <img :src="item.img"/>
-                  <i class="el-icon-check" v-if="item.theme === selectedMenuTheme"/>
-                </div>
-              </el-tooltip>
-            </template>
-          </div>
+      </div>
+      <el-divider/>
+      <div class="setting-group">
+        <h3 class="setting-title">主题色</h3>
+        <div style="height: 20px" class="flex-row-justify">
+          <el-tooltip v-for="(item, index) in colorList" :key="index" :content="item.key" placement="top-start">
+            <el-tag class="color-block" :color="item.color" :disable-transitions="false">
+              <i class="el-icon-check" v-if="item.color === primaryColor"/>
+            </el-tag>
+          </el-tooltip>
         </div>
-        <el-divider/>
-        <div class="setting-group">
-          <h3 class="setting-title">内容区域</h3>
-          <div>
-            <div class="drawer-item flex-row-center">
-              <span>顶栏</span>
-              <el-switch v-model="navBar" class="drawer-switch"/>
-            </div>
-            <div class="drawer-item flex-row-center">
-              <span>Tag视图</span>
-              <el-switch v-model="tagView" class="drawer-switch"/>
-            </div>
+      </div>
+      <el-divider/>
+      <div class="setting-group">
+        <h3 class="setting-title">导航模式</h3>
+        <div class="flex-row-left">
+          <template v-for="(item,index) in layoutMenus">
+            <el-tooltip :key="index" effect="dark" :content="item.label" placement="top-start">
+              <div class="setting-item" @click="handleChangeNav(item.theme)">
+                <img :src="item.img"/>
+                <i class="el-icon-check" v-if="item.theme === selectedMenuTheme"/>
+              </div>
+            </el-tooltip>
+          </template>
+        </div>
+      </div>
+      <el-divider/>
+      <div class="setting-group">
+        <h3 class="setting-title">内容区域</h3>
+        <div>
+          <div class="drawer-item flex-row-center">
+            <span>顶栏</span>
+            <el-switch v-model="navBar" class="drawer-switch"/>
+          </div>
+          <div class="drawer-item flex-row-center">
+            <span>Tag视图</span>
+            <el-switch v-model="tagView" class="drawer-switch"/>
+          </div>
 
-            <div class="drawer-item">
-              <span>固定Header</span>
-              <el-switch v-model="fixedHeader" class="drawer-switch"/>
-            </div>
+          <div class="drawer-item">
+            <span>固定Header</span>
+            <el-switch v-model="fixedHeader" class="drawer-switch"/>
+          </div>
 
-            <div class="drawer-item">
-              <span>侧边栏Logo</span>
-              <el-switch v-model="sidebarLogo" class="drawer-switch"/>
-            </div>
+          <div class="drawer-item">
+            <span>侧边栏Logo</span>
+            <el-switch v-model="sidebarLogo" class="drawer-switch"/>
           </div>
         </div>
       </div>
-    </el-drawer>
-  </div>
+    </div>
+  </el-drawer>
 </template>
 <script>
+  import Vue from 'vue';
   import {mapGetters} from 'vuex';
 
   export default {
@@ -182,6 +177,9 @@
         }
       }
     },
+    created() {
+      Vue.prototype.$Setting = this;
+    },
     methods: {
       toggleDrawer() {
         this.visible = !this.visible;
@@ -199,41 +197,6 @@
   };
 </script>
 <style lang="scss" scoped>
-  .icon-wrap {
-    width: 35px;
-    height: 35px;
-    margin-right: 5px;
-    border-radius: 50%;
-    cursor: pointer;
-
-    &.fixed {
-      position: fixed;
-      top: -9px;
-      right: -9px;
-      transform: rotate(-45deg);
-      border-radius: 0;
-
-      &:hover {
-        background: none;
-      }
-    }
-
-    &:hover {
-      background: #F2F6FC;
-    }
-
-    .icon-setting {
-      display: block;
-      font-size: 20px;
-      padding: 0 10px;
-    }
-
-    .icon-setting:hover {
-      /*background: #30B08F;*/
-      border-radius: 5px;
-    }
-  }
-
   .drawer-container {
     padding: 0 24px 24px 24px;
     font-size: 14px;
@@ -297,27 +260,4 @@
     }
   }
 
-  .icon-setting-fixed {
-    position: absolute;
-    top: 240px;
-    /*background: #1890ff;*/
-    width: 48px;
-    height: 48px;
-    right: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    pointer-events: auto;
-    z-index: 1001;
-    text-align: center;
-    font-size: 16px;
-    border-radius: 4px 0 0 4px;
-    background: red;
-
-    i {
-      color: rgb(255, 255, 255);
-      font-size: 20px;
-    }
-  }
 </style>

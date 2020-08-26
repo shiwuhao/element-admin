@@ -8,7 +8,9 @@
         </div>
         <div class="flex-row-right">
           <PersonalAvatar/>
-          <SettingDrawer/>
+          <div class="icon-setting-wrap flex-col-center" @click="toggleSetting">
+            <i class="iconfont icon-more-vertical"/>
+          </div>
         </div>
       </div>
     </el-header>
@@ -30,7 +32,7 @@
   export default {
     name: 'TopMenuLayout',
     components: {
-      NavMenu, TagView, RouteView, PersonalAvatar, SettingDrawer,Logo
+      NavMenu, TagView, RouteView, PersonalAvatar, SettingDrawer, Logo
     },
     mixins: [ResizeMixin],
     computed: {
@@ -67,6 +69,9 @@
       // 点击遮罩区域关闭sidebar
       handleClickOutside() {
         this.$store.dispatch('app/closeSideBar')
+      },
+      toggleSetting() {
+        this.$Setting.toggleDrawer();
       }
     }
   };

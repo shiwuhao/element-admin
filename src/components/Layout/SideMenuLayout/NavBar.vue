@@ -6,7 +6,9 @@
     </div>
     <div class="right">
       <PersonalAvatar/>
-      <SettingDrawer ref="setting"/>
+      <div class="icon-setting-wrap flex-col-center" @click="toggleSetting">
+        <i class="iconfont icon-more-vertical"/>
+      </div>
     </div>
   </div>
 </template>
@@ -28,6 +30,9 @@
       toggleSideBar() {
         this.$store.dispatch('app/toggleSideBar')
       },
+      toggleSetting() {
+        this.$Setting.toggleDrawer();
+      }
     }
   };
 </script>
@@ -64,11 +69,6 @@
       display: flex;
       align-items: center;
       justify-content: flex-end;
-
-      .setting {
-        padding: 0 10px;
-        cursor: pointer;
-      }
     }
   }
 </style>
