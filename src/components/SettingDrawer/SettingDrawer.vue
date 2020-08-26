@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="icon-wrap flex-col-center" :class="{'fixed':!navBar}" @click="toggleDrawer">
-      <i class="iconfont icon-more-vertical icon-setting"/>
-    </div>
     <!--    <div class="icon-setting-fixed">-->
     <!--      <i class="iconfont icon-more-vertical" v-if="!visible"/>-->
     <!--      <i class="iconfont icon-more-vertical" v-else/>-->
     <!--    </div>-->
+    <div class="icon-wrap flex-col-center" :class="{'fixed':!navBar}" @click="toggleDrawer">
+      <i class="iconfont icon-more-vertical icon-setting"/>
+    </div>
     <el-drawer
       title="系统布局设置"
       :visible.sync="visible"
