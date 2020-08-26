@@ -193,7 +193,7 @@
 
       },
       handleChangeNav(theme) {
-        this.$store.dispatch('setting/changeSetting', 'layout', theme);
+        this.$store.dispatch('setting/changeSetting', {layout: theme});
       }
     }
   };

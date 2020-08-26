@@ -11,13 +11,13 @@ const setting = {
     navBar: localStorage.getItem('navBar') ? !!+localStorage.getItem('navBar') : true,
   },
   mutations: {
-    CHANGE_SETTING: (state, key, value) => {
-      console.log(state, key, value);
-      if (Object.prototype.hasOwnProperty.call(state, key)) {
-        state[key] = value;
-        localStorage.setItem(key, state[key]);
+    CHANGE_SETTING: (state, data) => {
+      for (let key in data) {
+        if (Object.prototype.hasOwnProperty.call(state, key)) {
+          state[key] = data[key];
+          localStorage.setItem(key, state[key]);
+        }
       }
-      console.log(state);
     },
     TOGGLE_SETTING: (state, key) => {
       if (Object.prototype.hasOwnProperty.call(state, key)) {
@@ -30,11 +30,11 @@ const setting = {
     /**
      * change setting
      * @param commit
-     * @param key
-     * @param value
+     * @param data
      */
-    changeSetting({commit}, key, value) {
-      commit('CHANGE_SETTING', key, value)
+    changeSetting({commit}, data) {
+      console.log('changeSetting', data);
+      commit('CHANGE_SETTING', data)
     },
     /**
      * toggle setting

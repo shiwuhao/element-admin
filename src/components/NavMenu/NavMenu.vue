@@ -1,16 +1,16 @@
 <template>
   <div class="sidebar-wrapper" :class="{'has-logo':setting.sidebarLogo}">
-    <logo v-if="setting.sidebarLogo" :collapse="isCollapse"/>
+    <!--    <logo v-if="setting.sidebarLogo" :collapse="isCollapse"/>-->
     <el-scrollbar>
       <el-menu
-        class="menu"
+        :class="mode === 'vertical'? 'menu-vertical' : 'menu-horizontal'"
         :default-active="activeMenu"
         :background-color="variables.menuBg"
         :text-color="variables.menuText"
         :active-text-color="variables.menuActiveText"
         :unique-opened="uniqueOpened"
         :collapse-transition="collapseTransition"
-        :collapse="isCollapse"
+        :collapse="mode === 'vertical' ? isCollapse : false"
         :router="true"
         :mode="mode">
         <sub-menu v-for="menu in menus" :index="menu.path" :key="menu.path" :menu="menu"/>

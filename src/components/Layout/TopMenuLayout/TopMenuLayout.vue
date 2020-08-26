@@ -1,9 +1,15 @@
 <template>
   <el-container style="min-height: 100vh;">
     <el-header class="header flex-row-justify">
-      <div class="fluid flex-row-justify">
-        <NavMenu mode="horizontal"/>
-        <NavBar/>
+      <div class=" flex-row-justify" style="width: 100%;padding: 0 20px;">
+        <div class="flex-row-left">
+          <Logo></Logo>
+          <NavMenu mode="horizontal"/>
+        </div>
+        <div class="flex-row-right">
+          <PersonalAvatar/>
+          <SettingDrawer/>
+        </div>
       </div>
     </el-header>
     <el-main class="main">
@@ -12,6 +18,9 @@
   </el-container>
 </template>
 <script>
+  import Logo from "@/components/Logo/Logo";
+  import PersonalAvatar from "@/components/PersonalAvatar/PersonalAvatar";
+  import SettingDrawer from "@/components/SettingDrawer/SettingDrawer";
   import NavMenu from "@/components/NavMenu/NavMenu";
   import TagView from "@/components/TagView/TagView";
   import RouteView from "@/components/Layout/RouteView";
@@ -21,7 +30,7 @@
   export default {
     name: 'TopMenuLayout',
     components: {
-      NavMenu, TagView, RouteView
+      NavMenu, TagView, RouteView, PersonalAvatar, SettingDrawer,Logo
     },
     mixins: [ResizeMixin],
     computed: {
