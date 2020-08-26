@@ -43,7 +43,7 @@
             <el-tooltip :key="index" effect="dark" :content="item.label" placement="top-start">
               <div class="setting-item" @click="handleChangeNav(item.theme)">
                 <img :src="item.img"/>
-                <i class="el-icon-check" v-if="item.theme === selectedMenuTheme"/>
+                <i class="el-icon-check" v-if="item.theme === setting.layout"/>
               </div>
             </el-tooltip>
           </template>
@@ -134,7 +134,7 @@
             checked: false
           },
           {
-            theme: 'sideMenu',
+            theme: 'mixMenu',
             label: '混合菜单布局',
             img: 'https://gw.alipayobjects.com/zos/antfincdn/x8Ob%26B8cy8/LCkqqYNmvBEbokSDscrm.svg',
             checked: false
