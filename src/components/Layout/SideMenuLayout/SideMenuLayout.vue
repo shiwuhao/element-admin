@@ -2,6 +2,7 @@
   <el-container class="app-container" :class="containerClass">
     <div v-if="device==='mobile' && !isCollapse" class="drawer-bg" @click="handleClickOutside"/>
     <el-aside width="auto" class="sidebar-container">
+      <logo v-if="setting.sidebarLogo" :collapse="isCollapse"/>
       <nav-menu/>
     </el-aside>
     <el-container class="main-container" :class="mainContainerClass">
@@ -22,6 +23,7 @@
   </el-container>
 </template>
 <script>
+  import Logo from "@/components/Logo/Logo";
   import NavBar from "@/components/Layout/SideMenuLayout/NavBar";
   import NavMenu from "@/components/NavMenu/NavMenu";
   import TagView from "@/components/TagView/TagView";
@@ -32,7 +34,7 @@
   export default {
     name: 'SideMenuLayout',
     components: {
-      NavBar, TagView, RouteView, NavMenu
+      NavBar, TagView, RouteView, NavMenu, Logo
     },
     mixins: [ResizeMixin],
     computed: {

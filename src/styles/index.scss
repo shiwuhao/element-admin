@@ -58,5 +58,10 @@ body {
     font-size: 20px;
     padding: 0 10px;
   }
-
+}
+.top-menu-layout .icon-setting-wrap{
+  color: white;;
+  &:hover {
+    background: #606266;
+  }
 }

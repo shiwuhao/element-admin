@@ -1,9 +1,9 @@
 <template>
-  <el-container style="min-height: 100vh;">
-    <el-header class="header flex-row-justify">
-      <div class=" flex-row-justify" style="width: 100%;padding: 0 20px;">
+  <el-container class="top-menu-layout" style="min-height: 100vh;">
+    <el-header class="header flex-row-justify" height="56px;">
+      <div class="flex-row-justify" style="width: 100%;padding: 0 0px;">
         <div class="flex-row-left">
-          <Logo></Logo>
+          <Logo class="logo" v-if="setting.sidebarLogo" :collapse="false"></Logo>
           <NavMenu mode="horizontal"/>
         </div>
         <div class="flex-row-right">
@@ -13,6 +13,9 @@
           </div>
         </div>
       </div>
+    </el-header>
+    <el-header height="30px" style="padding: 0;" v-if="setting.tagView">
+      <TagView></TagView>
     </el-header>
     <el-main class="main">
       <RouteView/>
@@ -79,11 +82,15 @@
 <style lang="scss" scoped>
   .header {
     padding: 0;
-    background: #001529;
+    background: #2b2f3a;
+
+    .logo {
+      margin-left: 10px;
+    }
   }
 
   .main {
-    background: #3A71A8;
+    padding: 5px 10px;
   }
 
   .fluid {

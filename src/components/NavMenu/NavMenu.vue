@@ -1,6 +1,6 @@
 <template>
   <div class="sidebar-wrapper" :class="{'has-logo':setting.sidebarLogo}">
-    <!--    <logo v-if="setting.sidebarLogo" :collapse="isCollapse"/>-->
+<!--        <logo v-if="setting.sidebarLogo" :collapse="isCollapse"/>-->
     <el-scrollbar>
       <el-menu
         :class="mode === 'vertical'? 'menu-vertical' : 'menu-horizontal'"
