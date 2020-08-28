@@ -54,11 +54,8 @@
 
       .collapse {
         padding: 0 15px;
-
-        i {
-          cursor: pointer;
-          font-size: 20px;
-        }
+        cursor: pointer;
+        font-size: 20px;
       }
 
       .breadcrumb {

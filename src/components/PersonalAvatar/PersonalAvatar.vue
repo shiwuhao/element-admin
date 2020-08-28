@@ -14,7 +14,7 @@
     data() {
       return {
         circleUrl: '',
-        size: 'large',
+        size: 35,
       };
     }
   };
@@ -27,7 +27,9 @@
 
     .el-avatar {
       font-size: 12px;
-      -webkit-transform: scale(0.75);
+      -webkit-transform: scale(0.85);
+      background: #409EFF;
+      font-weight: bolder;
     }
   }
 </style>

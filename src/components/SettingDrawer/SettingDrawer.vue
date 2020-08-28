@@ -29,7 +29,8 @@
         <h3 class="setting-title">主题色</h3>
         <div style="height: 20px" class="flex-row-justify">
           <el-tooltip v-for="(item, index) in colorList" :key="index" :content="item.key" placement="top-start">
-            <el-tag class="color-block" :color="item.color" :disable-transitions="false">
+            <el-tag class="color-block" :color="item.color" :disable-transitions="false"
+                    @click="changeTheme(item.theme)">
               <i class="el-icon-check" v-if="item.color === primaryColor"/>
             </el-tag>
           </el-tooltip>
@@ -111,14 +112,14 @@
         ],
         primaryColor: '#F5222D',
         colorList: [
-          {key: '薄暮', color: '#F5222D'},
-          {key: '火山', color: '#FA541C'},
-          {key: '日暮', color: '#FAAD14'},
-          {key: '明青', color: '#13C2C2'},
-          {key: '极光绿', color: '#52C41A'},
-          {key: '拂晓蓝', color: '#1890FF'},
-          {key: '极客蓝', color: '#2F54EB'},
-          {key: '酱紫', color: '#722ED1'}
+          {theme: 'theme1', key: '薄暮', color: '#F5222D'},
+          {theme: 'theme2', key: '火山', color: '#FA541C'},
+          {theme: 'theme3', key: '日暮', color: '#FAAD14'},
+          {theme: 'theme4', key: '明青', color: '#13C2C2'},
+          {theme: 'theme5', key: '极光绿', color: '#52C41A'},
+          {theme: 'theme6', key: '拂晓蓝', color: '#1890FF'},
+          {theme: 'theme7', key: '极客蓝', color: '#2F54EB'},
+          {theme: 'theme8', key: '酱紫', color: '#722ED1'}
         ],
         layoutMenus: [
           {
@@ -187,8 +188,11 @@
       handleMenuTheme() {
 
       },
-      themeChange() {
+      changeTheme(theme) {
+        console.log(123);
+        import(`@/styles/element-variables-${theme}.scss`).then(msg => {
 
+        })
       },
       handleChangeNav(theme) {
         this.$store.dispatch('setting/changeSetting', {layout: theme});
