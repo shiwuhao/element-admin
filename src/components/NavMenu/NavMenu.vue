@@ -46,10 +46,10 @@
       ...mapGetters(['setting', 'sidebar', 'menus', 'device']),
       variables() {
         return {
-          menuBg: '#545c64',
+          menuBg: '#222d32',
           menuText: '#fff',
-          menuActiveText: '#ffd04b',
-          ...variables,
+          menuActiveText: this.setting.primaryColor,
+          // ...variables,
         };
       },
       // 激活菜单
