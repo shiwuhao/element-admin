@@ -39,7 +39,7 @@
     mounted() {
       // 如果是记住用户的状态就需要，在主题切换的时候记录颜色值，在下次打开的时候从新赋值
       this.colors.primary = localStorage.getItem('primaryColor') || this.colors.primary;
-      // this.getRemoteCss(this.cssUrl);
+      this.getRemoteCss(this.cssUrl);
 
       this.$nextTick(() => {
         this.originalStylesheetCount = document.styleSheets.length; // 获取页面一共引入了多少个style 文件
