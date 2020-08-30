@@ -5,6 +5,10 @@ import store from './store'
 import './plugins/element.js'
 import './plugins/contextmenu.js'
 import '@/assets/iconfont/iconfont.css'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+Vue.use(VueAxios, axios);
 
 require('@/mock/index');
 
