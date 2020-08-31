@@ -2,15 +2,10 @@ import Layout, {TopMenuLayout} from "@/components/Layout";
 
 export default [
   {
-    path: '/dashboard2',
-    component: TopMenuLayout,
-    meta: {title: 'dashboard', icon: 'el-icon-delete'},
-  },
-  {
     path: '/table',
     component: Layout,
-    redirect: '/about/me',
-    meta: {title: '基础表格', icon: 'el-icon-delete'},
+    redirect: '/table/base-table',
+    meta: {title: '列表页', icon: 'el-icon-delete'},
     children: [
       {
         path: '/table/base-table',
@@ -42,7 +37,7 @@ export default [
     path: '/about2',
     component: Layout,
     redirect: '/about/me2',
-    meta: {title: '关于', icon: 'el-icon-delete'},
+    meta: {title: '详情页', icon: 'el-icon-delete'},
     children: [
       {
         path: '/about/me2',
@@ -62,7 +57,7 @@ export default [
     path: '/about3',
     component: Layout,
     redirect: '/about/me3',
-    meta: {title: '关于', icon: 'el-icon-delete'},
+    meta: {title: '表单页', icon: 'el-icon-delete'},
     children: [
       {
         path: '/about/me3',
@@ -82,7 +77,7 @@ export default [
     path: '/about4',
     component: Layout,
     redirect: '/about/me4',
-    meta: {title: '关于', icon: 'el-icon-delete'},
+    meta: {title: '结果页', icon: 'el-icon-delete'},
     children: [
       {
         path: '/about/me4',
@@ -102,7 +97,7 @@ export default [
     path: '/about5',
     component: Layout,
     redirect: '/about/me5',
-    meta: {title: '关于', icon: 'el-icon-delete'},
+    meta: {title: '异常页', icon: 'el-icon-delete'},
     children: [
       {
         path: '/about/me5',

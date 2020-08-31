@@ -8,7 +8,7 @@
         :key="item.path"
         :route="item"
         :hit="isActive(item)"
-        :type="isActive(item) ? 'success' : 'info'"
+        :type="isActive(item) ? '' : 'info'"
         :closable="!(item.meta && item.meta.affix)"
         @close="closeTagView(item)"
         @click="clickTagView(item)"

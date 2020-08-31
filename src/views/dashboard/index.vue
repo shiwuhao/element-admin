@@ -31,8 +31,15 @@
       </el-col>
     </el-row>
 
-    <el-card>
-      asas
+    <el-card style="margin-top: 20px;">
+      <el-tabs v-model="activeName">
+        <el-tab-pane label="日统计" name="first">
+          日统计
+        </el-tab-pane>
+        <el-tab-pane label="月统计" name="second">月统计</el-tab-pane>
+        <el-tab-pane label="年统计" name="second">年统计</el-tab-pane>
+        <el-tab-pane label="实时电销" name="third">实时电销</el-tab-pane>
+      </el-tabs>
     </el-card>
   </div>
 </template>
@@ -46,6 +53,11 @@
     name: 'Home',
     components: {
       HelloWorld, Theme
-    }
+    },
+    data() {
+      return {
+        activeName: 'first'
+      };
+    },
   }
 </script>
