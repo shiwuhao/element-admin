@@ -5,6 +5,10 @@
 .el-drawer__container div, .el-drawer__header span:focus {
   outline: 0;
 }
+.el-card__header{
+  padding: 10px 20px !important;
+  font-size: 14px;
+}
 
 body {
   height: 100%;

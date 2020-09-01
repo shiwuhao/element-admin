@@ -26,7 +26,25 @@ const userInfoData = Object.assign(baseData, {
   },
 });
 
+const userListData = Mock.mock({
+  'data|15': [{
+    'id|+1': 1,
+    'email': '@email',
+    'name': '@name',
+    'role': '@role',
+    'created_at': '@datetime',
+  }],
+  'meta': {
+    current_page: 2,
+    from: 16,
+    last_page: 5,
+    path: "http://user-operate.juzifenqi.com:8080/api/users",
+    per_page: 15,
+    to: 30,
+    total: 73,
+  }
+});
 
-Mock.mock(/\/api\/user/, 'get', userInfoData);// 用户信息
-Mock.mock(`/api/logout`, 'post', baseData);// 退出登录
-Mock.mock(/\/api\/login/, 'post', loginData);// 登录
+
+Mock.mock(/\/api\/user-info/, 'get', userInfoData);// 用户信息
+Mock.mock(/\/api\/users/, 'get', userListData);// 登录

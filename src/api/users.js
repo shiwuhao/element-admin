@@ -1,4 +1,5 @@
 import axios from '@/utils/axios';
+import {use} from "element-ui/src/locale";
 
 const users = {};
 
@@ -24,6 +25,11 @@ users.logout = () => {
  * @returns {Promise<AxiosResponse<T>>}
  */
 users.userInfo = () => {
-  return axios.get('/api/user');
+  return axios.get('/api/user-info');
 };
+
+
+users.index = (params) => {
+  return axios.get('/api/users');
+}
 export default users;

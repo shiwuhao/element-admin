@@ -3,9 +3,13 @@ import VueRouter from 'vue-router'
 import constantRoutes from './modules/constantRoutes.js';
 import asyncRoutes from './modules/asyncRoutes.js';
 import store from '@/store/index';
+import NProgress from 'nprogress' // progress bar
+import 'nprogress/nprogress.css' // progress bar style
 import {getToken} from '@/utils/auth';
 
 Vue.use(VueRouter);
+
+NProgress.configure({showSpinner: false}) // NProgress Configuration
 
 const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function push(location) {
@@ -21,6 +25,7 @@ const whiteList = ['/login', '/404'];
 
 // 路由拦截器
 router.beforeEach(async (to, from, next) => {
+  NProgress.start();
   if (whiteList.indexOf(to.path) !== -1) { // 白名单，直接进入
     next();
   } else if (getToken()) { // 已登录 拉取用户信息,过滤权限路由,动态注册路由
@@ -29,11 +34,14 @@ router.beforeEach(async (to, from, next) => {
       const accessRoutes = await store.dispatch('permission/generateRoutes', roles);
       router.addRoutes(accessRoutes);
       next({...to, replace: true});
+      NProgress.done()
     } else {
       next();
+      NProgress.done()
     }
   } else { // 否则全部重定向到登录页
     next(`/login?redirect=${to.path}`);
+    NProgress.done()
   }
 });
 

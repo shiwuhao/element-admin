@@ -88,7 +88,8 @@
             {{ iconButton ? '' : '重置'}}
           </el-button>
           <slot name="button"></slot>
-          <el-link type="primary" @click="toggleAdvanced" style="margin-left:10px;font-size: 12px;">
+          <el-link type="primary" @click="toggleAdvanced" v-if="options.length > advancedLength"
+                   style="margin-left:10px;font-size: 12px;">
             {{ advanced ? '收起' : '展开' }}
           </el-link>
         </el-form-item>

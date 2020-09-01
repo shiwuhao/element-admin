@@ -7,6 +7,7 @@ import './plugins/contextmenu.js'
 import '@/assets/iconfont/iconfont.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import '@/mock/index';
 
 Vue.use(VueAxios, axios);
 

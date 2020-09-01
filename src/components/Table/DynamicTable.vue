@@ -13,16 +13,17 @@
       </el-checkbox-group>
     </el-drawer>
 
-    <el-table :data="data"
+    <el-table ref="el-table"
+              :data="data"
               :border="border"
               :size="size"
               :stripe="stripe"
               v-loading="loading"
               :height="height"
+              :max-height="maxHeight"
               :row-key="rowKey"
               :tree-props="treeProps"
-              tooltip-effect="light"
-              style="width: 100%;">
+              tooltip-effect="light">
       <template v-for="(column,index) in columns">
         <template v-if="checkedColumns.indexOf(column.key) >= 0">
           <slot v-if="column.slot" :name="column.key"/>
@@ -47,6 +48,18 @@
       </template>
       <slot></slot>
     </el-table>
+    <div class="flex-row-justify">
+      <div>
+        <slot name="selection-operate"></slot>
+      </div>
+      <el-pagination
+        v-if="Object.keys(paginate).length > 0"
+        class="mt10"
+        layout="prev, pager, next"
+        @current-change="changePage"
+        :total="50">
+      </el-pagination>
+    </div>
   </div>
 </template>
 
@@ -54,8 +67,20 @@
   export default {
     name: 'DynamicTable',
     props: {
-      data: Array,
-      columns: Array,
+      data: {
+        type: Array,
+        default: () => {
+          return [];
+        },
+        require: true,
+      },
+      columns: {
+        type: Array,
+        default: () => {
+          return [];
+        },
+        require: true,
+      },
       stripe: {
         type: Boolean,
         default: false,
@@ -66,11 +91,14 @@
       },
       height: {
         type: [String, Number],
-        default: 'auto',
+      },
+      maxHeight: {
+        type: [String, Number],
+        default: '100vh',
       },
       size: {
         type: String,
-        default: 'small',
+        default: '',
       },
       loading: {
         type: Boolean,
@@ -84,6 +112,12 @@
         type: Object,
         default: () => {
           return {children: 'children', hasChildren: 'hasChildren'}
+        },
+      },
+      paginate: {
+        type: Object,
+        default: () => {
+          return {}
         },
       }
     },
@@ -102,6 +136,9 @@
       this.checkedColumns = allColumns;
     },
     methods: {
+      updateHeight() {
+        this.$refs['el-table'].shouldUpdateHeight();
+      },
       // 全选事件
       handleCheckAllChange(val) {
         this.checkedColumns = val ? this.allColumns : [];
@@ -126,6 +163,10 @@
       // 获取展示的字段
       getCheckedColumns() {
         return this.checkedColumns;
+      },
+      // 翻页
+      changePage(page) {
+        this.$emit('change-page', page);
       }
     },
   }
