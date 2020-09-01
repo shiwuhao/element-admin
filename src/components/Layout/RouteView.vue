@@ -1,6 +1,6 @@
 <template>
   <section class="app-main">
-    <transition name="el-zoom-in-center">
+    <transition name="el-fade-in-linear">
       <keep-alive :include="cachedViews">
         <router-view :key="key"/>
       </keep-alive>

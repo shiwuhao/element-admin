@@ -1,5 +1,5 @@
 <template>
-  <el-card class="mt10">
+  <el-card>
     <div slot="header" class="flex-row-justify">
       <query-form style="width: 100%;" :options="queryFormOptions" size="mini" clearable @search="handleSearch"/>
       <el-button style="float: right" type="primary" size="mini" icon="el-icon-circle-plus">新增</el-button>
