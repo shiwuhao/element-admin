@@ -52,6 +52,7 @@
           {
             key: 'id',
             label: 'ID',
+            width: 60,
           },
           {
             key: 'email',
@@ -97,7 +98,3 @@
     }
   }
 </script>
-
-<style scoped>
-
-</style>

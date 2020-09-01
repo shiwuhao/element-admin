@@ -31,9 +31,14 @@
         width: $sideBarWidth;
       }
 
-      .sub-menu-wrapper > .el-menu-item {
-        min-width: $sideBarWidth;
-        padding-left: 15px !important;
+      .sub-menu-wrapper {
+        .el-menu-item {
+          min-width: $sideBarWidth !important;
+        }
+
+        > .el-menu-item {
+          padding-left: 15px !important;
+        }
       }
 
       &.el-menu--collapse > div > .el-submenu > .el-submenu__title span {
