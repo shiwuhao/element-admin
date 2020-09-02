@@ -2,6 +2,26 @@ import Layout, {TopMenuLayout} from "@/components/Layout";
 
 export default [
   {
+    path: '/system',
+    component: Layout,
+    redirect: '/system/configs',
+    meta: {title: '系统配置', icon: 'el-icon-setting'},
+    children: [
+      {
+        path: '/system/users',
+        name: 'users',
+        meta: {title: '用户管理', affix: false},
+        component: () => import('@/views/system/users/list'),
+      },
+      {
+        path: '/system/configs',
+        name: 'config',
+        meta: {title: '站点配置', affix: false},
+        component: () => import('@/views/system/configs/list'),
+      }
+    ]
+  },
+  {
     path: '/table',
     component: Layout,
     redirect: '/table/base-table',
@@ -111,26 +131,6 @@ export default [
         meta: {title: '测试页面', affix: false},
         component: () => import('@/views/Test'),
       },
-    ]
-  },
-  {
-    path: '/system',
-    component: Layout,
-    redirect: '/system/configs',
-    meta: {title: '系统配置', icon: 'el-icon-setting'},
-    children: [
-      {
-        path: '/system/users',
-        name: 'users',
-        meta: {title: '用户管理', affix: false},
-        component: () => import('@/views/system/users/list'),
-      },
-      {
-        path: '/system/configs',
-        name: 'config',
-        meta: {title: '站点配置', affix: false},
-        component: () => import('@/views/system/configs/list'),
-      }
     ]
   },
 ];
