@@ -44,7 +44,7 @@ const userListData = Mock.mock({
     total: 73,
   }
 });
-
-
 Mock.mock(/\/api\/user-info/, 'get', userInfoData);// 用户信息
 Mock.mock(/\/api\/users/, 'get', userListData);// 登录
+Mock.mock(/\/api\/login/,'post',loginData)//登录
+Mock.mock(/\/api\/logout/,'post')//登出

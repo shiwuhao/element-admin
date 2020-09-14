@@ -53,7 +53,8 @@
       "no-console": "off",
       "no-unused-vars": "off",
       "vue/no-unused-components": "off",
-      "no-unreachable": "off"
+      "no-unreachable": "off",
+      "no-debugger": "off"
     }
   },
   "browserslist": [

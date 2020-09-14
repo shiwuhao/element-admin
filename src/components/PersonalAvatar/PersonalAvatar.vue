@@ -4,7 +4,7 @@
       <el-avatar :size="size" :src="circleUrl">武浩</el-avatar>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item>个人中心</el-dropdown-item>
-        <el-dropdown-item>退出登录</el-dropdown-item>
+        <el-dropdown-item @click.native="logout">退出登录</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
   </div>
@@ -15,7 +15,14 @@
       return {
         circleUrl: '',
         size: 35,
-      };
+      }
+    },
+    methods: {
+      logout(){
+        this.$store.dispatch('user/logout').then(() => {
+          location.reload();
+        })
+      }
     }
   };
 </script>
