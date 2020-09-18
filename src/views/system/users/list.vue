@@ -5,18 +5,18 @@
       <el-button style="float: right" type="primary" size="mini" icon="el-icon-circle-plus">新增</el-button>
     </div>
     <dynamic-table ref="table"
-                   :stripe="true"
-                   :border="true"
-                   :columns="tableColumns"
-                   :data="tableData"
-                   :loading="tableLoading"
-                   :paginate="tablePaginate"
-                   @change-page="changePage">
-      <el-table-column label="操作">
-        <el-button type="primary" size="mini">编辑</el-button>
-        <el-button type="danger" size="mini">删除</el-button>
-      </el-table-column>
-    </dynamic-table>
+                                    :stripe="true"
+                                    :border="true"
+                                    :columns="tableColumns"
+                                    :data="tableData"
+                                    :loading="tableLoading"
+                                    :paginate="tablePaginate"
+                                    @change-page="changePage">
+    <el-table-column label="操作">
+      <el-button type="primary" size="mini">编辑</el-button>
+      <el-button type="danger" size="mini">删除</el-button>
+    </el-table-column>
+  </dynamic-table>
   </el-card>
 </template>
 
@@ -83,6 +83,7 @@
       fetchUsers(page) {
         this.tableLoading = true;
         userRequest.index(this.queryForm, page).then(response => {
+          debugger
           this.tableData = response.data.data;
           this.tablePaginate = response.data.meta;
           this.tableLoading = false;

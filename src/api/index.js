@@ -1,3 +1,3 @@
 import users from "@/api/users";
-
-export {users};
+import sales from "@/api/sales";
+export {users,sales};
