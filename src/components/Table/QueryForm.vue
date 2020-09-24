@@ -87,11 +87,11 @@
                      @click="handleReset('`queryForm`')">
             {{ iconButton ? '' : '重置'}}
           </el-button>
-          <slot name="button"></slot>
           <el-link type="primary" @click="toggleAdvanced" v-if="options.length > advancedLength"
                    style="margin-left:10px;font-size: 12px;">
             {{ advanced ? '收起' : '展开' }}
           </el-link>
+          <slot name="button"></slot>
         </el-form-item>
       </el-col>
     </el-row>
