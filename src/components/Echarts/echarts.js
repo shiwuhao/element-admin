@@ -4,6 +4,7 @@
 
 //折线图 area-pieces
 const dailyVisitsOption = {
+    id: 0,
     xAxis: {
         type: 'category',
             boundaryGap: false,
@@ -42,7 +43,6 @@ const dailyVisitsOption = {
             },
             areaStyle: {},
             data: [
-
                 ['2019-10-10', 200],
                 ['2019-10-11', 400],
                 ['2019-10-12', 650],
@@ -54,13 +54,15 @@ const dailyVisitsOption = {
                 ['2019-10-18', 100],
                 ['2019-10-16', 450],
                 ['2019-10-17', 300],
-                ['2019-10-18', 100],
+                ['2019-10-18', 100]
+
             ]
         }
     ]
 };
 //柱状图
 const conversionRateOption = {
+    id:1,
     color: ['#409eff'],
         tooltip: {
         trigger: 'axis',
@@ -93,11 +95,13 @@ const conversionRateOption = {
             type: 'bar',
             barWidth: '40%',
             data: [400, 302, 600, 334, 390, 330, 520]
+
         }
     ]
 };
 //柱状图
 const salesRankingOption =  {
+    id:2,
     color: ['#409eff'],
         tooltip: {
         trigger: 'axis',
@@ -130,12 +134,15 @@ const salesRankingOption =  {
             name: '直接访问',
             type: 'bar',
             barWidth: '60%',
-            data: [10, 52, 200, 334, 390, 330, 220,10, 52, 200, 334, 390, 330, 220]
+            data: [
+                10, 52, 200, 334, 390, 330, 220,10, 52, 200, 334, 390, 330, 220
+            ]
         }
     ]
 };
 //饼图
 const salesTypeOption = {
+    id:3,
     tooltip: {
         trigger: 'item',
             formatter: '{a} <br/>{b}: {c} ({d}%)'
@@ -177,6 +184,7 @@ const salesTypeOption = {
 };
 //折线图
 const salesRankingTrendOption = {
+    id:4,
     tooltip: {
         trigger: 'axis'
     },

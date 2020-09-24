@@ -2,7 +2,7 @@
     <div class='el-home'>
         <div class="el-header">
             <el-row :gutter="14">
-                <el-col :xs="14" :sm="12" :md="10" :lg="6">
+                <el-col :xs="24" :sm="12" :lg="6">
                     <el-card class="box-card">
                         <div slot="header" class="clearfix">
                             <span>总销售额</span>
@@ -26,7 +26,7 @@
 
                     </el-card>
                 </el-col>
-                <el-col :xs="14" :sm="12" :md="10" :lg="6">
+                <el-col :xs="24" :sm="12" :lg="6">
                     <el-card class="box-card">
                         <div slot="header" class="clearfix">
                             <span>访问量</span>
@@ -35,7 +35,8 @@
                         </div>
                         <CommonCard>
                             <div slot="number-header">
-                                <b>¥</b><AnimateNumber :number-content="Number(visits.sales)"></AnimateNumber>
+                                <b>¥</b>
+                                <AnimateNumber :number-content="Number(visits.sales)"></AnimateNumber>
                             </div>
                             <div slot="contain-section">
                                 <EchartType :option="dailyVisitsOption"></EchartType>
@@ -46,7 +47,7 @@
                         </CommonCard>
                     </el-card>
                 </el-col>
-                <el-col :xs="14" :sm="12" :md="10" :lg="6">
+                <el-col :xs="24" :sm="12" :lg="6">
                     <el-card class="box-card">
                         <div slot="header" class="clearfix">
                             <span>支付笔数</span>
@@ -55,7 +56,8 @@
                         </div>
                         <CommonCard>
                             <div slot="number-header">
-                                <b>¥</b><AnimateNumber :number-content="Number(paymentsNumber.sales)"></AnimateNumber>
+                                <b>¥</b>
+                                <AnimateNumber :number-content="Number(paymentsNumber.sales)"></AnimateNumber>
                             </div>
                             <div slot="contain-section">
                                 <EchartType :option="conversionRateOption"></EchartType>
@@ -66,7 +68,7 @@
                         </CommonCard>
                     </el-card>
                 </el-col>
-                <el-col :xs="14" :sm="12" :md="10" :lg="6">
+                <el-col :xs="24" :sm="12" :lg="6">
                     <el-card class="box-card">
                         <div slot="header" class="clearfix">
                             <span>运营活动效果</span>
@@ -75,7 +77,8 @@
                         </div>
                         <CommonCard>
                             <div slot="number-header">
-                                <AnimateNumber :number-content="parseInt(activityEffect.sales)"></AnimateNumber><b>%</b>
+                                <AnimateNumber :number-content="parseInt(activityEffect.sales)"></AnimateNumber>
+                                <b>%</b>
                             </div>
                             <div slot="contain-section">
                                 <el-progress :percentage="50"></el-progress>
@@ -90,56 +93,48 @@
             </el-row>
         </div>
         <div class="el-section">
-            <el-card class="box-card">
-                <el-tabs v-model="activeName" @tab-click="handleClick">
-                    <el-tab-pane label="销售额" name="first" >
-                        <div class="sales-ranking">
-                            <el-row :gutter="14" type="flex" justify="space-between">
-                                <el-col :span="18">
+            <el-row :gutter="14">
+                <el-col :xs="24" :sm="12">
+                    <el-card class="box-card" style="margin-bottom: 8px">
+
+                        <el-tabs v-model="activeName" @tab-click="handleClick">
+                            <el-tab-pane label="销售额" name="first">
+                                <div class="sales-ranking">
                                     <h4 style="text-indent: 18px">销售额排行</h4>
                                     <EchartType :option="salesRankingOption"></EchartType>
-                                </el-col>
-                                <el-col :span="6">
-                                    <div class="shop-show">
-                                        <h4>门店销售排行榜</h4>
-                                        <dl v-for="(item,index) in shop" :key="index">
-                                            <dt>{{index+1}}</dt>
-                                            <dd>
-                                                <span>{{item.title}}</span><span>{{item.number}}</span>
-                                            </dd>
-                                        </dl>
-                                    </div>
-                                </el-col>
-                            </el-row>
-                        </div>
-                    </el-tab-pane>
-                    <el-tab-pane label="访问量" name="second">
-                        <div class="sales-ranking">
-                            <el-row :gutter="14" type="flex" justify="space-between">
-                                <el-col :span="18">
+                                </div>
+                            </el-tab-pane>
+                            <el-tab-pane label="访问量" name="second">
+                                <div class="sales-ranking">
                                     <h4 style="text-indent: 18px">销售额趋势</h4>
                                     <EchartType :option="salesRankingTrendOption" ref="salesEchart"></EchartType>
-                                </el-col>
-                                <el-col :span="6">
-                                    <div class="shop-show">
-                                        <h4>门店销售排行榜</h4>
-                                        <dl v-for="(item,index) in shop" :key="index">
-                                            <dt>{{index+1}}</dt>
-                                            <dd>
-                                                <span>{{item.title}}</span><span>{{item.number}}</span>
-                                            </dd>
-                                        </dl>
-                                    </div>
-                                </el-col>
-                            </el-row>
+
+                                </div>
+                            </el-tab-pane>
+                        </el-tabs>
+                    </el-card>
+                </el-col>
+                <el-col :xs="24" :sm="12">
+                    <el-card class="box-card" style="height: 448px;">
+                        <div class="shop-show">
+                            <h4>门店销售排行榜</h4>
+                            <dl v-for="(item,index) in shop" :key="index">
+                                <dt>{{index+1}}</dt>
+                                <dd>
+                                    <span>{{item.title}}</span><span>{{item.number}}</span>
+                                </dd>
+                            </dl>
                         </div>
-                    </el-tab-pane>
-                </el-tabs>
-            </el-card>
+                    </el-card>
+                </el-col>
+
+            </el-row>
+
+
         </div>
         <div class="el-footer">
-            <el-row :gutter="12" class="el-row" type="flex">
-                <el-col class="el-col" :xs="12" :sm="16" :md="20" :lg="24">
+            <el-row :gutter="14" class="el-row">
+                <el-col class="el-col" :xs="24" :sm="12">
                     <el-card class="box-card">
                         <div slot="header" class="clearfix">
                             <span>线上热门搜索</span>
@@ -159,7 +154,7 @@
                         </div>
                     </el-card>
                 </el-col>
-                <el-col class="el-col" :xs="12" :sm="16" :md="20" :lg="24">
+                <el-col class="el-col" :xs="24" :sm="12">
                     <el-card class="box-card">
                         <div slot="header" class="clearfix">
                             <span>销售额类别占比</span>
@@ -204,61 +199,52 @@
             return {
                 activeName: 'first',
                 tableLoading: false,
-                tableData: [{
-                    rank: '14',
-                    keywords: '王小虎',
-                    num: '406',
-                    gains: '4%'
-                }, {
-                    rank: '18',
-                    keywords: '王小虎',
-                    num: '431',
-                    gains: '6%'
-                }, {
-                    rank: '39',
-                    keywords: '王小虎',
-                    num: '137',
-                    gains: '13%'
-                }, {
-                    rank: '37',
-                    keywords: '王小虎',
-                    num: '798',
-                    gains: '18%'
-                }],
+                tableData: [],
                 tablePaginate: {},
                 tableColumns: [
                     {
-                        key: 'rank',
+                        key: 'ranking',
                         label: '排名',
                         sortable: true
                     },
                     {
-                        key: 'keywords',
+                        key: 'key',
                         label: '搜索关键词',
                     },
                     {
-                        key: 'num',
+                        key: 'user',
                         label: '用户数',
                     },
                     {
-                        key: 'gains',
+                        key: 'increase',
                         label: '周涨幅',
                         sortable: true
                     }
                 ],
                 activityEffect: {},
                 paymentsNumber: {},
+                // dailyVisitsOption: {},
+                // conversionRateOption: {},
+                // salesRankingOption: {},
+                // salesRankingTrendOption: {},
+                // salesTypeOption: {},
                 saleTotal: {},
                 visits: {},
-                shop:[]
+                shop: [],
+                spin: true
             }
         },
         mounted() {
-
+            this.fetchTable().then(() => {
+                this.spin = false;
+                this.tableLoading = false;
+            });
+            this.fetchEchart();
         },
         computed: {
             //访问量
             dailyVisitsOption() {
+                console.log(Object.prototype.toString.call(echartOptions.dailyVisitsOption.series[0].data))
                 return echartOptions.dailyVisitsOption
             },
             //支付笔数
@@ -279,17 +265,9 @@
             }
         },
         created() {
-            this.tablePaginate = {
-                current_page: 2,
-                from: 16,
-                last_page: 5,
-                path: "http://user-operate.juzifenqi.com:8080/api/users",
-                per_page: 15,
-                to: 30,
-                total: 73
-            }
             this.fetchCard();
             this.fetchShop();
+            this.fetchTable();
         },
         methods: {
             //获取card数据
@@ -313,12 +291,51 @@
                 })
             },
             //获取销售门店数据
-            fetchShop(){
+            fetchShop() {
                 return sales.shop().then(response => {
                     this.shop = response.data.data;
-
                 })
             },
+            //获取热门搜索table数据
+            fetchTable(page = 1) {
+                return sales.table().then(response => {
+                    this.tableData = response.data.data;
+                    this.paginate = response.data.meta;
+                    this.tableLoading = false;
+                })
+            },
+            //获取echart图表数据
+            fetchEchart() {
+                sales.echart().then(response => {
+                    const {conversion_rate, daily_visits, sales_ranking, sales_ranking_trend, sales_type} = response.data.data;
+                    [
+                        echartOptions.dailyVisitsOption.series[0].data,
+                        echartOptions.conversionRateOption.series[0].data,
+                        echartOptions.salesRankingOption.series[0].data,
+                        echartOptions.salesRankingTrendOption.series[0].data,
+                        echartOptions.salesTypeOption.series[0].data
+                    ] = [
+                        daily_visits,
+                        conversion_rate,
+                        sales_ranking,
+                        sales_ranking_trend,
+                        sales_type
+                    ]
+                    this.dailyVisitsOption = echartOptions.dailyVisitsOption
+                    this.conversionRateOption = echartOptions.conversionRateOption
+                    this.salesRankingOption = echartOptions.salesRankingOption
+                    this.salesRankingTrendOption = echartOptions.salesRankingTrendOption
+                    this.salesTypeOption = echartOptions.salesRankingOption
+                    this.formatEchartOption()
+                })
+            },
+            formatEchartOption() {
+                const {conversionRateOption, dailyVisitsOption, salesRankingOption, salesRankingTrendOption, salesTypeOption} = echartOptions
+                let myChart = this.$echarts.init(document.getElementById('el-echart'));
+                // myChart.setOption(this.conversionRateOption);
+                myChart.setOption(this.dailyVisitsOption);
+            },
+
             //切换销售额和访问量，自动调整图表大小
             handleClick(tab, event) {
                 this.$nextTick(() => {
@@ -327,7 +344,7 @@
             },
             // 翻页事件
             changePage(page) {
-                this.fetchData(page);
+                this.fetchTable(page);
             },
         }
     }
@@ -382,6 +399,44 @@
 
     .el-section {
         margin-bottom: 8px;
+        .shop-show {
+            margin: -23px 0 0 15px;
+            dl {
+                display: flex;
+                justify-content: left;
+                align-items: center;
+                line-height: 26px;
+
+                dt {
+                    border-radius: 20px;
+                    display: inline-block;
+                    font-size: 12px;
+                    font-weight: 600;
+                    margin-right: 24px;
+                    height: 20px;
+                    line-height: 20px;
+                    width: 20px;
+                    text-align: center;
+                    background-color: #f5f5f5;
+                }
+
+                dd {
+                    width: 80%;
+                    margin-left: -12px;
+                    span {
+                        color: rgba(0, 0, 0, .65);
+                        font-size: 14px;
+                        line-height: 22px;
+                        &:last-child {
+                            float: right;
+                        }
+                        &:first-child {
+                            margin-right: 140px;
+                        }
+                    }
+                }
+            }
+        }
 
         /deep/ .el-tabs__item {
             color: rgba(0, 0, 0, .65);
@@ -389,55 +444,13 @@
         }
 
         .sales-ranking {
-            height: 407px;
             margin-top: -10px;
-
-            /deep/ #el-echart {
-                height: 300px !important;
+            #el-echart {
+                height: 300px!important;
             }
-
             h4 {
                 color: rgba(0, 0, 0, .85);
                 font-weight: 500;
-            }
-
-            .shop-show {
-                float: right;
-                margin-right: 35px;
-                //   margin-top: -10px;
-                dl {
-                    display: flex;
-                    justify-content: left;
-                    align-items: center;
-                    line-height: 26px;
-
-                    dt {
-                        border-radius: 20px;
-                        display: inline-block;
-                        font-size: 12px;
-                        font-weight: 600;
-                        margin-right: 24px;
-                        height: 20px;
-                        line-height: 20px;
-                        width: 20px;
-                        text-align: center;
-                        background-color: #f5f5f5;
-                    }
-
-                    dd {
-                        margin-left: -12px;
-
-                        span {
-                            color: rgba(0, 0, 0, .65);
-                            font-size: 14px;
-                            line-height: 22px;
-
-                            &:first-child {
-                                margin-right: 140px;
-                            }
-                        }
-                    }
-                }
             }
 
         }
@@ -450,6 +463,10 @@
             color: rgba(0, 0, 0, .85);
             font-weight: 500;
             font-size: 16px;
+        }
+
+        .el-card {
+            margin-bottom: 8px;
         }
 
         .box-card {

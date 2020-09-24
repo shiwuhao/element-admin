@@ -1,5 +1,5 @@
 <template>
-    <div id="el-echart" style="width: 100%;height: 100%;" ref="elEchart"></div>
+    <div  id="el-echart" style="width: 100%;height: 100%;" ref="elEchart"></div>
 </template>
 <script>
     export default {

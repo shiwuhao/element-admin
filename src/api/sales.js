@@ -13,5 +13,11 @@ sales.card = (params = {}) => {
 sales.shop = (params = {}) => {
     return axios.post('/api/shop', params);
 };
+sales.table = (params = {},page = 1)=>{
+    return axios.post(`/api/table?page=${page}`,params)
+}
+sales.echart = (params={})=>{
+    return axios.post('/api/echart',params)
+}
 
 export default sales
