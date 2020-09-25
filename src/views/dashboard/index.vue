@@ -30,8 +30,10 @@
                     <el-card class="box-card">
                         <div slot="header" class="clearfix">
                             <span>访问量</span>
-                            <SvgIcons icon="zhibiaoshuoming" fontSize="14px" color="rgba(0,0,0,.45)"
-                                      style="float: right;margin-top: 4px"></SvgIcons>
+                            <el-tooltip class="item" effect="dark" content="指标说明" placement="top-start">
+                                <SvgIcons icon="zhibiaoshuoming" fontSize="14px" color="rgba(0,0,0,.45)"
+                                          style="float: right;margin-top: 4px"></SvgIcons>
+                            </el-tooltip>
                         </div>
                         <CommonCard>
                             <div slot="number-header">
@@ -51,8 +53,10 @@
                     <el-card class="box-card">
                         <div slot="header" class="clearfix">
                             <span>支付笔数</span>
-                            <SvgIcons icon="zhibiaoshuoming" fontSize="14px" color="rgba(0,0,0,.45)"
-                                      style="float: right;margin-top: 4px"></SvgIcons>
+                            <el-tooltip class="item" effect="dark" content="指标说明" placement="top-start">
+                                <SvgIcons icon="zhibiaoshuoming" fontSize="14px" color="rgba(0,0,0,.45)"
+                                          style="float: right;margin-top: 4px"></SvgIcons>
+                            </el-tooltip>
                         </div>
                         <CommonCard>
                             <div slot="number-header">
@@ -72,8 +76,10 @@
                     <el-card class="box-card">
                         <div slot="header" class="clearfix">
                             <span>运营活动效果</span>
-                            <SvgIcons icon="zhibiaoshuoming" fontSize="14px" color="rgba(0,0,0,.45)"
-                                      style="float: right;margin-top: 4px"></SvgIcons>
+                            <el-tooltip class="item" effect="dark" content="指标说明" placement="top-start">
+                                <SvgIcons icon="zhibiaoshuoming" fontSize="14px" color="rgba(0,0,0,.45)"
+                                          style="float: right;margin-top: 4px"></SvgIcons>
+                            </el-tooltip>
                         </div>
                         <CommonCard>
                             <div slot="number-header">
@@ -119,9 +125,11 @@
                         <div class="shop-show">
                             <h4>门店销售排行榜</h4>
                             <dl v-for="(item,index) in shop" :key="index">
-                                <dt>{{index+1}}</dt>
+                                <dt :class="index == 0 || index == 1 || index == 2 ? 'active': ''">{{index+1}}</dt>
                                 <dd>
-                                    <span>{{item.title}}</span><span>{{item.number}}</span>
+                                    <el-tooltip class="item" effect="dark" :content="item.title" placement="top-start">
+                                        <span>{{item.title}}</span></el-tooltip>
+                                    <span>{{item.number}}</span>
                                 </dd>
                             </dl>
                         </div>
@@ -138,8 +146,16 @@
                     <el-card class="box-card">
                         <div slot="header" class="clearfix">
                             <span>线上热门搜索</span>
-                            <SvgIcons icon="sangedian" fontSize="14px" color="rgba(0,0,0,.45)"
-                                      style="float: right;margin-top: 4px"></SvgIcons>
+                            <el-dropdown  style="float: right;margin-top: 4px">
+                                  <span class="el-dropdown-link">
+                                     <SvgIcons icon="sangedian" fontSize="14px" color="rgba(0,0,0,.45)"></SvgIcons>
+                                  </span>
+                                <el-dropdown-menu slot="dropdown">
+                                    <el-dropdown-item>操作一</el-dropdown-item>
+                                    <el-dropdown-item>操作二</el-dropdown-item>
+                                </el-dropdown-menu>
+                            </el-dropdown>
+
                         </div>
                         <div>
                             <dynamic-table ref="table"
@@ -158,8 +174,15 @@
                     <el-card class="box-card">
                         <div slot="header" class="clearfix">
                             <span>销售额类别占比</span>
-                            <SvgIcons icon="sangedian" fontSize="14px" color="rgba(0,0,0,.45)"
-                                      style="float: right;margin-top: 4px"></SvgIcons>
+                            <el-dropdown  style="float: right;margin-top: 4px">
+                                  <span class="el-dropdown-link">
+                                     <SvgIcons icon="sangedian" fontSize="14px" color="rgba(0,0,0,.45)"></SvgIcons>
+                                  </span>
+                                <el-dropdown-menu slot="dropdown">
+                                    <el-dropdown-item>操作一</el-dropdown-item>
+                                    <el-dropdown-item>操作二</el-dropdown-item>
+                                </el-dropdown-menu>
+                            </el-dropdown>
                         </div>
                         <div>
                             <h4 style="text-indent: 18px">销售额</h4>
@@ -294,6 +317,7 @@
             fetchShop() {
                 return sales.shop().then(response => {
                     this.shop = response.data.data;
+
                 })
             },
             //获取热门搜索table数据
@@ -399,8 +423,10 @@
 
     .el-section {
         margin-bottom: 8px;
+
         .shop-show {
             margin: -23px 0 0 15px;
+
             dl {
                 display: flex;
                 justify-content: left;
@@ -420,18 +446,30 @@
                     background-color: #f5f5f5;
                 }
 
+                .active {
+                    background-color: #314659;
+                    color: #fff;
+                }
+
                 dd {
                     width: 80%;
                     margin-left: -12px;
+
                     span {
                         color: rgba(0, 0, 0, .65);
                         font-size: 14px;
                         line-height: 22px;
+
                         &:last-child {
                             float: right;
                         }
+
                         &:first-child {
-                            margin-right: 140px;
+                            width: 270px;
+                            display: inline-block;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
                         }
                     }
                 }
@@ -445,9 +483,13 @@
 
         .sales-ranking {
             margin-top: -10px;
+
             #el-echart {
-                height: 300px!important;
+                height: 300px !important;
+                top: -32px !important;
+                left: -10px !important;
             }
+
             h4 {
                 color: rgba(0, 0, 0, .85);
                 font-weight: 500;

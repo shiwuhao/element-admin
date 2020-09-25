@@ -35,35 +35,35 @@ const cardsData = Object.assign(baseData, {
 const shopsData = {
     data: [
         {
-            title: 'coco1号店',
+            title: 'coco1号店coco1号店coco1号店coco1号店coco1号店coco1号店coco1号店coco1号店',
             number: '1233'
         },
         {
-            title: 'coco2号店',
+            title: 'coco1号店coco1号店coco1号店coco1号店',
             number: '1234'
         },
         {
-            title: 'coco3号店',
+            title: 'coco1号店coco1号店coco1号店coco1号店coco1号店coco1号店coco1号店coco1号店',
             number: '1235'
         },
         {
-            title: 'coco4号店',
+            title: 'coco1号店coco1号店coco1号店coco1号店',
             number: '1236'
         },
         {
-            title: 'coco1号店',
+            title: 'coco1号店coco1号店coco1号店coco1号店coco1号店coco1号店coco1号店coco1号店',
             number: '1237'
         },
         {
-            title: 'coco5号店',
+            title: 'coco1号店coco1号店coco1号店coco1号店',
             number: '1238'
         },
         {
-            title: 'coco6号店',
+            title: 'coco1号店coco1号店coco1号店coco1号店',
             number: '1239'
         },
         {
-            title: 'coco7号店',
+            title: 'coco1号店coco1号店coco1号店coco1号店coco1号店coco1号店coco1号店coco1号店',
             number: '1240'
         },
     ]
