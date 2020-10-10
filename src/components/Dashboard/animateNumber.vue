@@ -11,7 +11,7 @@
         },
         data () {
             return {
-                counter: this.numberContent,
+                counter: this.numberContent  || 0,
                 timeTicket: null,
             }
         },

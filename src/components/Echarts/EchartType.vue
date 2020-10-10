@@ -1,12 +1,13 @@
 <template>
-    <div  id="el-echart" style="width: 100%;height: 100%;" ref="elEchart"></div>
-</template>
+    <div>
+        <div  id="el-echart " style="width: 100%;height: 100%;" ref="elEchart"></div>
+    </div>
+  </template>
 <script>
     export default {
         props:{
             // 业务数据
             option: {
-                type: Object,
                 default: () => []
             },
         },
