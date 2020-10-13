@@ -262,12 +262,11 @@
                 this.spin = false;
                 this.tableLoading = false;
             });
-            this.fetchEchart();
+           // this.fetchEchart();
         },
         computed: {
             //访问量
             dailyVisitsOption() {
-                console.log(Object.prototype.toString.call(echartOptions.dailyVisitsOption.series[0].data))
                 return echartOptions.dailyVisitsOption
             },
             //支付笔数
@@ -422,8 +421,6 @@
     }
 
     .el-section {
-        margin-bottom: 8px;
-
         .shop-show {
             margin: -23px 0 0 15px;
 
@@ -483,8 +480,7 @@
 
         .sales-ranking {
             margin-top: -10px;
-
-            #el-echart {
+            /deep/ #el-echart {
                 height: 300px !important;
                 top: -32px !important;
                 left: -10px !important;
